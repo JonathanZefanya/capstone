@@ -148,7 +148,7 @@ class HomeView extends GetView<HomeController> {
                     ),
                     image: DecorationImage(
                       image: AssetImage(
-                        'assets/images/banner.png',
+                        'assets/images/banner.png', // bisa ganti dengan banner promo ini yan
                       ),
                       fit: BoxFit.cover,
                     ),
