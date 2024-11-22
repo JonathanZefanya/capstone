@@ -23,7 +23,7 @@ class LoginView extends GetView<LoginController> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Selamat Datang Kembali !",
+                    "Selamat Datang Kembali !!",
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
