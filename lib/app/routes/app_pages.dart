@@ -12,6 +12,8 @@ import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/service/bindings/service_binding.dart';
 import '../modules/service/views/service_view.dart';
+import '../modules/tambah_service/bindings/tambah_service_binding.dart';
+import '../modules/tambah_service/views/tambah_service_view.dart';
 import '../modules/transaksi/bindings/transaksi_binding.dart';
 import '../modules/transaksi/views/transaksi_view.dart';
 
@@ -58,6 +60,11 @@ class AppPages {
       name: _Paths.TRANSAKSI,
       page: () => const TransaksiView(),
       binding: TransaksiBinding(),
+    ),
+    GetPage(
+      name: _Paths.TAMBAH_SERVICE,
+      page: () => const TambahServiceView(),
+      binding: TambahServiceBinding(),
     ),
   ];
 }
