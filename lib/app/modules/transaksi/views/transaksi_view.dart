@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../component/app_color.dart';
-import '../../service/views/Service_view.dart';
+import '../../service/views/service_view.dart';
 import '../controllers/transaksi_controller.dart';
 
 class TransaksiView extends GetView<TransaksiController> {

@@ -12,11 +12,12 @@ class AppColors {
 }
 
 class Constants {
-  static const Color primaryColor = Color(0xff4D3E93); // Biru tua
+  static const Color primaryColor = Color(0xFF007AFF); // Biru tua
   static const Color secondColor = Color(0xff646C83); // Biru muda
   static const Color thirdColor = Color(0xff128864); // Hijau
   static const Color fourColor = Color(0xff933E4D); // Merah
   static const Color fiveColor = Color(0xff797979); // Abu-abu
-  static const Color scaffoldbackgroundColor = Color.fromRGBO(245, 247, 249, 1); // Warna background scaffold
+  static const Color scaffoldbackgroundColor =
+      Color.fromRGBO(245, 247, 249, 1); // Warna background scaffold
   static const Color menucolor = Color(0xffF0F0F0); // Warna background menu
 }

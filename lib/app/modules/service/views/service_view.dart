@@ -10,7 +10,7 @@ class ServiceView extends GetView<ServiceController> {
 
   @override
   Widget build(BuildContext context) {
-    final transaksiController = Get.find<TransaksiController>();
+    final transaksiController = Get.put(TransaksiController());
 
     return DefaultTabController(
       length: 3,

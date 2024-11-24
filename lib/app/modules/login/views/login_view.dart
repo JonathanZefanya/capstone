@@ -23,7 +23,7 @@ class LoginView extends GetView<LoginController> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Selamat Datang Kembali !!",
+                    "Selamat Datang Kembali !",
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
@@ -106,6 +106,25 @@ class LoginView extends GetView<LoginController> {
                         ),
                         backgroundColor: AppColors.primary,
                       ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Belum punya akun?"),
+                        TextButton(
+                          onPressed: () {
+                            Get.toNamed(
+                                '/register'); // Navigasi ke halaman register
+                          },
+                          child: Text(
+                            "Daftar Sekarang",
+                            style: TextStyle(color: AppColors.primary),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
