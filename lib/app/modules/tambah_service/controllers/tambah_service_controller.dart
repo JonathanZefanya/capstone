@@ -18,7 +18,7 @@ class TambahServiceController extends GetxController {
   }
 
   void tambahProduk(String namaProduk, double harga, String kategori) async {
-    if (namaProduk.isEmpty || (kategori != 'cuciSetrika' && harga <= 0)) {
+    if (namaProduk.isEmpty || harga == 0) {
       Get.snackbar('Error', 'Harap lengkapi semua field');
       return;
     }
