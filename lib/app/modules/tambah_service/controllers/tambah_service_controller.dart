@@ -18,7 +18,7 @@ class TambahServiceController extends GetxController {
   }
 
   void tambahProduk(String namaProduk, double harga, String kategori) async {
-    if (namaProduk.isEmpty || (kategori != 'cuciSetrika' && harga <= 0)) {
+    if (namaProduk.isEmpty || harga <= 0 || kategori.isEmpty) {
       Get.snackbar('Error', 'Harap lengkapi semua field');
       return;
     }
@@ -39,7 +39,7 @@ class TambahServiceController extends GetxController {
 
       await _firestore.collection(collectionName).add({
         'nama': namaProduk,
-        if (kategori != 'cuciSetrika') 'harga': harga,
+        'harga': harga,
         'kategori': kategori, // Menyimpan kategori ke dalam Firestore
         'created_at': FieldValue.serverTimestamp(),
       });

@@ -8,6 +8,8 @@ class TambahServiceView extends GetView<TambahServiceController> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(TambahServiceController());
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -16,7 +18,6 @@ class TambahServiceView extends GetView<TambahServiceController> {
           style: TextStyle(
             color: Constants.primaryColor,
             fontWeight: FontWeight.w600,
-            fontFamily: 'Poppins',
           ),
         ),
         toolbarHeight: 80,
@@ -41,7 +42,6 @@ class TambahServiceView extends GetView<TambahServiceController> {
               const Text(
                 "Nama Produk",
                 style: TextStyle(
-                  fontFamily: 'Poppins',
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                   color: Constants.primaryColor,
@@ -53,48 +53,30 @@ class TambahServiceView extends GetView<TambahServiceController> {
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Nama Produk',
-                  hintStyle: TextStyle(
-                    fontFamily: 'Poppins',
-                  ),
                 ),
               ),
               const SizedBox(height: 15),
-              Obx(() {
-                return Column(
-                  children: [
-                    if (controller.selectedKategori.value != 'cuciSetrika') ...[
-                      const Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          "Harga",
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Constants.primaryColor,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      TextField(
-                        controller: controller.hargaController,
-                        decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: 'Harga',
-                            hintStyle: TextStyle(
-                              fontFamily: 'Poppins',
-                            )),
-                        keyboardType: TextInputType.number,
-                      ),
-                      const SizedBox(height: 15),
-                    ],
-                  ],
-                );
-              }),
+              const Text(
+                "Harga /Kg",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Constants.primaryColor,
+                ),
+              ),
+              const SizedBox(height: 5),
+              TextField(
+                controller: controller.hargaController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Harga',
+                ),
+                keyboardType: TextInputType.number,
+              ),
+              const SizedBox(height: 15),
               const Text(
                 "Kategori",
                 style: TextStyle(
-                  fontFamily: 'Poppins',
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                   color: Constants.primaryColor,
@@ -116,9 +98,6 @@ class TambahServiceView extends GetView<TambahServiceController> {
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Pilih Kategori',
-                  hintStyle: TextStyle(
-                    fontFamily: 'Poppins',
-                  ),
                 ),
               ),
               const SizedBox(height: 20),
@@ -131,22 +110,15 @@ class TambahServiceView extends GetView<TambahServiceController> {
                   ),
                 ),
                 onPressed: () {
-                  double harga = 0.0;
-                  if (controller.selectedKategori.value != 'cuciSetrika') {
-                    harga =
-                        double.tryParse(controller.hargaController.text) ?? 0.0;
-                  }
                   controller.tambahProduk(
                     controller.namaController.text,
-                    harga,
+                    double.tryParse(controller.hargaController.text) ?? 0.0,
                     controller.selectedKategori.value,
                   );
+                  Get.back();
                 },
                 child: const Text(
                   'Simpan',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                  ),
                 ),
               ),
             ],

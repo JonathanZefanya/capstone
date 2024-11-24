@@ -178,7 +178,7 @@ class ServiceView extends GetView<ServiceController> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
                               side: const BorderSide(
-                                  color: Colors.black, width: 1.5),
+                                  color: Constants.fiveColor, width: 1.5),
                             ),
                             color: Colors.white,
                             child: ListTile(
@@ -189,13 +189,14 @@ class ServiceView extends GetView<ServiceController> {
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              subtitle: category == 'cuciSetrika'
-                                  ? null
-                                  : Text(
-                                      'Harga: $hargaText',
-                                    ),
+                              subtitle: Text(
+                                'Harga: $hargaText',
+                              ),
                               trailing: IconButton(
-                                icon: const Icon(Icons.delete_outlined),
+                                icon: const Icon(
+                                  Icons.delete_outlined,
+                                  color: AppColors.error,
+                                ),
                                 onPressed: () {
                                   controller.deleteservice(
                                     service['id'],
@@ -204,7 +205,7 @@ class ServiceView extends GetView<ServiceController> {
                                 },
                               ),
                               onTap: () {
-                                if (category == 'cuciSetrika') {
+                                if (category == 'express') {
                                   transaksiController.addcuciSetrika(service);
                                 } else {
                                   transaksiController.addService(service);
