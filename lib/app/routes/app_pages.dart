@@ -10,6 +10,8 @@ import '../modules/pelanggan/bindings/pelanggan_binding.dart';
 import '../modules/pelanggan/views/pelanggan_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+import '../modules/register/bindings/register_binding.dart';
+import '../modules/register/views/register_view.dart';
 import '../modules/service/bindings/service_binding.dart';
 import '../modules/service/views/service_view.dart';
 import '../modules/tambah_service/bindings/tambah_service_binding.dart';
@@ -65,6 +67,11 @@ class AppPages {
       name: _Paths.TAMBAH_SERVICE,
       page: () => const TambahServiceView(),
       binding: TambahServiceBinding(),
+    ),
+    GetPage(
+      name: _Paths.REGISTER,
+      page: () => const RegisterView(),
+      binding: RegisterBinding(),
     ),
   ];
 }

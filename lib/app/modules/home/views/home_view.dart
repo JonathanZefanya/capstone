@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../component/app_color.dart';
 import '../../profile/controllers/profile_controller.dart';
@@ -10,7 +12,8 @@ import '../controllers/home_controller.dart';
 class HomeView extends GetView<HomeController> {
   HomeView({super.key});
 
-  final ProfileController profileController = Get.find();
+  final ProfileController profileController = Get.put(ProfileController());
+  final user = FirebaseAuth.instance.currentUser;
 
   DateTime? currentBackPressTime;
 
@@ -30,136 +33,126 @@ class HomeView extends GetView<HomeController> {
     return true;
   }
 
+  String getFormattedDateTime() {
+    DateTime now = DateTime.now();
+    String dayOfWeek =
+        DateFormat('EEEE').format(now); // Hari dalam format panjang
+    String time = DateFormat('HH:mm').format(now); // Jam dalam format 24 jam
+    return '$dayOfWeek, $time';
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Constants.primaryColor,
-          toolbarHeight: 100,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Obx(
-                    () => CircleAvatar(
-                      radius: 30,
-                      child: controller.imagePath.value.isNotEmpty
-                          ? ClipOval(
-                              child: Image.network(
-                                controller.imagePath.value,
-                                errorBuilder: (context, error, stackTrace) =>
-                                    SvgPicture.asset(
-                                  "assets/images/person.svg",
-                                  fit: BoxFit.cover,
-                                  width: 140,
-                                  height: 140,
-                                ),
-                                fit: BoxFit.cover,
-                                width: 140,
-                                height: 140,
-                              ),
-                            )
-                          : SvgPicture.asset(
-                              "assets/images/person.svg",
-                              fit: BoxFit.cover,
-                              width: 140,
-                              height: 140,
-                            ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Obx(
-              () => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Selamat Datang",
-                    style: TextStyle(
-                      fontFamily: "Poppins",
-                      fontSize: 14,
-                      color: Constants.scaffoldbackgroundColor,
-                    ),
-                  ),
-                  Text(
-                    controller.name.value,
-                    style: const TextStyle(
-                      fontFamily: "Poppins",
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: Constants.scaffoldbackgroundColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const Spacer(),
-            PopupMenuButton(
-              color: Constants.scaffoldbackgroundColor,
-              icon: const Icon(Icons.more_vert, color: Colors.white),
-              itemBuilder: (BuildContext context) {
-                return [
-                  const PopupMenuItem(
-                    value: 'Profile',
-                    child: Text(
-                      'Profile',
-                      style: TextStyle(
-                        color: Constants.primaryColor,
-                        fontFamily: 'Poppins',
+          backgroundColor: Colors.white, // Warna latar belakang
+          elevation: 0,
+          title: FutureBuilder<DocumentSnapshot>(
+            future: FirebaseFirestore.instance
+                .collection('users')
+                .doc(user?.uid)
+                .get(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              }
+              if (snapshot.hasError) {
+                return Text('Error loading username');
+              }
+              if (snapshot.hasData && snapshot.data != null) {
+                // Mengambil username dari Firestore
+                String username = snapshot.data!['username'] ?? 'Pengguna';
+                String dateTime = getFormattedDateTime();
+
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 0, horizontal: 10),
+                      child: Text(
+                        username,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                          color: Constants.primaryColor,
+                        ),
                       ),
                     ),
-                  ),
-                ];
-              },
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 0, horizontal: 10),
+                      child: Text(
+                        dateTime,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Constants
+                              .secondColor, // Warna untuk tanggal dan jam
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              }
+              return Text('Pengguna');
+            },
+          ),
+          actions: [
+            PopupMenuButton(
+              icon: const Icon(Icons.more_vert, color: Constants.secondColor),
+              itemBuilder: (context) => [
+                const PopupMenuItem(
+                  value: 'Settings',
+                  child: Text('Settings'),
+                ),
+                const PopupMenuItem(
+                  value: 'Logout',
+                  child: Text('Logout'),
+                ),
+              ],
               onSelected: (value) {
-                switch (value) {
-                  case 'Profile':
-                    Get.toNamed('/profile');
-                    break;
-                  default:
+                if (value == 'Settings') {
+                  Get.toNamed('/settings');
+                } else if (value == 'Logout') {
+                  // Logika logout di sini
+                  Get.offAllNamed('/login');
                 }
               },
             ),
           ],
-          automaticallyImplyLeading: false,
         ),
-        body: Padding(
-          padding: const EdgeInsets.only(top: 30),
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-            child: Column(
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: 200,
-                  decoration: const BoxDecoration(
-                    color: Constants.primaryColor,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                      bottomRight: Radius.circular(20),
-                      bottomLeft: Radius.circular(20),
-                    ),
-                    image: DecorationImage(
-                      image: AssetImage(
-                        'assets/images/banner.png', // bisa ganti dengan banner promo ini yan
+        body: SingleChildScrollView(
+          // Membungkus seluruh body dengan SingleChildScrollView
+          child: Padding(
+            padding: const EdgeInsets.only(top: 30),
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+              child: Column(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 200,
+                    decoration: const BoxDecoration(
+                      color: Constants.fiveColor,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20),
                       ),
-                      fit: BoxFit.cover,
+                      image: DecorationImage(
+                        image: AssetImage(
+                            'assets/images/banner.png'), // Ganti path sesuai gambar Anda
+                        fit: BoxFit.cover, // Menyesuaikan ukuran gambar
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 40),
-                Expanded(
-                  child: GridView.count(
+                  const SizedBox(height: 20),
+                  GridView.count(
                     crossAxisCount: 2,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap:
+                        true, // Membuat GridView menyesuaikan ukuran kontennya
+                    physics:
+                        const NeverScrollableScrollPhysics(), // Menonaktifkan scroll pada GridView
                     children: [
                       GestureDetector(
                         onTap: () {
@@ -174,15 +167,24 @@ class HomeView extends GetView<HomeController> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(
-                                'assets/images/service.png',
-                                scale: 1.4,
+                              Container(
+                                width: 60,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                        'assets/images/layanan.png'), // Ganti path sesuai gambar Anda
+                                    fit: BoxFit
+                                        .cover, // Menyesuaikan ukuran gambar
+                                  ),
+                                ),
                               ),
                               const SizedBox(height: 10),
                               const Text(
-                                'Service',
+                                'Layanan',
                                 style: TextStyle(
-                                  fontFamily: 'Poppins',
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -204,15 +206,24 @@ class HomeView extends GetView<HomeController> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(
-                                'assets/images/pelanggan.png',
-                                scale: 1.4,
+                              Container(
+                                width: 60,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color: Colors.yellow,
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                        'assets/images/pelanggan.png'), // Ganti path sesuai gambar Anda
+                                    fit: BoxFit
+                                        .cover, // Menyesuaikan ukuran gambar
+                                  ),
+                                ),
                               ),
-                              const SizedBox(height: 30),
+                              const SizedBox(height: 10),
                               const Text(
                                 'Pelanggan',
                                 style: TextStyle(
-                                  fontFamily: 'Poppins',
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -234,15 +245,24 @@ class HomeView extends GetView<HomeController> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(
-                                'assets/images/laporan.png',
-                                scale: 1.4,
+                              Container(
+                                width: 60,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                        'assets/images/laporan.png'), // Ganti path sesuai gambar Anda
+                                    fit: BoxFit
+                                        .cover, // Menyesuaikan ukuran gambar
+                                  ),
+                                ),
                               ),
                               const SizedBox(height: 15),
                               const Text(
                                 'Laporan',
                                 style: TextStyle(
-                                  fontFamily: 'Poppins',
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -264,15 +284,24 @@ class HomeView extends GetView<HomeController> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(
-                                'assets/images/transaksi.png',
-                                scale: 1.4,
+                              Container(
+                                width: 60,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color: Colors.orange,
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                        'assets/images/transaksi.png'), // Ganti path sesuai gambar Anda
+                                    fit: BoxFit
+                                        .cover, // Menyesuaikan ukuran gambar
+                                  ),
+                                ),
                               ),
                               const SizedBox(height: 15),
                               const Text(
                                 'Transaksi',
                                 style: TextStyle(
-                                  fontFamily: 'Poppins',
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -283,8 +312,8 @@ class HomeView extends GetView<HomeController> {
                       ),
                     ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
