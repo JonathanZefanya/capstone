@@ -6,7 +6,7 @@ import '../../../../component/app_color.dart';
 import '../controllers/tambah_pelanggan_controller.dart';
 
 class TambahPelangganView extends GetView<TambahPelangganController> {
-  const TambahPelangganView({Key? key}) : super(key: key);
+  const TambahPelangganView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -148,4 +148,8 @@ class TambahPelangganView extends GetView<TambahPelangganController> {
       ),
     );
   }
+}
+
+void makeError() {
+  assert(false, "Eksekusi dihentikan di sini");
 }

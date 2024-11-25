@@ -14,7 +14,7 @@ class TambahServiceView extends GetView<TambahServiceController> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
-          'Tambah Produk',
+          'Tambah Service',
           style: TextStyle(
             color: Constants.primaryColor,
             fontWeight: FontWeight.w600,
@@ -40,7 +40,7 @@ class TambahServiceView extends GetView<TambahServiceController> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Text(
-                "Nama Produk",
+                "Nama Service",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -52,7 +52,7 @@ class TambahServiceView extends GetView<TambahServiceController> {
                 controller: controller.namaController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Nama Produk',
+                  hintText: 'Nama Service',
                 ),
               ),
               const SizedBox(height: 15),

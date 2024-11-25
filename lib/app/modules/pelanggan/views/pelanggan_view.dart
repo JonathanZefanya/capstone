@@ -124,12 +124,15 @@ class PelangganView extends GetView<PelangganController> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color.fromRGBO(77, 62, 147, 50),
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const TambahPelangganView(),
-            ),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => const TambahPelangganView(),
+          //   ),
+          // );
+          
+          //URL Navigation /tambah-pelanggan
+          Get.toNamed('/tambah-pelanggan');
         },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),

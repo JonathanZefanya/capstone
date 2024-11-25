@@ -4,6 +4,10 @@ import 'package:get/get.dart';
 
 import '../../pelanggan/controllers/pelanggan_controller.dart';
 
+// void makeError() {
+//   assert(false, "Eksekusi dihentikan di sini");
+// }
+
 class TambahPelangganController extends GetxController {
   final TextEditingController namaPelangganController = TextEditingController();
   final TextEditingController nomorWhatsAppController = TextEditingController();

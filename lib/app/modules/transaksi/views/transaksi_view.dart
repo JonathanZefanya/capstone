@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myapp/app/modules/service/controllers/service_controller.dart';
 
 import '../../../../component/app_color.dart';
 import '../../service/views/service_view.dart';
@@ -77,6 +78,7 @@ class TransaksiView extends GetView<TransaksiController> {
                     ),
                     onPressed: () {
                       Get.to(() => const ServiceView());
+                      Get.put(ServiceController());
                     },
                     child: const Text(
                       "Service",
@@ -331,6 +333,14 @@ class TransaksiView extends GetView<TransaksiController> {
                                                         );
                                                       }
                                                     },
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "Kg",
+                                                  style: const TextStyle(
+                                                    fontFamily: 'Poppins',
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w700,
                                                   ),
                                                 ),
                                                 IconButton(

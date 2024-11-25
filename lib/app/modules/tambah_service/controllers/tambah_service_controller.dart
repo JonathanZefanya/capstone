@@ -43,8 +43,8 @@ class TambahServiceController extends GetxController {
         'kategori': kategori, // Menyimpan kategori ke dalam Firestore
         'created_at': FieldValue.serverTimestamp(),
       });
-      Get.snackbar('Success', 'Produk berhasil ditambahkan');
-      Get.offNamed('/produk'); // Kembali ke ProdukView setelah simpan
+      Get.snackbar('Success', 'Service berhasil ditambahkan');
+      Get.offNamed('/service'); // Kembali ke ProdukView setelah simpan
 
       // Membersihkan input field
       namaController.clear();
