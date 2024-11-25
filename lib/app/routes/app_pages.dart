@@ -14,6 +14,8 @@ import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/service/bindings/service_binding.dart';
 import '../modules/service/views/service_view.dart';
+import '../modules/tambah_pelanggan/bindings/tambah_pelanggan_binding.dart';
+import '../modules/tambah_pelanggan/views/tambah_pelanggan_view.dart';
 import '../modules/tambah_service/bindings/tambah_service_binding.dart';
 import '../modules/tambah_service/views/tambah_service_view.dart';
 import '../modules/transaksi/bindings/transaksi_binding.dart';
@@ -72,6 +74,11 @@ class AppPages {
       name: _Paths.REGISTER,
       page: () => const RegisterView(),
       binding: RegisterBinding(),
+    ),
+    GetPage(
+      name: _Paths.TAMBAH_PELANGGAN,
+      page: () => const TambahPelangganView(),
+      binding: TambahPelangganBinding(),
     ),
   ];
 }

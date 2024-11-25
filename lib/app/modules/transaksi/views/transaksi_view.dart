@@ -79,7 +79,7 @@ class TransaksiView extends GetView<TransaksiController> {
                       Get.to(() => const ServiceView());
                     },
                     child: const Text(
-                      "cuciSetrika",
+                      "Service",
                       style: TextStyle(
                         fontFamily: 'Poppins',
                         color: Constants.scaffoldbackgroundColor,
@@ -89,25 +89,25 @@ class TransaksiView extends GetView<TransaksiController> {
                   const SizedBox(
                     width: 15,
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(double.minPositive, 35),
-                      backgroundColor: Constants.primaryColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () {
-                      Get.toNamed('/Service');
-                    },
-                    child: const Text(
-                      "Service",
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        color: Constants.scaffoldbackgroundColor,
-                      ),
-                    ),
-                  ),
+                  // ElevatedButton(
+                  //   style: ElevatedButton.styleFrom(
+                  //     minimumSize: const Size(double.minPositive, 35),
+                  //     backgroundColor: Constants.primaryColor,
+                  //     shape: RoundedRectangleBorder(
+                  //       borderRadius: BorderRadius.circular(10),
+                  //     ),
+                  //   ),
+                  //   onPressed: () {
+                  //     Get.toNamed('/Service');
+                  //   },
+                  //   child: const Text(
+                  //     "Service",
+                  //     style: TextStyle(
+                  //       fontFamily: 'Poppins',
+                  //       color: Constants.scaffoldbackgroundColor,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

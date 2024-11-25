@@ -12,6 +12,7 @@ abstract class Routes {
   static const TRANSAKSI = _Paths.TRANSAKSI;
   static const TAMBAH_SERVICE = _Paths.TAMBAH_SERVICE;
   static const REGISTER = _Paths.REGISTER;
+  static const TAMBAH_PELANGGAN = _Paths.TAMBAH_PELANGGAN;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const TRANSAKSI = '/transaksi';
   static const TAMBAH_SERVICE = '/tambah-service';
   static const REGISTER = '/register';
+  static const TAMBAH_PELANGGAN = '/tambah-pelanggan';
 }
