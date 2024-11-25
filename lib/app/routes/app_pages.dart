@@ -1,5 +1,9 @@
 import 'package:get/get.dart';
 
+import '../modules/detailorder/bindings/detailorder_binding.dart';
+import '../modules/detailorder/views/detailorder_view.dart';
+import '../modules/edittransaksi/bindings/edittransaksi_binding.dart';
+import '../modules/edittransaksi/views/edittransaksi_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/laporan/bindings/laporan_binding.dart';
@@ -79,6 +83,16 @@ class AppPages {
       name: _Paths.TAMBAH_PELANGGAN,
       page: () => const TambahPelangganView(),
       binding: TambahPelangganBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAILORDER,
+      page: () => DetailorderView(),
+      binding: DetailorderBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDITTRANSAKSI,
+      page: () => const EditTransaksiView(),
+      binding: EdittransaksiBinding(),
     ),
   ];
 }

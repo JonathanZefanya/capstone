@@ -197,37 +197,139 @@ class TransaksiView extends GetView<TransaksiController> {
                     //   return const SizedBox.shrink();
                     // }
                     // }),
+                  // Obx(() {
+                  //   var cuciSetrikaList = controller.selectedcuciSetrika;
+                  //   if (cuciSetrikaList.isNotEmpty) {
+                  //     return Column(
+                  //       crossAxisAlignment: CrossAxisAlignment.start,
+                  //       children: List.generate(
+                  //         cuciSetrikaList.length,
+                  //         (index) {
+                  //           var cuciSetrika = cuciSetrikaList[index];
+                  //           return Column(
+                  //             children: [
+                  //               Card(
+                  //                 elevation: 0,
+                  //                 color: Colors.transparent,
+                  //                 shape: RoundedRectangleBorder(
+                  //                   borderRadius: BorderRadius.circular(10),
+                  //                 ),
+                  //                 child: Column(
+                  //                   crossAxisAlignment:
+                  //                       CrossAxisAlignment.start,
+                  //                   children: [
+                  //                     Row(
+                  //                       mainAxisAlignment:
+                  //                           MainAxisAlignment.spaceBetween,
+                  //                       children: [
+                  //                         Text(
+                  //                           "Express: \n${cuciSetrika['nama']}",
+                  //                           style: const TextStyle(
+                  //                             fontSize: 16,
+                  //                             fontFamily: 'Poppins',
+                  //                             fontWeight: FontWeight.w600,
+                  //                           ),
+                  //                         ),
+                  //                         IconButton(
+                  //                           onPressed: () {
+                  //                             controller.removecuciSetrika(index);
+                  //                           },
+                  //                           icon: const Icon(
+                  //                             Icons.delete_outlined,
+                  //                             color: Constants.primaryColor,
+                  //                           ),
+                  //                         ),
+                  //                       ],
+                  //                     ),
+                  //                   ],
+                  //                 ),
+                  //               ),
+                  //               const Divider(color: Constants.primaryColor),
+                  //             ],
+                  //           );
+                  //         },
+                  //       ),
+                  //     );
+                  //   } else {
+                  //     return const SizedBox.shrink();
+                  //   }
+                  // }),
                   Obx(() {
                     var cuciSetrikaList = controller.selectedcuciSetrika;
                     if (cuciSetrikaList.isNotEmpty) {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: List.generate(
-                          cuciSetrikaList.length,
-                          (index) {
-                            var cuciSetrika = cuciSetrikaList[index];
-                            return Column(
-                              children: [
-                                Card(
-                                  elevation: 0,
-                                  color: Colors.transparent,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 5),
+                          const Card(
+                            elevation: 0,
+                            color: Colors.transparent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                            ),
+                            child: Text(
+                              "Express:",
+                              style: TextStyle(
+                                fontFamily: 'Poppins',
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          Column(
+                            children: List.generate(cuciSetrikaList.length, (index) {
+                              var cuciSetrika = cuciSetrikaList[index];
+                              return Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
+                                      Expanded(
+                                        child: Text(
+                                          "${cuciSetrika['nama']}\nRp.${cuciSetrika['harga'].toStringAsFixed(0)}",
+                                          style: const TextStyle(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
-                                            "cuciSetrika: ${cuciSetrika['nama']}",
-                                            style: const TextStyle(
-                                              fontSize: 16,
+                                          SizedBox(
+                                            width: 50,
+                                            height: 30,
+                                            child: TextFormField(
+                                              initialValue: cuciSetrika['berat'] != null
+                                                  ? cuciSetrika['berat'].toString()
+                                                  : '1',
+                                              keyboardType: const TextInputType.numberWithOptions(
+                                                  decimal: true),
+                                              textAlign: TextAlign.center,
+                                              decoration: const InputDecoration(
+                                                border: OutlineInputBorder(),
+                                                contentPadding: EdgeInsets.zero,
+                                              ),
+                                              onChanged: (value) {
+                                                if (value.isNotEmpty) {
+                                                  controller.updateBeratCuciSetrika(
+                                                    index,
+                                                    double.parse(value).toDouble(),
+                                                  );
+                                                } else {
+                                                  controller.updateBeratCuciSetrika(index, 1);
+                                                }
+                                              },
+                                            ),
+                                          ),
+                                          const SizedBox(width: 5),
+                                          const Text(
+                                            "Kg",
+                                            style: TextStyle(
                                               fontFamily: 'Poppins',
-                                              fontWeight: FontWeight.w600,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w700,
                                             ),
                                           ),
                                           IconButton(
@@ -243,12 +345,12 @@ class TransaksiView extends GetView<TransaksiController> {
                                       ),
                                     ],
                                   ),
-                                ),
-                                const Divider(color: Constants.primaryColor),
-                              ],
-                            );
-                          },
-                        ),
+                                  const Divider(color: Constants.primaryColor),
+                                ],
+                              );
+                            }),
+                          ),
+                        ],
                       );
                     } else {
                       return const SizedBox.shrink();
@@ -272,7 +374,7 @@ class TransaksiView extends GetView<TransaksiController> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Nama Service:",
+                                    "Service:",
                                     style: TextStyle(
                                       fontFamily: 'Poppins',
                                       fontSize: 16,
@@ -319,7 +421,7 @@ class TransaksiView extends GetView<TransaksiController> {
                                                     Service['jumlah'] != null
                                                       ? Service['jumlah']
                                                         .toString()
-                                                      : '1',
+                                                      : '2',
                                                   keyboardType:
                                                     const TextInputType
                                                       .numberWithOptions(
@@ -518,7 +620,7 @@ class TransaksiView extends GetView<TransaksiController> {
                       Get.back();
                     },
                   );
-                } else if (controller.selectedService.isEmpty || controller.selectedcuciSetrika.isEmpty){
+                } else if (controller.selectedService.isEmpty && controller.selectedcuciSetrika.isEmpty){
                   Get.defaultDialog(
                     title: "Data tidak lengkap",
                     middleText: "service harus diisi",

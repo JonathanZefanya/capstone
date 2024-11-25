@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
@@ -10,25 +12,31 @@ class TransaksiController extends GetxController {
   var statusPengiriman = 'Diantar'.obs;
   var totalHarga = 0.0.obs;
 
+  // Select pelanggan
   void selectPelanggan(Map<String, dynamic> pelanggan) {
     selectedPelanggan.value = pelanggan;
   }
 
+  // Add and remove cuciSetrika with berat cucian
   void addcuciSetrika(Map<String, dynamic> cuciSetrika) {
+    cuciSetrika['berat'] = 1.0; // Default berat adalah 1 kg
     selectedcuciSetrika.add(cuciSetrika);
+    _hitungTotalHarga();
   }
 
   void removecuciSetrika(int index) {
     selectedcuciSetrika.removeAt(index);
+    _hitungTotalHarga();
   }
 
+  void updateBeratCuciSetrika(int index, double berat) {
+    selectedcuciSetrika[index]['berat'] = berat;
+    _hitungTotalHarga();
+  }
+
+  // Add, remove, and update jumlah Service
   void addService(Map<String, dynamic> Service) {
-    selectedService.add(Service);
-  }
-
-// Select and remove Service and update jumlah Service
-  void selectService(Map<String, dynamic> Service) {
-    Service['jumlah'] = 0.0; // Default jumlah Service adalah 1
+    Service['berat'] = 1.0; // Default jumlah Service adalah 1
     selectedService.add(Service);
     _hitungTotalHarga();
   }
@@ -39,35 +47,56 @@ class TransaksiController extends GetxController {
   }
 
   void updateJumlahService(int index, double jumlah) {
-    selectedService[index]['jumlah'] = jumlah;
+    selectedService[index]['berat'] = jumlah;
     _hitungTotalHarga();
   }
 
-// Hitung total harga
+  // Hitung total harga
   void _hitungTotalHarga() {
     double total = 0;
-    for (var Service in selectedService) {
-      double harga = Service['harga'] != null && Service['harga'] is num
-          ? (Service['harga'] as num).toDouble()
+
+    // Hitung total dari cuci setrika
+    for (var item in selectedcuciSetrika) {
+      double harga = item['harga'] != null && item['harga'] is num
+          ? (item['harga'] as num).toDouble()
           : 0.0;
-      double jumlah = Service['jumlah'] != null && Service['jumlah'] is num
-          ? (Service['jumlah'] as num).toDouble()
+      double berat = item['berat'] != null && item['berat'] is num
+          ? (item['berat'] as num).toDouble()
+          : 1.0;
+      total += harga * berat;
+    }
+
+    // Hitung total dari services
+    for (var item in selectedService) {
+      double harga = item['harga'] != null && item['harga'] is num
+          ? (item['harga'] as num).toDouble()
           : 0.0;
+      double jumlah = item['berat'] != null && item['berat'] is num
+          ? (item['berat'] as num).toDouble()
+          : 1.0;
       total += harga * jumlah;
     }
+
     totalHarga.value = total;
   }
 
+  // Simpan transaksi
   Future<void> saveTransaksi() async {
     try {
       var transaksiData = {
         'pelanggan': selectedPelanggan.value,
-        'cuciSetrika': selectedcuciSetrika.map((e) => e['nama']).toList(),
+        'cuciSetrika': selectedcuciSetrika
+            .map((e) => {
+                  'nama': e['nama'],
+                  'harga': e['harga'],
+                  'berat': e['berat'], // Tambahkan berat di data transaksi
+                })
+            .toList(),
         'Service': selectedService
             .map((e) => {
                   'nama': e['nama'],
                   'harga': e['harga'],
-                  'jumlah': e['jumlah'],
+                  'berat': e['berat'],
                 })
             .toList(),
         'metode_pembayaran': metodePembayaran.value,
@@ -87,6 +116,7 @@ class TransaksiController extends GetxController {
     }
   }
 
+  // Reset semua data
   void clearSelections() {
     selectedPelanggan.value = {};
     selectedcuciSetrika.clear();
