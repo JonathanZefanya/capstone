@@ -136,11 +136,11 @@ class ServiceController extends GetxController {
   String getCategoryCollection(String category) {
     switch (category) {
       case 'express':
-        return 'service';
+        return 'service_express';
       case 'cuciLipat':
         return 'service_cuciLipat';
       case 'cuciSetrika':
-        return 'cuciSetrika';
+        return 'service_cuciSetrika';
       default:
         throw Exception('Kategori tidak valid');
     }
