@@ -35,11 +35,14 @@ class TransaksiController extends GetxController {
   }
 
   // Add, remove, and update jumlah Service
-  void addService(Map<String, dynamic> Service) {
-    Service['berat'] = 1.0; // Default jumlah Service adalah 1
-    selectedService.add(Service);
+  void addService(Map<String, dynamic> service) {
+    // Tambahkan kategori berdasarkan nama koleksi
+    service['kategori'] = service['kategori'] ?? 'N/A'; // Jika kategori belum ditentukan
+    service['berat'] = 1.0; // Default berat adalah 1
+    selectedService.add(service);
     _hitungTotalHarga();
   }
+
 
   void removeService(int index) {
     selectedService.removeAt(index);
@@ -80,6 +83,38 @@ class TransaksiController extends GetxController {
     totalHarga.value = total;
   }
 
+  Future<List<Map<String, dynamic>>> fetchServices() async {
+    List<Map<String, dynamic>> services = [];
+    // Fetch dari koleksi 'service_cuciLipat'
+    var cuciLipatSnapshot = await FirebaseFirestore.instance
+        .collection('service_cuciLipat')
+        .get();
+
+    for (var doc in cuciLipatSnapshot.docs) {
+      services.add({
+        'id': doc.id,
+        ...doc.data(),
+        'kategori': 'cuciLipat', // Tambahkan kategori
+      });
+    }
+
+    // Fetch dari koleksi 'service_cuciSetrika'
+    var cuciSetrikaSnapshot = await FirebaseFirestore.instance
+        .collection('service_cuciSetrika')
+        .get();
+
+    for (var doc in cuciSetrikaSnapshot.docs) {
+      services.add({
+        'id': doc.id,
+        ...doc.data(),
+        'kategori': 'cuciSetrika', // Tambahkan kategori
+      });
+    }
+
+    return services;
+  }
+
+
   // Simpan transaksi
   Future<void> saveTransaksi() async {
     try {
@@ -97,6 +132,7 @@ class TransaksiController extends GetxController {
                   'nama': e['nama'],
                   'harga': e['harga'],
                   'berat': e['berat'],
+                  'kategori': e['kategori'],
                 })
             .toList(),
         'metode_pembayaran': metodePembayaran.value,

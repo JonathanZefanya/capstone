@@ -398,17 +398,30 @@ class TransaksiView extends GetView<TransaksiController> {
                                   (index) {
                                     var Service = ServiceList[index];
                                     return Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
+                                        // Menampilkan kategori di atas harga
+                                        Text(
+                                          "${Service['kategori']}",
+                                          style: const TextStyle(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 5),
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              "${Service['nama']}\nRp.${Service['harga'].toStringAsFixed(0)}",
-                                              style: const TextStyle(
-                                                fontFamily: 'Poppins',
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600,
+                                            Expanded(
+                                              child: Text(
+                                                "${Service['nama']}\nRp.${Service['harga'].toStringAsFixed(0)}",
+                                                style: const TextStyle(
+                                                  fontFamily: 'Poppins',
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
                                               ),
                                             ),
                                             Row(
@@ -417,44 +430,36 @@ class TransaksiView extends GetView<TransaksiController> {
                                                   width: 50,
                                                   height: 30,
                                                   child: TextFormField(
-                                                  initialValue:
-                                                    Service['jumlah'] != null
-                                                      ? Service['jumlah']
-                                                        .toString()
-                                                      : '2',
-                                                  keyboardType:
-                                                    const TextInputType
-                                                      .numberWithOptions(
-                                                      decimal: true),
-                                                  textAlign: TextAlign.center,
-                                                  decoration:
-                                                    const InputDecoration(
-                                                    border:
-                                                      OutlineInputBorder(),
-                                                    contentPadding:
-                                                      EdgeInsets.zero,
-                                                  ),
-                                                  onChanged: (value) {
-                                                    if (value.isNotEmpty) {
-                                                    controller
-                                                      .updateJumlahService(
-                                                      index,
-                                                      double.parse(value)
-                                                        .toDouble(),
-                                                    );
-                                                    } else {
-                                                    controller
-                                                      .updateJumlahService(
-                                                      index,
-                                                      1,
-                                                    );
-                                                    }
-                                                  },
+                                                    initialValue: Service['jumlah'] != null
+                                                        ? Service['jumlah'].toString()
+                                                        : '1',
+                                                    keyboardType:
+                                                        const TextInputType.numberWithOptions(
+                                                            decimal: true),
+                                                    textAlign: TextAlign.center,
+                                                    decoration: const InputDecoration(
+                                                      border: OutlineInputBorder(),
+                                                      contentPadding: EdgeInsets.zero,
+                                                    ),
+                                                    onChanged: (value) {
+                                                      if (value.isNotEmpty) {
+                                                        controller.updateJumlahService(
+                                                          index,
+                                                          double.parse(value).toDouble(),
+                                                        );
+                                                      } else {
+                                                        controller.updateJumlahService(
+                                                          index,
+                                                          1,
+                                                        );
+                                                      }
+                                                    },
                                                   ),
                                                 ),
-                                                Text(
+                                                const SizedBox(width: 5),
+                                                const Text(
                                                   "Kg",
-                                                  style: const TextStyle(
+                                                  style: TextStyle(
                                                     fontFamily: 'Poppins',
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w700,
@@ -462,19 +467,18 @@ class TransaksiView extends GetView<TransaksiController> {
                                                 ),
                                                 IconButton(
                                                   onPressed: () {
-                                                    controller
-                                                        .removeService(index);
+                                                    controller.removeService(index);
                                                   },
                                                   icon: const Icon(
                                                     Icons.delete_outlined,
-                                                    color:
-                                                        Constants.primaryColor,
+                                                    color: Constants.primaryColor,
                                                   ),
                                                 ),
                                               ],
                                             ),
                                           ],
                                         ),
+                                        const SizedBox(height: 10),
                                       ],
                                     );
                                   },

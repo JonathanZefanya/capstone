@@ -193,7 +193,7 @@ class DetailorderView extends GetView<LaporanController> {
                   const SizedBox(height: 10),
                   for (var produk in laporan['Service'] ?? []) ...[
                     Text(
-                      '- ${produk['nama']?? 'N/A'}, Berat ${produk['berat']?.toStringAsFixed(0) ?? '0'}kg, Harga ${produk['harga']?.toStringAsFixed(0) ?? '0'}',
+                      '- ${produk['nama']?? 'N/A'}, Berat ${produk['berat']?.toStringAsFixed(0) ?? '0'}kg, Harga ${produk['harga']?.toStringAsFixed(0) ?? '0'}, Kategori ${produk['kategori'] ?? 'N/A'}',
                       // '- $produk',
                       style: const TextStyle(fontSize: 16),
                     ),
