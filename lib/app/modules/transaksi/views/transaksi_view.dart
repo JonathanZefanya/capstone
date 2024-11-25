@@ -182,6 +182,21 @@ class TransaksiView extends GetView<TransaksiController> {
                       return const SizedBox.shrink();
                     }
                   }),
+                    // Obx(() {
+                    // if (controller.selectedPelanggan.value.isEmpty) {
+                    //   return const Text(
+                    //   "Pelanggan harus diisi",
+                    //   style: TextStyle(
+                    //     color: Colors.red,
+                    //     fontFamily: 'Poppins',
+                    //     fontSize: 16,
+                    //     fontWeight: FontWeight.w600,
+                    //   ),
+                    //   );
+                    // } else {
+                    //   return const SizedBox.shrink();
+                    // }
+                    // }),
                   Obx(() {
                     var cuciSetrikaList = controller.selectedcuciSetrika;
                     if (cuciSetrikaList.isNotEmpty) {
@@ -300,39 +315,39 @@ class TransaksiView extends GetView<TransaksiController> {
                                                   width: 50,
                                                   height: 30,
                                                   child: TextFormField(
-                                                    initialValue:
-                                                        Service['jumlah'] != null
-                                                            ? Service['jumlah']
-                                                                .toString()
-                                                            : '',
-                                                    keyboardType:
-                                                        const TextInputType
-                                                            .numberWithOptions(
-                                                            decimal: true),
-                                                    textAlign: TextAlign.center,
-                                                    decoration:
-                                                        const InputDecoration(
-                                                      border:
-                                                          OutlineInputBorder(),
-                                                      contentPadding:
-                                                          EdgeInsets.zero,
-                                                    ),
-                                                    onChanged: (value) {
-                                                      if (value.isNotEmpty) {
-                                                        controller
-                                                            .updateJumlahService(
-                                                          index,
-                                                          double.parse(value)
-                                                              .toDouble(),
-                                                        );
-                                                      } else {
-                                                        controller
-                                                            .updateJumlahService(
-                                                          index,
-                                                          1,
-                                                        );
-                                                      }
-                                                    },
+                                                  initialValue:
+                                                    Service['jumlah'] != null
+                                                      ? Service['jumlah']
+                                                        .toString()
+                                                      : '1',
+                                                  keyboardType:
+                                                    const TextInputType
+                                                      .numberWithOptions(
+                                                      decimal: true),
+                                                  textAlign: TextAlign.center,
+                                                  decoration:
+                                                    const InputDecoration(
+                                                    border:
+                                                      OutlineInputBorder(),
+                                                    contentPadding:
+                                                      EdgeInsets.zero,
+                                                  ),
+                                                  onChanged: (value) {
+                                                    if (value.isNotEmpty) {
+                                                    controller
+                                                      .updateJumlahService(
+                                                      index,
+                                                      double.parse(value)
+                                                        .toDouble(),
+                                                    );
+                                                    } else {
+                                                    controller
+                                                      .updateJumlahService(
+                                                      index,
+                                                      1,
+                                                    );
+                                                    }
+                                                  },
                                                   ),
                                                 ),
                                                 Text(
@@ -492,7 +507,31 @@ class TransaksiView extends GetView<TransaksiController> {
                 ),
               ),
               onPressed: () async {
-                controller.saveTransaksi();
+                // Jika pelanggan kosong dan service kosong maka akan muncul dialog data tidak lengkap
+                if (controller.selectedPelanggan.value.isEmpty){
+                  Get.defaultDialog(
+                    title: "Data tidak lengkap",
+                    middleText: "Pelanggan harus diisi",
+                    textConfirm: "OK",
+                    confirmTextColor: Constants.scaffoldbackgroundColor,
+                    onConfirm: () {
+                      Get.back();
+                    },
+                  );
+                } else if (controller.selectedService.isEmpty || controller.selectedcuciSetrika.isEmpty){
+                  Get.defaultDialog(
+                    title: "Data tidak lengkap",
+                    middleText: "service harus diisi",
+                    textConfirm: "OK",
+                    confirmTextColor: Constants.scaffoldbackgroundColor,
+                    onConfirm: () {
+                      Get.back();
+                    },
+                  );
+                } else {
+                  controller.saveTransaksi();
+                }
+                // controller.saveTransaksi();
               },
               child: const Text(
                 "Simpan",
