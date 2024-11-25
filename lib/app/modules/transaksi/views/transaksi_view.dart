@@ -268,7 +268,7 @@ class TransaksiView extends GetView<TransaksiController> {
                               borderRadius: BorderRadius.all(Radius.circular(10)),
                             ),
                             child: Text(
-                              "Express:",
+                              "Laundry Perjam:",
                               style: TextStyle(
                                 fontFamily: 'Poppins',
                                 fontSize: 16,
@@ -374,7 +374,7 @@ class TransaksiView extends GetView<TransaksiController> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Service:",
+                                    "Laundry Harian:",
                                     style: TextStyle(
                                       fontFamily: 'Poppins',
                                       fontSize: 16,

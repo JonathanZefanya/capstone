@@ -174,7 +174,7 @@ class DetailorderView extends GetView<LaporanController> {
                   const Divider(height: 2, color: Constants.primaryColor),
                   const SizedBox(height: 10),
                   const Text(
-                    "Express :",
+                    "Laundry Perjam :",
                     style: TextStyle(fontSize: 16),
                   ),
                   const SizedBox(height: 10),
@@ -187,7 +187,7 @@ class DetailorderView extends GetView<LaporanController> {
                   ],
                   const Divider(height: 2, color: Constants.primaryColor),
                   const Text(
-                    "Service :",
+                    "Laundry Harian :",
                     style: TextStyle(fontSize: 16),
                   ),
                   const SizedBox(height: 10),
