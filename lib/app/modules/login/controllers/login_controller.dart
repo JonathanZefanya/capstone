@@ -22,8 +22,12 @@ class LoginController extends GetxController {
         email: email,
         password: password,
       );
-
-      Get.offAllNamed(AppPages.INITIAL);
+      if (userCredential.user!.emailVerified) {
+        Get.snackbar('Sukses', 'Berhasil Masuk');
+        Get.offAllNamed(Routes.HOME);
+      } else {
+        Get.snackbar('Error', 'Verifikasi Email Kamu');
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-credential') {
         print("email tidak cocok");
@@ -45,7 +49,7 @@ class LoginController extends GetxController {
           "Sudah dulu ya!",
           "Terlalu banyak mencoba, ingat ingat lagi!",
         );
-      } 
+      }
       print(e.code);
     } catch (e) {
       print(e);

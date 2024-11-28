@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/resetpassword/bindings/reset_password_binding.dart';
+import '../modules/resetpassword/views/reset_password_view.dart';
 import '../modules/detailorder/bindings/detailorder_binding.dart';
 import '../modules/detailorder/views/detailorder_view.dart';
 import '../modules/edittransaksi/bindings/edittransaksi_binding.dart';
@@ -93,6 +95,11 @@ class AppPages {
       name: _Paths.EDITTRANSAKSI,
       page: () => const EditTransaksiView(),
       binding: EdittransaksiBinding(),
+    ),
+    GetPage(
+      name: _Paths.RESET_PASSWORD,
+      page: () => const ResetPasswordView(),
+      binding: ResetPasswordBinding(),
     ),
   ];
 }

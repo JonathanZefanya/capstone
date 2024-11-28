@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:myapp/app/routes/app_pages.dart';
 
 import '../../../../component/app_color.dart';
 import '../../profile/controllers/profile_controller.dart';
@@ -104,20 +105,19 @@ class HomeView extends GetView<HomeController> {
               icon: const Icon(Icons.more_vert, color: Constants.secondColor),
               itemBuilder: (context) => [
                 const PopupMenuItem(
-                  value: 'Settings',
-                  child: Text('Settings'),
+                  value: 'Profile',
+                  child: Text('Profil'),
                 ),
                 const PopupMenuItem(
                   value: 'Logout',
-                  child: Text('Logout'),
+                  child: Text('Keluar'),
                 ),
               ],
               onSelected: (value) {
-                if (value == 'Settings') {
-                  Get.toNamed('/settings');
+                if (value == 'Profile') {
+                  Get.toNamed(Routes.PROFILE);
                 } else if (value == 'Logout') {
-                  // Logika logout di sini
-                  Get.offAllNamed('/login');
+                  controller.logout();
                 }
               },
             ),

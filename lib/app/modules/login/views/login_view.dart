@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:myapp/app/routes/app_pages.dart';
 import 'package:myapp/component/app_color.dart';
 import 'package:myapp/component/custom_field.dart';
 
@@ -77,7 +78,9 @@ class LoginView extends GetView<LoginController> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.toNamed(Routes.RESET_PASSWORD);
+                      },
                       child: Text("Lupa Kata Sandi?"),
                     ),
                   ),

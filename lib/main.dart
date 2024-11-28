@@ -52,7 +52,9 @@ class MyApp extends StatelessWidget {
               ),
             ),
             initialRoute:
-                snapshot.data != null ? AppPages.INITIAL : AppPages.LOGIN,
+                snapshot.data != null && snapshot.data!.emailVerified == true
+                    ? AppPages.INITIAL
+                    : AppPages.LOGIN,
             getPages: AppPages.routes,
           );
         }

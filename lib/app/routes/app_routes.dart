@@ -15,6 +15,7 @@ abstract class Routes {
   static const TAMBAH_PELANGGAN = _Paths.TAMBAH_PELANGGAN;
   static const DETAILORDER = _Paths.DETAILORDER;
   static const EDITTRANSAKSI = _Paths.EDITTRANSAKSI;
+  static const RESET_PASSWORD = _Paths.RESET_PASSWORD;
 }
 
 abstract class _Paths {
@@ -31,4 +32,5 @@ abstract class _Paths {
   static const TAMBAH_PELANGGAN = '/tambah-pelanggan';
   static const DETAILORDER = '/detailorder';
   static const EDITTRANSAKSI = '/edittransaksi';
+  static const RESET_PASSWORD = '/reset-password';
 }
