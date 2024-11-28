@@ -16,6 +16,8 @@ abstract class Routes {
   static const DETAILORDER = _Paths.DETAILORDER;
   static const EDITTRANSAKSI = _Paths.EDITTRANSAKSI;
   static const RESET_PASSWORD = _Paths.RESET_PASSWORD;
+  static const ABOUTUS = _Paths.ABOUTUS;
+  static const MYACCOUNT = _Paths.MYACCOUNT;
 }
 
 abstract class _Paths {
@@ -33,4 +35,6 @@ abstract class _Paths {
   static const DETAILORDER = '/detailorder';
   static const EDITTRANSAKSI = '/edittransaksi';
   static const RESET_PASSWORD = '/reset-password';
+  static const ABOUTUS = '/aboutus';
+  static const MYACCOUNT = '/myaccount';
 }

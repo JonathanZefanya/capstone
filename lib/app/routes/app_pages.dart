@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-import '../modules/resetpassword/bindings/reset_password_binding.dart';
-import '../modules/resetpassword/views/reset_password_view.dart';
+import '../modules/aboutus/bindings/aboutus_binding.dart';
+import '../modules/aboutus/views/aboutus_view.dart';
 import '../modules/detailorder/bindings/detailorder_binding.dart';
 import '../modules/detailorder/views/detailorder_view.dart';
 import '../modules/edittransaksi/bindings/edittransaksi_binding.dart';
@@ -12,12 +12,16 @@ import '../modules/laporan/bindings/laporan_binding.dart';
 import '../modules/laporan/views/laporan_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/myaccount/bindings/myaccount_binding.dart';
+import '../modules/myaccount/views/myaccount_view.dart';
 import '../modules/pelanggan/bindings/pelanggan_binding.dart';
 import '../modules/pelanggan/views/pelanggan_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
+import '../modules/resetpassword/bindings/reset_password_binding.dart';
+import '../modules/resetpassword/views/reset_password_view.dart';
 import '../modules/service/bindings/service_binding.dart';
 import '../modules/service/views/service_view.dart';
 import '../modules/tambah_pelanggan/bindings/tambah_pelanggan_binding.dart';
@@ -100,6 +104,16 @@ class AppPages {
       name: _Paths.RESET_PASSWORD,
       page: () => const ResetPasswordView(),
       binding: ResetPasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.ABOUTUS,
+      page: () => const AboutusView(),
+      binding: AboutusBinding(),
+    ),
+    GetPage(
+      name: _Paths.MYACCOUNT,
+      page: () => const MyaccountView(),
+      binding: MyaccountBinding(),
     ),
   ];
 }
