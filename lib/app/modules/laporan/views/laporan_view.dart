@@ -28,9 +28,9 @@ class LaporanView extends GetView<LaporanController> {
         title: const Text(
           'Laporan',
           style: TextStyle(
-            color: Constants.primaryColor,
+           color: Constants.secondColor,
             fontWeight: FontWeight.w600,
-            fontFamily: 'Poppins',
+          
           ),
         ),
         centerTitle: true,
@@ -46,7 +46,7 @@ class LaporanView extends GetView<LaporanController> {
                       child: Text(
                         'Pilih Bulan dan Tahun',
                         style: TextStyle(
-                          fontFamily: 'Poppins',
+                          
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                         ),
@@ -126,7 +126,7 @@ class LaporanView extends GetView<LaporanController> {
                           child: const Text(
                             "Kembali",
                             style: TextStyle(
-                              fontFamily: 'Poppins',
+                              
                               fontWeight: FontWeight.w600,
                               color: Constants.scaffoldbackgroundColor,
                             ),
@@ -158,7 +158,7 @@ class LaporanView extends GetView<LaporanController> {
                     decoration: const InputDecoration(
                       hintText: 'Cari Pelanggan',
                       hintStyle: TextStyle(
-                        fontFamily: 'Poppins',
+                       
                         fontSize: 16,
                       ),
                       prefixIcon: Icon(Icons.search),
@@ -203,7 +203,7 @@ class LaporanView extends GetView<LaporanController> {
                                 const Text(
                                   'Order',
                                   style: TextStyle(
-                                    fontFamily: 'Poppins',
+                                   
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -244,7 +244,7 @@ class LaporanView extends GetView<LaporanController> {
                                       Text(
                                         'Nama: ${pelanggan['nama pelanggan']}',
                                         style: const TextStyle(
-                                          fontFamily: 'Poppins',
+                                         
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           color: Colors.white,
@@ -254,7 +254,7 @@ class LaporanView extends GetView<LaporanController> {
                                       Text(
                                         'Nomor WhatsApp : ${pelanggan['nomor WhatsApp']}',
                                         style: const TextStyle(
-                                          fontFamily: 'Poppins',
+                                          
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           color: Colors.white,
@@ -264,7 +264,7 @@ class LaporanView extends GetView<LaporanController> {
                                       Text(
                                         'Tanggal: $formattedDate',
                                         style: const TextStyle(
-                                          fontFamily: 'Poppins',
+                                      
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           color: Colors.white,

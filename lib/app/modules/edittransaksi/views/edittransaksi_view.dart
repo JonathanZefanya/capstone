@@ -22,7 +22,7 @@ class EditTransaksiView extends GetView<EditTransaksiController> {
           'Edit Transaksi',
           style: TextStyle(
             fontSize: 20,
-            color: Constants.primaryColor,
+            color: Constants.secondColor,
             fontWeight: FontWeight.w600,
           ),
         ),

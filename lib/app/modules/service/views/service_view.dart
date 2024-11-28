@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myapp/component/search_field.dart';
 import '../../../../component/app_color.dart';
 import '../../tambah_service/views/tambah_service_view.dart';
 import '../../transaksi/controllers/transaksi_controller.dart';
@@ -19,15 +20,14 @@ class ServiceView extends GetView<ServiceController> {
           title: const Text(
             'List service',
             style: TextStyle(
-              color: Constants.primaryColor,
+              color: Constants.secondColor,
               fontWeight: FontWeight.w600,
-              fontFamily: 'Poppins',
               fontSize: 20,
             ),
           ),
           bottom: TabBar(
             tabs: const [
-              Tab(text: 'express'),
+              Tab(text: 'Express'),
               Tab(text: 'Cuci Lipat'),
               Tab(text: 'Cuci Setrika'),
             ],
@@ -49,12 +49,10 @@ class ServiceView extends GetView<ServiceController> {
             labelStyle: const TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 16,
-              fontFamily: 'Poppins',
             ),
             unselectedLabelStyle: const TextStyle(
               fontWeight: FontWeight.normal,
               fontSize: 14,
-              fontFamily: 'Poppins',
             ),
             indicator: const UnderlineTabIndicator(
               borderSide: BorderSide(
@@ -66,14 +64,14 @@ class ServiceView extends GetView<ServiceController> {
           ),
           automaticallyImplyLeading: false,
           leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: Icon(
-            Icons.arrow_back_ios,
-            color: Constants.secondColor,
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Constants.secondColor,
+            ),
           ),
-        ),
           centerTitle: true,
         ),
         body: TabBarView(
@@ -131,17 +129,17 @@ class ServiceView extends GetView<ServiceController> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 10,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      hintText: 'Cari service',
-                      prefixIcon: Icon(Icons.search),
-                      border: OutlineInputBorder(),
-                    ),
+                  child: SearchFormField(
+                    hintText: "Cari Layanan",
+                    prefixIcon: Icons.search,
                     onChanged: (value) {
                       controller.searchservice(value, category);
                     },
@@ -173,11 +171,14 @@ class ServiceView extends GetView<ServiceController> {
                           }
 
                           return Card(
-                            margin: const EdgeInsets.all(10.0),
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 10,
+                            ),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
+                              borderRadius: BorderRadius.circular(8.0),
                               side: const BorderSide(
-                                  color: Constants.fiveColor, width: 1.5),
+                                  color: Constants.borderColor, width: 1.5),
                             ),
                             color: Colors.white,
                             child: ListTile(

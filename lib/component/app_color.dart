@@ -16,6 +16,7 @@ class Constants {
   static const Color secondColor = Color(0xff646C83); // Biru muda
   static const Color thirdColor = Color(0xff128864); // Hijau
   static const Color fourColor = Color(0xff933E4D); // Merah
+  static const Color borderColor = Color.fromARGB(255, 209, 209, 209); // Merah
   static const Color fiveColor = Color(0xff797979); // Abu-abu
   static const Color scaffoldbackgroundColor =
       Color.fromRGBO(245, 247, 249, 1); // Warna background scaffold

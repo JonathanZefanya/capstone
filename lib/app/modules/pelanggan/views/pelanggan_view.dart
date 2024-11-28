@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myapp/component/search_field.dart';
 
 import '../../../../component/app_color.dart';
 import '../../tambah_pelanggan/views/tambah_pelanggan_view.dart';
@@ -16,9 +17,8 @@ class PelangganView extends GetView<PelangganController> {
         title: const Text(
           'List Pelanggan',
           style: TextStyle(
-            color: Constants.primaryColor,
+            color: Constants.secondColor,
             fontWeight: FontWeight.w600,
-            fontFamily: 'FontPoppins',
             fontSize: 20,
           ),
         ),
@@ -37,17 +37,14 @@ class PelangganView extends GetView<PelangganController> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      hintText: 'Cari Pelanggan',
-                      prefixIcon: Icon(Icons.search),
-                      border: OutlineInputBorder(),
-                    ),
+                  child: SearchFormField(
+                    hintText: "Cari Pelanggan",
+                    prefixIcon: Icons.search,
                     onChanged: (value) {
                       controller.filterPelanggan(value);
                     },
@@ -69,10 +66,12 @@ class PelangganView extends GetView<PelangganController> {
                 itemBuilder: (context, index) {
                   var pelanggan = pelangganList[index];
                   return Card(
-                    margin: const EdgeInsets.all(10.0),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 15),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
-                      side: const BorderSide(color: Colors.black, width: 1.5),
+                      side: const BorderSide(
+                          color: Constants.borderColor, width: 1.5),
                     ),
                     color: Colors.white,
                     child: ListTile(
@@ -97,7 +96,10 @@ class PelangganView extends GetView<PelangganController> {
                         ],
                       ),
                       trailing: IconButton(
-                        icon: const Icon(Icons.delete_outlined),
+                        icon: const Icon(
+                          Icons.delete_outlined,
+                          color: AppColors.error,
+                        ),
                         onPressed: () {
                           if (pelanggan['id'] != null) {
                             controller.deletePelanggan(pelanggan['id']);
@@ -121,7 +123,7 @@ class PelangganView extends GetView<PelangganController> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color.fromRGBO(77, 62, 147, 50),
+        backgroundColor: Constants.primaryColor,
         onPressed: () {
           // Navigator.push(
           //   context,
@@ -129,7 +131,7 @@ class PelangganView extends GetView<PelangganController> {
           //     builder: (context) => const TambahPelangganView(),
           //   ),
           // );
-          
+
           //URL Navigation /tambah-pelanggan
           Get.toNamed('/tambah-pelanggan');
         },

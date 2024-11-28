@@ -18,9 +18,8 @@ class TransaksiView extends GetView<TransaksiController> {
         title: const Text(
           'Transaksi',
           style: TextStyle(
-            color: Constants.primaryColor,
+            color: Constants.secondColor,
             fontWeight: FontWeight.w600,
-            fontFamily: 'Poppins',
             fontSize: 20,
           ),
         ),
@@ -49,7 +48,7 @@ class TransaksiView extends GetView<TransaksiController> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.minPositive, 35),
-                      backgroundColor: Constants.primaryColor,
+                      backgroundColor: AppColors.accent,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -61,7 +60,6 @@ class TransaksiView extends GetView<TransaksiController> {
                       "Pelanggan",
                       style: TextStyle(
                         color: Constants.scaffoldbackgroundColor,
-                        fontFamily: 'Poppins',
                       ),
                     ),
                   ),
@@ -83,7 +81,6 @@ class TransaksiView extends GetView<TransaksiController> {
                     child: const Text(
                       "Service",
                       style: TextStyle(
-                        fontFamily: 'Poppins',
                         color: Constants.scaffoldbackgroundColor,
                       ),
                     ),
@@ -138,7 +135,6 @@ class TransaksiView extends GetView<TransaksiController> {
                                     Text(
                                       "Nama : ${pelanggan['nama pelanggan']}",
                                       style: const TextStyle(
-                                        fontFamily: 'Poppins',
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -147,7 +143,6 @@ class TransaksiView extends GetView<TransaksiController> {
                                     Text(
                                       "Nomor : ${pelanggan['nomor WhatsApp']}",
                                       style: const TextStyle(
-                                        fontFamily: 'Poppins',
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -156,7 +151,6 @@ class TransaksiView extends GetView<TransaksiController> {
                                     Text(
                                       "Alamat : ${pelanggan['alamat']}",
                                       style: const TextStyle(
-                                        fontFamily: 'Poppins',
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -271,7 +265,6 @@ class TransaksiView extends GetView<TransaksiController> {
                             child: Text(
                               "Laundry Perjam:",
                               style: TextStyle(
-                                fontFamily: 'Poppins',
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -292,7 +285,6 @@ class TransaksiView extends GetView<TransaksiController> {
                                         child: Text(
                                           "${cuciSetrika['nama']}\nRp.${cuciSetrika['harga'].toStringAsFixed(0)}",
                                           style: const TextStyle(
-                                            fontFamily: 'Poppins',
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -337,7 +329,6 @@ class TransaksiView extends GetView<TransaksiController> {
                                           const Text(
                                             "Kg",
                                             style: TextStyle(
-                                              fontFamily: 'Poppins',
                                               fontSize: 16,
                                               fontWeight: FontWeight.w700,
                                             ),
@@ -387,7 +378,6 @@ class TransaksiView extends GetView<TransaksiController> {
                                   Text(
                                     "Laundry Harian:",
                                     style: TextStyle(
-                                      fontFamily: 'Poppins',
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -416,7 +406,6 @@ class TransaksiView extends GetView<TransaksiController> {
                                         Text(
                                           "${Service['kategori']}",
                                           style: const TextStyle(
-                                            fontFamily: 'Poppins',
                                             fontSize: 14,
                                             fontWeight: FontWeight.w500,
                                             color: Colors.grey,
@@ -431,7 +420,6 @@ class TransaksiView extends GetView<TransaksiController> {
                                               child: Text(
                                                 "${Service['nama']}\nRp.${Service['harga'].toStringAsFixed(0)}",
                                                 style: const TextStyle(
-                                                  fontFamily: 'Poppins',
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w600,
                                                 ),
@@ -483,7 +471,6 @@ class TransaksiView extends GetView<TransaksiController> {
                                                 const Text(
                                                   "Kg",
                                                   style: TextStyle(
-                                                    fontFamily: 'Poppins',
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w700,
                                                   ),
@@ -525,7 +512,6 @@ class TransaksiView extends GetView<TransaksiController> {
                         "Metode Bayar",
                         style: TextStyle(
                           color: Constants.primaryColor,
-                          fontFamily: 'Poppins',
                         ),
                       ),
                       DropdownButtonFormField<String>(
@@ -559,7 +545,6 @@ class TransaksiView extends GetView<TransaksiController> {
                         "Status Bayar",
                         style: TextStyle(
                           color: Constants.primaryColor,
-                          fontFamily: 'Poppins',
                         ),
                       ),
                       DropdownButtonFormField<String>(
@@ -591,7 +576,6 @@ class TransaksiView extends GetView<TransaksiController> {
                         "Pengiriman",
                         style: TextStyle(
                           color: Constants.primaryColor,
-                          fontFamily: 'Poppins',
                         ),
                       ),
                       DropdownButtonFormField<String>(
@@ -622,10 +606,9 @@ class TransaksiView extends GetView<TransaksiController> {
             Obx(() => Text(
                   "Total: Rp.${controller.totalHarga.value.toStringAsFixed(0)}",
                   style: const TextStyle(
-                    fontFamily: 'Poppins',
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
-                    color: Constants.primaryColor,
+                    color: Constants.secondColor,
                   ),
                 )),
             const SizedBox(height: 20),
@@ -669,7 +652,6 @@ class TransaksiView extends GetView<TransaksiController> {
                 "Simpan",
                 style: TextStyle(
                   color: Constants.scaffoldbackgroundColor,
-                  fontFamily: 'Poppins',
                   fontWeight: FontWeight.w600,
                 ),
               ),

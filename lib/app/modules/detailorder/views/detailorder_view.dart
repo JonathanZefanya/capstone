@@ -26,7 +26,7 @@ class DetailorderView extends GetView<LaporanController> {
           'Detail Order',
           style: TextStyle(
             fontSize: 20,
-            color: Constants.primaryColor,
+            color: Constants.secondColor,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -50,7 +50,7 @@ class DetailorderView extends GetView<LaporanController> {
             icon: const Icon(
               Icons.edit_note_rounded,
               size: 40,
-              color: Constants.primaryColor,
+              color: Constants.secondColor,
             ),
           ),
         ],

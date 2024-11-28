@@ -16,9 +16,9 @@ class TambahPelangganView extends GetView<TambahPelangganController> {
         title: const Text(
           'Tambah Pelanggan',
           style: TextStyle(
-            color: Constants.primaryColor,
+            color: Constants.secondColor,
             fontWeight: FontWeight.w600,
-            fontFamily: 'Poppins',
+          
           ),
         ),
         toolbarHeight: 80,
@@ -44,7 +44,7 @@ class TambahPelangganView extends GetView<TambahPelangganController> {
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   color: Constants.primaryColor,
-                  fontFamily: 'Poppins',
+                 
                 ),
               ),
               TextField(
@@ -52,9 +52,7 @@ class TambahPelangganView extends GetView<TambahPelangganController> {
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Nama Pelanggan',
-                  hintStyle: TextStyle(
-                    fontFamily: 'Poppins',
-                  ),
+                 
                 ),
               ),
               const SizedBox(height: 10),
@@ -63,7 +61,7 @@ class TambahPelangganView extends GetView<TambahPelangganController> {
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   color: Constants.primaryColor,
-                  fontFamily: 'Poppins',
+                 
                 ),
               ),
               Row(
@@ -94,9 +92,7 @@ class TambahPelangganView extends GetView<TambahPelangganController> {
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Nomor WhatsApp',
-                        hintStyle: TextStyle(
-                          fontFamily: 'Poppins',
-                        ),
+                       
                       ),
                     ),
                   ),
@@ -108,7 +104,7 @@ class TambahPelangganView extends GetView<TambahPelangganController> {
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   color: Constants.primaryColor,
-                  fontFamily: 'Poppins',
+                  
                 ),
               ),
               TextField(
@@ -116,9 +112,7 @@ class TambahPelangganView extends GetView<TambahPelangganController> {
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Alamat',
-                  hintStyle: TextStyle(
-                    fontFamily: 'Poppins',
-                  ),
+                 
                 ),
               ),
               const SizedBox(height: 10),
@@ -138,7 +132,7 @@ class TambahPelangganView extends GetView<TambahPelangganController> {
                     "Simpan",
                     style: TextStyle(
                       color: Constants.scaffoldbackgroundColor,
-                      fontFamily: 'Poppins',
+                     
                     ),
                   ))
             ],

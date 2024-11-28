@@ -16,7 +16,7 @@ class TambahServiceView extends GetView<TambahServiceController> {
         title: const Text(
           'Tambah Service',
           style: TextStyle(
-            color: Constants.primaryColor,
+            color: Constants.secondColor,
             fontWeight: FontWeight.w600,
           ),
         ),
