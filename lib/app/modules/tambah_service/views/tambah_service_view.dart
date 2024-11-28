@@ -21,14 +21,13 @@ class TambahServiceView extends GetView<TambahServiceController> {
           ),
         ),
         toolbarHeight: 80,
-        leading: IconButton(
+       leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
-          icon: const Icon(
-            Icons.keyboard_arrow_left_rounded,
-            size: 45,
-            color: Constants.primaryColor,
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Constants.secondColor,
           ),
         ),
         centerTitle: true,

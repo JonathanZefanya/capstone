@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
             ),
             initialRoute:
                 snapshot.data != null && snapshot.data!.emailVerified == true
-                    ? AppPages.INITIAL
+                    ? Routes.SPLASH_SCREEN
                     : AppPages.LOGIN,
             getPages: AppPages.routes,
           );

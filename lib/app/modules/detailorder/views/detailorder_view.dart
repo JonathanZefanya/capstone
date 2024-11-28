@@ -32,14 +32,13 @@ class DetailorderView extends GetView<LaporanController> {
         ),
         centerTitle: true,
         automaticallyImplyLeading: false,
-        leading: IconButton(
+       leading: IconButton(
           onPressed: () {
             Get.back();
           },
-          icon: const Icon(
-            Icons.keyboard_arrow_left_rounded,
-            size: 45,
-            color: Constants.primaryColor,
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Constants.secondColor,
           ),
         ),
         actions: [

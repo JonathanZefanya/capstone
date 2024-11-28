@@ -17,7 +17,7 @@ class AboutusView extends GetView<AboutusController> {
           },
           icon: Icon(
             Icons.arrow_back_ios,
-            color: Colors.white,
+            color: Constants.secondColor,
           ),
         ),
         title: Text(

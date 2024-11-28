@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:myapp/spalash_screen.dart';
 
 import '../modules/aboutus/bindings/aboutus_binding.dart';
 import '../modules/aboutus/views/aboutus_view.dart';
@@ -114,6 +115,10 @@ class AppPages {
       name: _Paths.MYACCOUNT,
       page: () => const MyaccountView(),
       binding: MyaccountBinding(),
+    ),
+    GetPage(
+      name: _Paths.SPLASH_SCREEN,
+      page: () => SplashScreen(),
     ),
   ];
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapp/app/modules/service/controllers/service_controller.dart';
+import 'package:myapp/app/routes/app_pages.dart';
 
 import '../../../../component/app_color.dart';
 import '../../service/views/service_view.dart';
@@ -26,12 +27,11 @@ class TransaksiView extends GetView<TransaksiController> {
         toolbarHeight: 80,
         leading: IconButton(
           onPressed: () {
-            Get.offAllNamed('/home');
+            Get.offAllNamed(Routes.HOME);
           },
-          icon: const Icon(
-            Icons.keyboard_arrow_left_rounded,
-            size: 45,
-            color: Constants.primaryColor,
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Constants.secondColor,
           ),
         ),
         centerTitle: true,
@@ -182,21 +182,21 @@ class TransaksiView extends GetView<TransaksiController> {
                       return const SizedBox.shrink();
                     }
                   }),
-                    // Obx(() {
-                    // if (controller.selectedPelanggan.value.isEmpty) {
-                    //   return const Text(
-                    //   "Pelanggan harus diisi",
-                    //   style: TextStyle(
-                    //     color: Colors.red,
-                    //     fontFamily: 'Poppins',
-                    //     fontSize: 16,
-                    //     fontWeight: FontWeight.w600,
-                    //   ),
-                    //   );
-                    // } else {
-                    //   return const SizedBox.shrink();
-                    // }
-                    // }),
+                  // Obx(() {
+                  // if (controller.selectedPelanggan.value.isEmpty) {
+                  //   return const Text(
+                  //   "Pelanggan harus diisi",
+                  //   style: TextStyle(
+                  //     color: Colors.red,
+                  //     fontFamily: 'Poppins',
+                  //     fontSize: 16,
+                  //     fontWeight: FontWeight.w600,
+                  //   ),
+                  //   );
+                  // } else {
+                  //   return const SizedBox.shrink();
+                  // }
+                  // }),
                   // Obx(() {
                   //   var cuciSetrikaList = controller.selectedcuciSetrika;
                   //   if (cuciSetrikaList.isNotEmpty) {
@@ -265,7 +265,8 @@ class TransaksiView extends GetView<TransaksiController> {
                             elevation: 0,
                             color: Colors.transparent,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
                             child: Text(
                               "Laundry Perjam:",
@@ -278,12 +279,14 @@ class TransaksiView extends GetView<TransaksiController> {
                           ),
                           const SizedBox(height: 5),
                           Column(
-                            children: List.generate(cuciSetrikaList.length, (index) {
+                            children:
+                                List.generate(cuciSetrikaList.length, (index) {
                               var cuciSetrika = cuciSetrikaList[index];
                               return Column(
                                 children: [
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Expanded(
                                         child: Text(
@@ -301,10 +304,13 @@ class TransaksiView extends GetView<TransaksiController> {
                                             width: 50,
                                             height: 30,
                                             child: TextFormField(
-                                              initialValue: cuciSetrika['berat'] != null
-                                                  ? cuciSetrika['berat'].toString()
-                                                  : '1',
-                                              keyboardType: const TextInputType.numberWithOptions(
+                                              initialValue:
+                                                  cuciSetrika['berat'] != null
+                                                      ? cuciSetrika['berat']
+                                                          .toString()
+                                                      : '1',
+                                              keyboardType: const TextInputType
+                                                  .numberWithOptions(
                                                   decimal: true),
                                               textAlign: TextAlign.center,
                                               decoration: const InputDecoration(
@@ -313,12 +319,16 @@ class TransaksiView extends GetView<TransaksiController> {
                                               ),
                                               onChanged: (value) {
                                                 if (value.isNotEmpty) {
-                                                  controller.updateBeratCuciSetrika(
+                                                  controller
+                                                      .updateBeratCuciSetrika(
                                                     index,
-                                                    double.parse(value).toDouble(),
+                                                    double.parse(value)
+                                                        .toDouble(),
                                                   );
                                                 } else {
-                                                  controller.updateBeratCuciSetrika(index, 1);
+                                                  controller
+                                                      .updateBeratCuciSetrika(
+                                                          index, 1);
                                                 }
                                               },
                                             ),
@@ -334,7 +344,8 @@ class TransaksiView extends GetView<TransaksiController> {
                                           ),
                                           IconButton(
                                             onPressed: () {
-                                              controller.removecuciSetrika(index);
+                                              controller
+                                                  .removecuciSetrika(index);
                                             },
                                             icon: const Icon(
                                               Icons.delete_outlined,
@@ -398,7 +409,8 @@ class TransaksiView extends GetView<TransaksiController> {
                                   (index) {
                                     var Service = ServiceList[index];
                                     return Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         // Menampilkan kategori di atas harga
                                         Text(
@@ -412,7 +424,8 @@ class TransaksiView extends GetView<TransaksiController> {
                                         ),
                                         const SizedBox(height: 5),
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
                                               child: Text(
@@ -430,25 +443,35 @@ class TransaksiView extends GetView<TransaksiController> {
                                                   width: 50,
                                                   height: 30,
                                                   child: TextFormField(
-                                                    initialValue: Service['jumlah'] != null
-                                                        ? Service['jumlah'].toString()
-                                                        : '1',
+                                                    initialValue:
+                                                        Service['jumlah'] !=
+                                                                null
+                                                            ? Service['jumlah']
+                                                                .toString()
+                                                            : '1',
                                                     keyboardType:
-                                                        const TextInputType.numberWithOptions(
+                                                        const TextInputType
+                                                            .numberWithOptions(
                                                             decimal: true),
                                                     textAlign: TextAlign.center,
-                                                    decoration: const InputDecoration(
-                                                      border: OutlineInputBorder(),
-                                                      contentPadding: EdgeInsets.zero,
+                                                    decoration:
+                                                        const InputDecoration(
+                                                      border:
+                                                          OutlineInputBorder(),
+                                                      contentPadding:
+                                                          EdgeInsets.zero,
                                                     ),
                                                     onChanged: (value) {
                                                       if (value.isNotEmpty) {
-                                                        controller.updateJumlahService(
+                                                        controller
+                                                            .updateJumlahService(
                                                           index,
-                                                          double.parse(value).toDouble(),
+                                                          double.parse(value)
+                                                              .toDouble(),
                                                         );
                                                       } else {
-                                                        controller.updateJumlahService(
+                                                        controller
+                                                            .updateJumlahService(
                                                           index,
                                                           1,
                                                         );
@@ -467,11 +490,13 @@ class TransaksiView extends GetView<TransaksiController> {
                                                 ),
                                                 IconButton(
                                                   onPressed: () {
-                                                    controller.removeService(index);
+                                                    controller
+                                                        .removeService(index);
                                                   },
                                                   icon: const Icon(
                                                     Icons.delete_outlined,
-                                                    color: Constants.primaryColor,
+                                                    color:
+                                                        Constants.primaryColor,
                                                   ),
                                                 ),
                                               ],
@@ -614,7 +639,7 @@ class TransaksiView extends GetView<TransaksiController> {
               ),
               onPressed: () async {
                 // Jika pelanggan kosong dan service kosong maka akan muncul dialog data tidak lengkap
-                if (controller.selectedPelanggan.value.isEmpty){
+                if (controller.selectedPelanggan.value.isEmpty) {
                   Get.defaultDialog(
                     title: "Data tidak lengkap",
                     middleText: "Pelanggan harus diisi",
@@ -624,7 +649,8 @@ class TransaksiView extends GetView<TransaksiController> {
                       Get.back();
                     },
                   );
-                } else if (controller.selectedService.isEmpty && controller.selectedcuciSetrika.isEmpty){
+                } else if (controller.selectedService.isEmpty &&
+                    controller.selectedcuciSetrika.isEmpty) {
                   Get.defaultDialog(
                     title: "Data tidak lengkap",
                     middleText: "service harus diisi",

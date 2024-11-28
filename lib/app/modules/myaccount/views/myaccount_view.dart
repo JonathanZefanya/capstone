@@ -15,6 +15,15 @@ class MyaccountView extends GetView<MyaccountController> {
     final user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Constants.secondColor,
+          ),
+        ),
         title: const Text('Akun Saya'),
         centerTitle: true,
       ),

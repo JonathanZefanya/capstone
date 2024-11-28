@@ -20,10 +20,9 @@ class LaporanView extends GetView<LaporanController> {
           onPressed: () {
             Get.back();
           },
-          icon: const Icon(
-            Icons.keyboard_arrow_left_rounded,
-            size: 45,
-            color: Constants.primaryColor,
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Constants.secondColor,
           ),
         ),
         title: const Text(

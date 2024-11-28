@@ -27,10 +27,9 @@ class PelangganView extends GetView<PelangganController> {
           onPressed: () {
             Get.back();
           },
-          icon: const Icon(
-            Icons.keyboard_arrow_left_rounded,
-            size: 50.0,
-            color: Constants.primaryColor,
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Constants.secondColor,
           ),
         ),
         centerTitle: true,

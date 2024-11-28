@@ -66,15 +66,14 @@ class ServiceView extends GetView<ServiceController> {
           ),
           automaticallyImplyLeading: false,
           leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: const Icon(
-              Icons.keyboard_arrow_left_rounded,
-              size: 45,
-              color: Constants.primaryColor,
-            ),
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Constants.secondColor,
           ),
+        ),
           centerTitle: true,
         ),
         body: TabBarView(
