@@ -32,7 +32,7 @@ class DetailorderView extends GetView<LaporanController> {
         ),
         centerTitle: true,
         automaticallyImplyLeading: false,
-       leading: IconButton(
+        leading: IconButton(
           onPressed: () {
             Get.back();
           },
@@ -113,8 +113,8 @@ class DetailorderView extends GetView<LaporanController> {
                       var nomorWhatsApp =
                           updatedLaporan['pelanggan']?['nomor WhatsApp'] ?? '';
                       detailorderController.saveInvoiceAndSendWhatsApp(
-                          nomorWhatsApp, 'Hallo ini invoice pesanan laundry Anda');
-                          
+                          nomorWhatsApp,
+                          'Hallo ini invoice pesanan laundry Anda');
                     },
                     child: const Text(
                       "Kirim WhatsApp",
@@ -177,9 +177,11 @@ class DetailorderView extends GetView<LaporanController> {
                     style: TextStyle(fontSize: 16),
                   ),
                   const SizedBox(height: 10),
-                  for (var produk in laporan['cuciSetrika'] ?? []) ...[
+                  for (var produk in laporan['cuciPerjam'] ?? []) ...[
                     Text(
-                      '- ${produk['nama']?? 'N/A'}, Berat ${produk['berat']?.toStringAsFixed(0) ?? '0'}kg, Harga ${produk['harga']?.toStringAsFixed(0) ?? '0'}',
+                      '${produk['nama'] ?? 'N/A'}\n'
+                      'Berat : ${produk['berat']?.toStringAsFixed(0) ?? '0'} kg\n'
+                      'Harga : ${produk['harga']?.toStringAsFixed(0) ?? '0'}',
                       style: const TextStyle(fontSize: 16),
                     ),
                     const SizedBox(height: 10),
@@ -192,8 +194,10 @@ class DetailorderView extends GetView<LaporanController> {
                   const SizedBox(height: 10),
                   for (var produk in laporan['Service'] ?? []) ...[
                     Text(
-                      '- ${produk['nama']?? 'N/A'}, Berat ${produk['berat']?.toStringAsFixed(0) ?? '0'}kg, Harga ${produk['harga']?.toStringAsFixed(0) ?? '0'}, Kategori ${produk['kategori'] ?? 'N/A'}',
-                      // '- $produk',
+                      '${produk['nama'] ?? 'N/A'}\n'
+                      'Berat : ${produk['berat']?.toStringAsFixed(0) ?? '0'} kg\n'
+                      'Harga : ${produk['harga']?.toStringAsFixed(0) ?? '0'} \n'
+                      'Kategori : ${produk['kategori'] ?? 'N/A'}',
                       style: const TextStyle(fontSize: 16),
                     ),
                     const SizedBox(height: 10),

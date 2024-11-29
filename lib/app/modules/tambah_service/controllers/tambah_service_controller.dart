@@ -30,8 +30,8 @@ class TambahServiceController extends GetxController {
         collectionName = 'service_express';
       } else if (kategori == 'cuciLipat') {
         collectionName = 'service_cuciLipat';
-      } else if (kategori == 'cuciSetrika') {
-        collectionName = 'service_cuciSetrika';
+      } else if (kategori == 'cuciPerjam') {
+        collectionName = 'service_cuciPerjam';
       } else {
         Get.snackbar('Error', 'Kategori tidak valid');
         return;

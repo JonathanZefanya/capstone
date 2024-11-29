@@ -21,7 +21,7 @@ class TambahServiceView extends GetView<TambahServiceController> {
           ),
         ),
         toolbarHeight: 80,
-       leading: IconButton(
+        leading: IconButton(
           onPressed: () {
             Get.back();
           },
@@ -56,7 +56,7 @@ class TambahServiceView extends GetView<TambahServiceController> {
               ),
               const SizedBox(height: 15),
               const Text(
-                "Harga /Kg",
+                "Harga ",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -87,7 +87,7 @@ class TambahServiceView extends GetView<TambahServiceController> {
                 onChanged: (value) {
                   controller.selectedKategori.value = value!;
                 },
-                items: <String>['express', 'cuciLipat', 'cuciSetrika']
+                items: <String>['express', 'cuciLipat', 'cuciPerjam']
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,

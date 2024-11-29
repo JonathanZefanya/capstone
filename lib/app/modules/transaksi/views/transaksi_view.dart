@@ -192,14 +192,14 @@ class TransaksiView extends GetView<TransaksiController> {
                   // }
                   // }),
                   // Obx(() {
-                  //   var cuciSetrikaList = controller.selectedcuciSetrika;
-                  //   if (cuciSetrikaList.isNotEmpty) {
+                  //   var cuciPerjamList = controller.selectedcuciPerjam;
+                  //   if (cuciPerjamList.isNotEmpty) {
                   //     return Column(
                   //       crossAxisAlignment: CrossAxisAlignment.start,
                   //       children: List.generate(
-                  //         cuciSetrikaList.length,
+                  //         cuciPerjamList.length,
                   //         (index) {
-                  //           var cuciSetrika = cuciSetrikaList[index];
+                  //           var cuciPerjam = cuciPerjamList[index];
                   //           return Column(
                   //             children: [
                   //               Card(
@@ -217,7 +217,7 @@ class TransaksiView extends GetView<TransaksiController> {
                   //                           MainAxisAlignment.spaceBetween,
                   //                       children: [
                   //                         Text(
-                  //                           "Express: \n${cuciSetrika['nama']}",
+                  //                           "Express: \n${cuciPerjam['nama']}",
                   //                           style: const TextStyle(
                   //                             fontSize: 16,
                   //                             fontFamily: 'Poppins',
@@ -226,7 +226,7 @@ class TransaksiView extends GetView<TransaksiController> {
                   //                         ),
                   //                         IconButton(
                   //                           onPressed: () {
-                  //                             controller.removecuciSetrika(index);
+                  //                             controller.removecuciPerjam(index);
                   //                           },
                   //                           icon: const Icon(
                   //                             Icons.delete_outlined,
@@ -249,8 +249,8 @@ class TransaksiView extends GetView<TransaksiController> {
                   //   }
                   // }),
                   Obx(() {
-                    var cuciSetrikaList = controller.selectedcuciSetrika;
-                    if (cuciSetrikaList.isNotEmpty) {
+                    var cuciPerjamList = controller.selectedcuciPerjam;
+                    if (cuciPerjamList.isNotEmpty) {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -273,8 +273,8 @@ class TransaksiView extends GetView<TransaksiController> {
                           const SizedBox(height: 5),
                           Column(
                             children:
-                                List.generate(cuciSetrikaList.length, (index) {
-                              var cuciSetrika = cuciSetrikaList[index];
+                                List.generate(cuciPerjamList.length, (index) {
+                              var cuciPerjam = cuciPerjamList[index];
                               return Column(
                                 children: [
                                   Row(
@@ -283,7 +283,7 @@ class TransaksiView extends GetView<TransaksiController> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          "${cuciSetrika['nama']}\nRp.${cuciSetrika['harga'].toStringAsFixed(0)}",
+                                          "${cuciPerjam['nama']}\nRp.${cuciPerjam['harga'].toStringAsFixed(0)}",
                                           style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600,
@@ -297,8 +297,8 @@ class TransaksiView extends GetView<TransaksiController> {
                                             height: 30,
                                             child: TextFormField(
                                               initialValue:
-                                                  cuciSetrika['berat'] != null
-                                                      ? cuciSetrika['berat']
+                                                  cuciPerjam['berat'] != null
+                                                      ? cuciPerjam['berat']
                                                           .toString()
                                                       : '1',
                                               keyboardType: const TextInputType
@@ -312,14 +312,14 @@ class TransaksiView extends GetView<TransaksiController> {
                                               onChanged: (value) {
                                                 if (value.isNotEmpty) {
                                                   controller
-                                                      .updateBeratCuciSetrika(
+                                                      .updateBeratcuciPerjam(
                                                     index,
                                                     double.parse(value)
                                                         .toDouble(),
                                                   );
                                                 } else {
                                                   controller
-                                                      .updateBeratCuciSetrika(
+                                                      .updateBeratcuciPerjam(
                                                           index, 1);
                                                 }
                                               },
@@ -336,7 +336,7 @@ class TransaksiView extends GetView<TransaksiController> {
                                           IconButton(
                                             onPressed: () {
                                               controller
-                                                  .removecuciSetrika(index);
+                                                  .removecuciPerjam(index);
                                             },
                                             icon: const Icon(
                                               Icons.delete_outlined,
@@ -535,6 +535,22 @@ class TransaksiView extends GetView<TransaksiController> {
                           contentPadding: EdgeInsets.symmetric(horizontal: 10),
                         ),
                       ),
+                      Obx(() {
+                        if (controller.metodePembayaran.value == 'QRIS') {
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 16.0),
+                            child: Image.asset(
+                              'assets/images/qris-logo.jpg', // Pastikan gambar QRIS ada di folder assets
+                              width: double
+                                  .infinity, // Atur ukuran gambar sesuai kebutuhan
+                              height: 200,
+                            ),
+                          );
+                        } else {
+                          return const SizedBox
+                              .shrink(); // Tidak menampilkan gambar jika bukan QRIS
+                        }
+                      }),
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -633,7 +649,7 @@ class TransaksiView extends GetView<TransaksiController> {
                     },
                   );
                 } else if (controller.selectedService.isEmpty &&
-                    controller.selectedcuciSetrika.isEmpty) {
+                    controller.selectedcuciPerjam.isEmpty) {
                   Get.defaultDialog(
                     title: "Data tidak lengkap",
                     middleText: "service harus diisi",

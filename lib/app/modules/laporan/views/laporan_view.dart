@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:myapp/component/search_field.dart';
 
 import '../../../../component/app_color.dart';
 import '../../detailorder/views/detailorder_view.dart';
@@ -28,9 +29,8 @@ class LaporanView extends GetView<LaporanController> {
         title: const Text(
           'Laporan',
           style: TextStyle(
-           color: Constants.secondColor,
+            color: Constants.secondColor,
             fontWeight: FontWeight.w600,
-          
           ),
         ),
         centerTitle: true,
@@ -46,7 +46,6 @@ class LaporanView extends GetView<LaporanController> {
                       child: Text(
                         'Pilih Bulan dan Tahun',
                         style: TextStyle(
-                          
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                         ),
@@ -115,7 +114,8 @@ class LaporanView extends GetView<LaporanController> {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size(double.minPositive, 30),
-                            backgroundColor: const Color.fromARGB(255, 235, 0, 43),
+                            backgroundColor:
+                                const Color.fromARGB(255, 235, 0, 43),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5),
                             ),
@@ -126,7 +126,6 @@ class LaporanView extends GetView<LaporanController> {
                           child: const Text(
                             "Kembali",
                             style: TextStyle(
-                              
                               fontWeight: FontWeight.w600,
                               color: Constants.scaffoldbackgroundColor,
                             ),
@@ -154,16 +153,9 @@ class LaporanView extends GetView<LaporanController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      hintText: 'Cari Pelanggan',
-                      hintStyle: TextStyle(
-                       
-                        fontSize: 16,
-                      ),
-                      prefixIcon: Icon(Icons.search),
-                      border: OutlineInputBorder(),
-                    ),
+                  child: SearchFormField(
+                    hintText: 'Cari Pelanggan',
+                    prefixIcon: Icons.search,
                     onChanged: (value) {
                       controller.searchLaporan(value);
                     },
@@ -187,7 +179,7 @@ class LaporanView extends GetView<LaporanController> {
 
                     Color backgroundColor = statusPembayaran == "Belum Lunas"
                         ? Constants.fourColor
-                        : Constants.primaryColor;
+                        : AppColors.success;
 
                     return Card(
                       elevation: 3,
@@ -203,7 +195,6 @@ class LaporanView extends GetView<LaporanController> {
                                 const Text(
                                   'Order',
                                   style: TextStyle(
-                                   
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -233,7 +224,7 @@ class LaporanView extends GetView<LaporanController> {
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                   color: backgroundColor,
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
@@ -244,7 +235,6 @@ class LaporanView extends GetView<LaporanController> {
                                       Text(
                                         'Nama: ${pelanggan['nama pelanggan']}',
                                         style: const TextStyle(
-                                         
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           color: Colors.white,
@@ -254,7 +244,6 @@ class LaporanView extends GetView<LaporanController> {
                                       Text(
                                         'Nomor WhatsApp : ${pelanggan['nomor WhatsApp']}',
                                         style: const TextStyle(
-                                          
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           color: Colors.white,
@@ -264,7 +253,6 @@ class LaporanView extends GetView<LaporanController> {
                                       Text(
                                         'Tanggal: $formattedDate',
                                         style: const TextStyle(
-                                      
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           color: Colors.white,

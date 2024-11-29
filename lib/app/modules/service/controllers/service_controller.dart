@@ -6,13 +6,14 @@ class ServiceController extends GetxController {
 
   RxList<Map<String, dynamic>> expressList = RxList<Map<String, dynamic>>([]);
   RxList<Map<String, dynamic>> cuciLipatList = RxList<Map<String, dynamic>>([]);
-  RxList<Map<String, dynamic>> cuciSetrikaList = RxList<Map<String, dynamic>>([]);
+  RxList<Map<String, dynamic>> cuciPerjamList =
+      RxList<Map<String, dynamic>>([]);
 
   RxList<Map<String, dynamic>> filteredexpressList =
       RxList<Map<String, dynamic>>([]);
   RxList<Map<String, dynamic>> filteredcuciLipatList =
       RxList<Map<String, dynamic>>([]);
-  RxList<Map<String, dynamic>> filteredcuciSetrikaList =
+  RxList<Map<String, dynamic>> filteredcuciPerjamList =
       RxList<Map<String, dynamic>>([]);
 
   RxBool isLoading = RxBool(false);
@@ -38,10 +39,7 @@ class ServiceController extends GetxController {
       });
 
       // Fetch Cuci Lipat products
-      firestore
-          .collection('service_cuciLipat')
-          .snapshots()
-          .listen((snapshot) {
+      firestore.collection('service_cuciLipat').snapshots().listen((snapshot) {
         cuciLipatList.value = snapshot.docs.map((doc) {
           var data = doc.data();
           data['id'] = doc.id;
@@ -50,14 +48,14 @@ class ServiceController extends GetxController {
         filteredcuciLipatList.value = cuciLipatList.toList();
       });
 
-      // Fetch cuciSetrika products
-      firestore.collection('service_cuciSetrika').snapshots().listen((snapshot) {
-        cuciSetrikaList.value = snapshot.docs.map((doc) {
+      // Fetch cuciPerjam products
+      firestore.collection('service_cuciPerjam').snapshots().listen((snapshot) {
+        cuciPerjamList.value = snapshot.docs.map((doc) {
           var data = doc.data();
           data['id'] = doc.id;
           return data;
         }).toList();
-        filteredcuciSetrikaList.value = cuciSetrikaList.toList();
+        filteredcuciPerjamList.value = cuciPerjamList.toList();
       });
 
       isLoading.value = false;
@@ -75,8 +73,8 @@ class ServiceController extends GetxController {
       case 'cuciLipat':
         filteredcuciLipatList.value = cuciLipatList.toList();
         break;
-      case 'cuciSetrika':
-        filteredcuciSetrikaList.value = cuciSetrikaList.toList();
+      case 'cuciPerjam':
+        filteredcuciPerjamList.value = cuciPerjamList.toList();
         break;
       default:
         Get.snackbar('Error', 'Kategori tidak valid');
@@ -102,8 +100,8 @@ class ServiceController extends GetxController {
                 .contains(lowercaseQuery))
             .toList();
         break;
-      case 'cuciSetrika':
-        filteredcuciSetrikaList.value = cuciSetrikaList
+      case 'cuciPerjam':
+        filteredcuciPerjamList.value = cuciPerjamList
             .where((service) => service['nama']
                 .toString()
                 .toLowerCase()
@@ -139,8 +137,8 @@ class ServiceController extends GetxController {
         return 'service_express';
       case 'cuciLipat':
         return 'service_cuciLipat';
-      case 'cuciSetrika':
-        return 'service_cuciSetrika';
+      case 'cuciPerjam':
+        return 'service_cuciPerjam';
       default:
         throw Exception('Kategori tidak valid');
     }

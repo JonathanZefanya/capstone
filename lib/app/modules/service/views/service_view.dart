@@ -40,7 +40,7 @@ class ServiceView extends GetView<ServiceController> {
                   controller.filterserviceByCategory('cuciLipat');
                   break;
                 case 2:
-                  controller.filterserviceByCategory('cuciSetrika');
+                  controller.filterserviceByCategory('cuciPerjam');
                   break;
               }
             },
@@ -78,7 +78,7 @@ class ServiceView extends GetView<ServiceController> {
           children: [
             buildserviceList(transaksiController, 'express'),
             buildserviceList(transaksiController, 'cuciLipat'),
-            buildserviceList(transaksiController, 'cuciSetrika'),
+            buildserviceList(transaksiController, 'cuciPerjam'),
           ],
         ),
         floatingActionButton: FloatingActionButton(
@@ -120,8 +120,8 @@ class ServiceView extends GetView<ServiceController> {
         case 'cuciLipat':
           serviceList = controller.filteredcuciLipatList.toList();
           break;
-        case 'cuciSetrika':
-          serviceList = controller.filteredcuciSetrikaList.toList();
+        case 'cuciPerjam':
+          serviceList = controller.filteredcuciPerjamList.toList();
           break;
       }
 
@@ -206,7 +206,7 @@ class ServiceView extends GetView<ServiceController> {
                               ),
                               onTap: () {
                                 if (category == 'express') {
-                                  transaksiController.addcuciSetrika(service);
+                                  transaksiController.addcuciPerjam(service);
                                 } else {
                                   transaksiController.addService(service);
                                 }

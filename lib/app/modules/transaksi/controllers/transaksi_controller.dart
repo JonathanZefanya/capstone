@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 class TransaksiController extends GetxController {
   var selectedPelanggan = {}.obs;
-  var selectedcuciSetrika = <Map<String, dynamic>>[].obs;
+  var selectedcuciPerjam = <Map<String, dynamic>>[].obs;
   var selectedService = <Map<String, dynamic>>[].obs;
   var metodePembayaran = 'Cash'.obs;
   var statusPembayaran = 'Lunas'.obs;
@@ -17,32 +17,32 @@ class TransaksiController extends GetxController {
     selectedPelanggan.value = pelanggan;
   }
 
-  // Add and remove cuciSetrika with berat cucian
-  void addcuciSetrika(Map<String, dynamic> cuciSetrika) {
-    cuciSetrika['berat'] = 1.0; // Default berat adalah 1 kg
-    selectedcuciSetrika.add(cuciSetrika);
+  // Add and remove cuciPerjam with berat cucian
+  void addcuciPerjam(Map<String, dynamic> cuciPerjam) {
+    cuciPerjam['berat'] = 2.0; // Default berat adalah 1 kg
+    selectedcuciPerjam.add(cuciPerjam);
     _hitungTotalHarga();
   }
 
-  void removecuciSetrika(int index) {
-    selectedcuciSetrika.removeAt(index);
+  void removecuciPerjam(int index) {
+    selectedcuciPerjam.removeAt(index);
     _hitungTotalHarga();
   }
 
-  void updateBeratCuciSetrika(int index, double berat) {
-    selectedcuciSetrika[index]['berat'] = berat;
+  void updateBeratcuciPerjam(int index, double berat) {
+    selectedcuciPerjam[index]['berat'] = berat;
     _hitungTotalHarga();
   }
 
   // Add, remove, and update jumlah Service
   void addService(Map<String, dynamic> service) {
     // Tambahkan kategori berdasarkan nama koleksi
-    service['kategori'] = service['kategori'] ?? 'N/A'; // Jika kategori belum ditentukan
-    service['berat'] = 1.0; // Default berat adalah 1
+    service['kategori'] =
+        service['kategori'] ?? 'N/A'; // Jika kategori belum ditentukan
+    service['berat'] = 2.0; // Default berat adalah 1
     selectedService.add(service);
     _hitungTotalHarga();
   }
-
 
   void removeService(int index) {
     selectedService.removeAt(index);
@@ -59,7 +59,7 @@ class TransaksiController extends GetxController {
     double total = 0;
 
     // Hitung total dari cuci setrika
-    for (var item in selectedcuciSetrika) {
+    for (var item in selectedcuciPerjam) {
       double harga = item['harga'] != null && item['harga'] is num
           ? (item['harga'] as num).toDouble()
           : 0.0;
@@ -86,9 +86,8 @@ class TransaksiController extends GetxController {
   Future<List<Map<String, dynamic>>> fetchServices() async {
     List<Map<String, dynamic>> services = [];
     // Fetch dari koleksi 'service_cuciLipat'
-    var cuciLipatSnapshot = await FirebaseFirestore.instance
-        .collection('service_cuciLipat')
-        .get();
+    var cuciLipatSnapshot =
+        await FirebaseFirestore.instance.collection('service_cuciLipat').get();
 
     for (var doc in cuciLipatSnapshot.docs) {
       services.add({
@@ -98,29 +97,27 @@ class TransaksiController extends GetxController {
       });
     }
 
-    // Fetch dari koleksi 'service_cuciSetrika'
-    var cuciSetrikaSnapshot = await FirebaseFirestore.instance
-        .collection('service_cuciSetrika')
-        .get();
+    // Fetch dari koleksi 'service_cuciPerjam'
+    var cuciPerjamSnapshot =
+        await FirebaseFirestore.instance.collection('service_cuciPerjam').get();
 
-    for (var doc in cuciSetrikaSnapshot.docs) {
+    for (var doc in cuciPerjamSnapshot.docs) {
       services.add({
         'id': doc.id,
         ...doc.data(),
-        'kategori': 'cuciSetrika', // Tambahkan kategori
+        'kategori': 'cuciPerjam', // Tambahkan kategori
       });
     }
 
     return services;
   }
 
-
   // Simpan transaksi
   Future<void> saveTransaksi() async {
     try {
       var transaksiData = {
         'pelanggan': selectedPelanggan.value,
-        'cuciSetrika': selectedcuciSetrika
+        'cuciPerjam': selectedcuciPerjam
             .map((e) => {
                   'nama': e['nama'],
                   'harga': e['harga'],
@@ -155,7 +152,7 @@ class TransaksiController extends GetxController {
   // Reset semua data
   void clearSelections() {
     selectedPelanggan.value = {};
-    selectedcuciSetrika.clear();
+    selectedcuciPerjam.clear();
     selectedService.clear();
     metodePembayaran.value = 'Cash';
     statusPembayaran.value = 'Lunas';
