@@ -14,7 +14,7 @@ class ServiceView extends GetView<ServiceController> {
     final transaksiController = Get.put(TransaksiController());
 
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -30,6 +30,7 @@ class ServiceView extends GetView<ServiceController> {
               Tab(text: 'Express'),
               Tab(text: 'Cuci Lipat'),
               Tab(text: 'Cuci Setrika'),
+              Tab(text: 'Cuci Satuan'),
             ],
             onTap: (index) {
               switch (index) {
@@ -41,6 +42,9 @@ class ServiceView extends GetView<ServiceController> {
                   break;
                 case 2:
                   controller.filterserviceByCategory('cuciPerjam');
+                  break;
+                case 3:
+                  controller.filterserviceByCategory('satuan');
                   break;
               }
             },
@@ -79,6 +83,7 @@ class ServiceView extends GetView<ServiceController> {
             buildserviceList(transaksiController, 'express'),
             buildserviceList(transaksiController, 'cuciLipat'),
             buildserviceList(transaksiController, 'cuciPerjam'),
+            buildserviceList(transaksiController, 'satuan'),
           ],
         ),
         floatingActionButton: FloatingActionButton(
@@ -122,6 +127,9 @@ class ServiceView extends GetView<ServiceController> {
           break;
         case 'cuciPerjam':
           serviceList = controller.filteredcuciPerjamList.toList();
+          break;
+        case 'satuan':
+          serviceList = controller.filteredsatuanList.toList();
           break;
       }
 
@@ -207,6 +215,8 @@ class ServiceView extends GetView<ServiceController> {
                               onTap: () {
                                 if (category == 'express') {
                                   transaksiController.addcuciPerjam(service);
+                                } else if (category == 'satuan'){
+                                  transaksiController.addSatuan(service);
                                 } else {
                                   transaksiController.addService(service);
                                 }

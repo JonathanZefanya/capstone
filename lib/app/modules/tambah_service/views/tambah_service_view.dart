@@ -87,7 +87,7 @@ class TambahServiceView extends GetView<TambahServiceController> {
                 onChanged: (value) {
                   controller.selectedKategori.value = value!;
                 },
-                items: <String>['express', 'cuciLipat', 'cuciPerjam']
+                items: <String>['express', 'cuciLipat', 'cuciPerjam', 'satuan']
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,

@@ -504,6 +504,142 @@ class TransaksiView extends GetView<TransaksiController> {
                       }
                     },
                   ),
+                  // Obx khusus untuk service satuan
+                  // To-Do: Tambahkan Obx untuk menampilkan service satuan
+                  Obx(
+                    () {
+                      var satuanList = controller.selectedSatuan;
+                      if (satuanList.isNotEmpty) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 5),
+                            Card(
+                              elevation: 0,
+                              color: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Laundry Satuan:",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            Card(
+                              elevation: 0,
+                              color: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: List.generate(
+                                  satuanList.length,
+                                  (index) {
+                                    var satuan = satuanList[index];
+                                    return Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        // Menampilkan kategori di atas harga
+                                        Text(
+                                          "${satuan['kategori']}",
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 5),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                "${satuan['nama']}\nRp.${satuan['harga'].toStringAsFixed(0)}",
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                            ),
+                                            Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: 50,
+                                                  height: 30,
+                                                  child: TextFormField(
+                                                    initialValue: satuan['jumlah'] != null
+                                                        ? satuan['jumlah'].toString()
+                                                        : '1',
+                                                    keyboardType:
+                                                        const TextInputType.numberWithOptions(
+                                                      decimal: true,
+                                                    ),
+                                                    textAlign: TextAlign.center,
+                                                    decoration: const InputDecoration(
+                                                      border: OutlineInputBorder(),
+                                                      contentPadding: EdgeInsets.zero,
+                                                    ),
+                                                    onChanged: (value) {
+                                                      if (value.isNotEmpty) {
+                                                        controller.updateJumlahSatuan(
+                                                          index,
+                                                          double.parse(value).toDouble(),
+                                                        );
+                                                      } else {
+                                                        controller.updateJumlahSatuan(
+                                                          index,
+                                                          1,
+                                                        );
+                                                      }
+                                                    },
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 5),
+                                                const Text(
+                                                  "Pcs",
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w700,
+                                                  ),
+                                                ),
+                                                IconButton(
+                                                  onPressed: () {
+                                                    controller.removeSatuan(index);
+                                                  },
+                                                  icon: const Icon(
+                                                    Icons.delete_outlined,
+                                                    color: Constants.primaryColor,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 10),
+                                      ],
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      } else {
+                        return const SizedBox.shrink();
+                      }
+                    },
+                  ),
+
                   const SizedBox(height: 20),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -649,7 +785,7 @@ class TransaksiView extends GetView<TransaksiController> {
                     },
                   );
                 } else if (controller.selectedService.isEmpty &&
-                    controller.selectedcuciPerjam.isEmpty) {
+                    controller.selectedcuciPerjam.isEmpty && controller.selectedSatuan.isEmpty) {
                   Get.defaultDialog(
                     title: "Data tidak lengkap",
                     middleText: "service harus diisi",

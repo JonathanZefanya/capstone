@@ -105,6 +105,36 @@ class EditTransaksiView extends GetView<EditTransaksiController> {
                 ),
               ),
             ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(double.infinity, 45),
+                backgroundColor: Constants.errorColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              onPressed: () {
+                // Buat dialog konfirmasi
+                Get.defaultDialog(
+                  title: 'Konfirmasi',
+                  middleText: 'Apakah Anda yakin ingin menghapus transaksi ini?',
+                  textConfirm: 'Ya',
+                  textCancel: 'Tidak',
+                  confirmTextColor: Constants.scaffoldbackgroundColor,
+                  onConfirm: () {
+                    controller.deleteTransaksi();
+                  },
+                );
+              },
+              child: const Text(
+                "Hapus",
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Constants.scaffoldbackgroundColor,
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -20,5 +20,7 @@ class Constants {
   static const Color fiveColor = Color(0xff797979); // Abu-abu
   static const Color scaffoldbackgroundColor =
       Color.fromRGBO(245, 247, 249, 1); // Warna background scaffold
-  static const Color menucolor = Color(0xffF0F0F0); // Warna background menu
+  static const Color menucolor = Color(0xffF0F0F0);
+
+  static var errorColor; // Warna background menu
 }

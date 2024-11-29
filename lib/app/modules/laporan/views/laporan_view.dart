@@ -19,7 +19,7 @@ class LaporanView extends GetView<LaporanController> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Get.back();
+            Get.toNamed('/home');
           },
           icon: Icon(
             Icons.arrow_back_ios,

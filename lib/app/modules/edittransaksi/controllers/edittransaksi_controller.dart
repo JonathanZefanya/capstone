@@ -30,4 +30,23 @@ class EditTransaksiController extends GetxController {
       Get.snackbar('Error', 'Failed to update transaction');
     }
   }
+
+  void deleteTransaksi() async {
+    var laporan = Get.find<LaporanController>().selectedLaporan.value;
+
+    try {
+      await FirebaseFirestore.instance
+          .collection('laporanTransaksi')
+          .doc(laporan['id'])
+          .delete();
+
+      // Get ke page laporan
+      Get.toNamed('/laporan');
+      Get.snackbar('Success',
+          'Transaction deleted successfully'); // Snackbar for successful delete
+    } catch (e) {
+      // Debugging: Print Error
+      Get.snackbar('Error', 'Failed to delete transaction');
+    }
+  }
 }

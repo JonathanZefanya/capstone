@@ -204,6 +204,23 @@ class DetailorderView extends GetView<LaporanController> {
                   ],
                   const Divider(height: 2, color: Constants.primaryColor),
                   const SizedBox(height: 10),
+                  // Servis satuan
+                  const Text(
+                    "Laundry Satuan :",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(height: 10),
+                  for (var produk in laporan['Satuan'] ?? []) ...[
+                    Text(
+                      '${produk['nama'] ?? 'N/A'}\n'
+                      'Jumlah : ${produk['jumlah']?.toStringAsFixed(0) ?? '0'} Pcs\n'
+                      'Harga : ${produk['harga']?.toStringAsFixed(0) ?? '0'}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 10),
+                  ],
+                  const Divider(height: 2, color: Constants.primaryColor),
+                  const SizedBox(height: 10),
                   Text(
                     'Metode Pembayaran : ${laporan['metode_pembayaran'] ?? 'N/A'}',
                     style: const TextStyle(fontSize: 16),

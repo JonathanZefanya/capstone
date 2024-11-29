@@ -7,6 +7,7 @@ class TransaksiController extends GetxController {
   var selectedPelanggan = {}.obs;
   var selectedcuciPerjam = <Map<String, dynamic>>[].obs;
   var selectedService = <Map<String, dynamic>>[].obs;
+  var selectedSatuan = <Map<String, dynamic>>[].obs;
   var metodePembayaran = 'Cash'.obs;
   var statusPembayaran = 'Lunas'.obs;
   var statusPengiriman = 'Diantar'.obs;
@@ -31,6 +32,26 @@ class TransaksiController extends GetxController {
 
   void updateBeratcuciPerjam(int index, double berat) {
     selectedcuciPerjam[index]['berat'] = berat;
+    _hitungTotalHarga();
+  }
+
+  // Add, remove, and update jumlah satuan dan berat diganti menjadi jumlah
+  void addSatuan(Map<String, dynamic> satuan) {
+    // Tambahkan kategori berdasarkan nama koleksi
+    satuan['kategori'] =
+        satuan['kategori'] ?? 'N/A'; // Jika kategori belum ditentukan
+    satuan['jumlah'] = 1.0; // Default berat adalah 1
+    selectedSatuan.add(satuan);
+    _hitungTotalHarga();
+  }
+
+  void removeSatuan(int index) {
+    selectedSatuan.removeAt(index);
+    _hitungTotalHarga();
+  }
+
+  void updateJumlahSatuan(int index, double jumlah) {
+    selectedSatuan[index]['jumlah'] = jumlah;
     _hitungTotalHarga();
   }
 
@@ -80,6 +101,17 @@ class TransaksiController extends GetxController {
       total += harga * jumlah;
     }
 
+    // Hitung total dari satuan
+    for (var item in selectedSatuan) {
+      double harga = item['harga'] != null && item['harga'] is num
+          ? (item['harga'] as num).toDouble()
+          : 0.0;
+      double jumlah = item['jumlah'] != null && item['jumlah'] is num
+          ? (item['jumlah'] as num).toDouble()
+          : 1.0;
+      total += harga * jumlah;
+    }
+
     totalHarga.value = total;
   }
 
@@ -109,6 +141,18 @@ class TransaksiController extends GetxController {
       });
     }
 
+    // Fetch dari koleksi 'service_satuan'
+    var satuanSnapshot =
+        await FirebaseFirestore.instance.collection('service_satuan').get();
+
+    for (var doc in satuanSnapshot.docs) {
+      services.add({
+        'id': doc.id,
+        ...doc.data(),
+        'kategori': 'satuan', // Tambahkan kategori
+      });
+    }
+
     return services;
   }
 
@@ -129,6 +173,14 @@ class TransaksiController extends GetxController {
                   'nama': e['nama'],
                   'harga': e['harga'],
                   'berat': e['berat'],
+                  'kategori': e['kategori'],
+                })
+            .toList(),
+        'Satuan': selectedSatuan
+            .map((e) => {
+                  'nama': e['nama'],
+                  'harga': e['harga'],
+                  'jumlah': e['jumlah'], // Ganti berat dengan jumlah
                   'kategori': e['kategori'],
                 })
             .toList(),
@@ -154,6 +206,7 @@ class TransaksiController extends GetxController {
     selectedPelanggan.value = {};
     selectedcuciPerjam.clear();
     selectedService.clear();
+    selectedSatuan.clear();
     metodePembayaran.value = 'Cash';
     statusPembayaran.value = 'Lunas';
     statusPengiriman.value = 'Diantar';
