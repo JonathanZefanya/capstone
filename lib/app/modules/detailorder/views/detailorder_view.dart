@@ -225,6 +225,23 @@ class DetailorderView extends GetView<LaporanController> {
                     'Metode Pembayaran : ${laporan['metode_pembayaran'] ?? 'N/A'}',
                     style: const TextStyle(fontSize: 16),
                   ),
+                  // Jika metode pembayaran adalah transfer bank maka tampilkan nomor rekening
+                  if (laporan['metode_pembayaran'] == 'Transfer') ...[
+                    const SizedBox(height: 10),
+                    Text(
+                      'Nomor Rekening BCA: NOMOR REKENING\nNomor Dana: 08xx-xxxx-xxxx\nAtas Nama : Owner Laundry',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ],
+                  // Jika metode pembayaran adalah QRIS maka tampilkan QR Code dalam bentuk gambar di local
+                  if (laporan['metode_pembayaran'] == 'QRIS') ...[
+                    const SizedBox(height: 10),
+                    Image.asset(
+                      'assets/images/qris-logo.jpg',
+                      width: 200,
+                      height: 200,
+                    ),
+                  ],
                   const SizedBox(height: 10),
                   const Divider(height: 2, color: Constants.primaryColor),
                   const SizedBox(height: 10),
