@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:open_file/open_file.dart';
 
 class LaporanController extends GetxController {
   var laporanList = <Map<String, dynamic>>[].obs;
@@ -108,7 +109,7 @@ class LaporanController extends GetxController {
       TextCellValue('Total Harga'),
       TextCellValue('Detail Cuci Per Jam'),
       TextCellValue('Detail Service'),
-      TextCellValue('Detail Satuan')
+      TextCellValue('Detail Satuan'),
     ]);
 
     // Data
@@ -129,19 +130,17 @@ class LaporanController extends GetxController {
               .join('\n') ??
           '-';
 
-      // Convert Timestamp to DateTime, then set it to only include date (year, month, day)
       DateTime date = (item['tanggal'] as Timestamp).toDate();
-      DateTime onlyDate =
-          DateTime(date.year, date.month, date.day); // Remove time part
+      DateTime onlyDate = DateTime(date.year, date.month, date.day);
 
       // Append row
       sheetObject.appendRow([
-        TextCellValue(onlyDate.toString()), // Date only in string format
+        TextCellValue(onlyDate.toString()),
         TextCellValue(item['pelanggan']['nama pelanggan'] ?? 'Tidak Diketahui'),
         TextCellValue(item['metode_pembayaran'] ?? 'Tidak Diketahui'),
         TextCellValue(item['status_pembayaran'] ?? 'Tidak Diketahui'),
         TextCellValue(item['status_pengiriman'] ?? 'Tidak Diketahui'),
-        IntCellValue(item['totalHarga'] ?? 0),
+        IntCellValue((item['totalHarga'] ?? 0).toInt()), // Convert to int
         TextCellValue(cuciPerjamDetails),
         TextCellValue(serviceDetails),
         TextCellValue(satuanDetails),
@@ -153,11 +152,17 @@ class LaporanController extends GetxController {
       var directory = await getApplicationDocumentsDirectory();
       var path = "${directory.path}/Laporan_Transaksi.xlsx";
       var fileBytes = excel.encode();
-      File(path)
+      File file = File(path)
         ..createSync(recursive: true)
         ..writeAsBytesSync(fileBytes!);
 
-      Get.snackbar("Sukses", "Laporan berhasil diekspor ke $path");
+      // Open the file after exporting
+      final result = await OpenFile.open(file.path);
+      if (result.type != ResultType.done) {
+        Get.snackbar("Error", "Gagal membuka file: ${result.message}");
+      } else {
+        Get.snackbar("Sukses", "Laporan berhasil diekspor ke $path");
+      }
     } catch (e) {
       Get.snackbar("Error", "Gagal mengekspor laporan: $e");
     }
