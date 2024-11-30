@@ -253,7 +253,7 @@ class DetailorderView extends GetView<LaporanController> {
                   const Divider(height: 2, color: Constants.primaryColor),
                   const SizedBox(height: 10),
                   Text(
-                    'Status Pengiriman : ${laporan['status_pengiriman'] ?? 'N/A'}',
+                    'Status Pesanan : ${laporan['status_pengambilan'] ?? 'N/A'}',
                     style: const TextStyle(fontSize: 16),
                   ),
                   const SizedBox(height: 10),

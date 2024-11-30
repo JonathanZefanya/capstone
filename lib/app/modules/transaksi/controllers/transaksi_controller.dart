@@ -10,7 +10,7 @@ class TransaksiController extends GetxController {
   var selectedSatuan = <Map<String, dynamic>>[].obs;
   var metodePembayaran = 'Cash'.obs;
   var statusPembayaran = 'Lunas'.obs;
-  var statusPengiriman = 'Diantar'.obs;
+  var statusPengambilan = 'Belum Di Ambil'.obs;
   var totalHarga = 0.0.obs;
 
   // Select pelanggan
@@ -186,7 +186,7 @@ class TransaksiController extends GetxController {
             .toList(),
         'metode_pembayaran': metodePembayaran.value,
         'status_pembayaran': statusPembayaran.value,
-        'status_pengiriman': statusPengiriman.value,
+        'status_pengambilan': statusPengambilan.value,
         'totalHarga': totalHarga.value,
         'tanggal': Timestamp.now(),
       };
@@ -209,7 +209,7 @@ class TransaksiController extends GetxController {
     selectedSatuan.clear();
     metodePembayaran.value = 'Cash';
     statusPembayaran.value = 'Lunas';
-    statusPengiriman.value = 'Diantar';
+    statusPengambilan.value = 'Belum Di Ambil';
     totalHarga.value = 0;
     totalHarga.refresh();
   }

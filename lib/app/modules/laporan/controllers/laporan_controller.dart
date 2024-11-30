@@ -105,7 +105,7 @@ class LaporanController extends GetxController {
       TextCellValue('Pelanggan'),
       TextCellValue('Metode Pembayaran'),
       TextCellValue('Status Pembayaran'),
-      TextCellValue('Status Pengiriman'),
+      TextCellValue('Status Pesanan'),
       TextCellValue('Total Harga'),
       TextCellValue('Detail Cuci Per Jam'),
       TextCellValue('Detail Service'),
@@ -139,7 +139,7 @@ class LaporanController extends GetxController {
         TextCellValue(item['pelanggan']['nama pelanggan'] ?? 'Tidak Diketahui'),
         TextCellValue(item['metode_pembayaran'] ?? 'Tidak Diketahui'),
         TextCellValue(item['status_pembayaran'] ?? 'Tidak Diketahui'),
-        TextCellValue(item['status_pengiriman'] ?? 'Tidak Diketahui'),
+        TextCellValue(item['status_pengambilan'] ?? 'Tidak Diketahui'),
         IntCellValue((item['totalHarga'] ?? 0).toInt()), // Convert to int
         TextCellValue(cuciPerjamDetails),
         TextCellValue(serviceDetails),

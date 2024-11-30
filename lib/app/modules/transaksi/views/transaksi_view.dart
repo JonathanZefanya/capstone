@@ -725,18 +725,18 @@ class TransaksiView extends GetView<TransaksiController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "Pengiriman",
+                        "Status Pesanan",
                         style: TextStyle(
                           color: Constants.primaryColor,
                         ),
                       ),
                       DropdownButtonFormField<String>(
-                        value: controller.statusPengiriman.value,
+                        value: controller.statusPengambilan.value,
                         onChanged: (newValue) {
-                          controller.statusPengiriman.value = newValue!;
+                          controller.statusPengambilan.value = newValue!;
                         },
                         items: <String>[
-                          'Diantar',
+                          'Belum Di Ambil',
                           'Ambil Sendiri',
                         ].map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
