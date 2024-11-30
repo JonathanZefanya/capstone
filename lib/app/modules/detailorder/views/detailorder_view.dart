@@ -11,7 +11,7 @@ import '../../laporan/controllers/laporan_controller.dart';
 import '../controllers/detailorder_controller.dart';
 
 class DetailorderView extends GetView<LaporanController> {
-  DetailorderView({Key? key}) : super(key: key);
+    DetailorderView({Key? key}) : super(key: key);
 
   final DetailorderController detailorderController =
       Get.put(DetailorderController());
