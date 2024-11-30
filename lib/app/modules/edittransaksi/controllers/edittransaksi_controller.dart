@@ -7,6 +7,7 @@ import '../../laporan/controllers/laporan_controller.dart';
 class EditTransaksiController extends GetxController {
   TextEditingController paymentMethodController = TextEditingController();
   TextEditingController paymentStatusController = TextEditingController();
+  TextEditingController paymentPengambilanController = TextEditingController();
 
   void updateTransaksi() async {
     var laporan = Get.find<LaporanController>().selectedLaporan.value;
@@ -20,6 +21,7 @@ class EditTransaksiController extends GetxController {
           .update({
         'metode_pembayaran': paymentMethodController.text,
         'status_pembayaran': paymentStatusController.text,
+        'status_pengambilan': paymentPengambilanController.text,
       });
 
       Get.back();
