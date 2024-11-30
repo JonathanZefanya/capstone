@@ -125,7 +125,7 @@ class TransaksiController extends GetxController {
       services.add({
         'id': doc.id,
         ...doc.data(),
-        'kategori': 'cuciLipat', // Tambahkan kategori
+        'kategori': 'Cuci Lipat', // Tambahkan kategori
       });
     }
 

@@ -38,10 +38,10 @@ class ServiceView extends GetView<ServiceController> {
                   controller.filterserviceByCategory('express');
                   break;
                 case 1:
-                  controller.filterserviceByCategory('cuciLipat');
+                  controller.filterserviceByCategory('Cuci Lipat');
                   break;
                 case 2:
-                  controller.filterserviceByCategory('cuciPerjam');
+                  controller.filterserviceByCategory('Cuci Strika');
                   break;
                 case 3:
                   controller.filterserviceByCategory('satuan');
@@ -81,8 +81,8 @@ class ServiceView extends GetView<ServiceController> {
         body: TabBarView(
           children: [
             buildserviceList(transaksiController, 'express'),
-            buildserviceList(transaksiController, 'cuciLipat'),
-            buildserviceList(transaksiController, 'cuciPerjam'),
+            buildserviceList(transaksiController, 'Cuci Lipat'),
+            buildserviceList(transaksiController, 'Cuci Strika'),
             buildserviceList(transaksiController, 'satuan'),
           ],
         ),
@@ -122,10 +122,10 @@ class ServiceView extends GetView<ServiceController> {
         case 'express':
           serviceList = controller.filteredexpressList.toList();
           break;
-        case 'cuciLipat':
+        case 'Cuci Lipat':
           serviceList = controller.filteredcuciLipatList.toList();
           break;
-        case 'cuciPerjam':
+        case 'Cuci Strika':
           serviceList = controller.filteredcuciPerjamList.toList();
           break;
         case 'satuan':
