@@ -110,28 +110,63 @@ class LaporanView extends GetView<LaporanController> {
                       );
                     }),
                     actions: [
-                      Center(
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: const Size(double.minPositive, 30),
-                            backgroundColor:
-                                const Color.fromARGB(255, 235, 0, 43),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
+                      // Gunakan Row untuk menyusun tombol secara horizontal
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment
+                            .spaceEvenly, // Menyusun tombol secara merata
+                        children: [
+                          // Tombol Kembali
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: const Size(double.minPositive, 30),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 235, 0, 43),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                            onPressed: () {
+                              Get.back(); // Menutup dialog
+                            },
+                            child: const Text(
+                              "Kembali",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: Constants
+                                    .scaffoldbackgroundColor, // Sesuaikan dengan warna latar belakang
+                              ),
                             ),
                           ),
-                          onPressed: () {
-                            Get.back();
-                          },
-                          child: const Text(
-                            "Kembali",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: Constants.scaffoldbackgroundColor,
+
+                          // Tombol Export
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: const Size(double.minPositive, 30),
+                              backgroundColor: const Color.fromARGB(255, 0, 123,
+                                  255), // Ubah warna sesuai keinginan
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                            ),
+                            onPressed: () async {
+                              try {
+                                await controller
+                                    .exportToExcel(); // Memastikan export berjalan secara async
+                                Get.back(); // Menutup dialog setelah ekspor selesai
+                              } catch (e) {
+                                print("Export failed: $e");
+                              }
+                            },
+                            child: const Text(
+                              "Export",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white, // Sesuaikan warna teks
+                              ),
                             ),
                           ),
-                        ),
-                      )
+                        ],
+                      ),
                     ],
                   );
                 },
@@ -140,7 +175,8 @@ class LaporanView extends GetView<LaporanController> {
             icon: const Icon(
               Icons.filter_list_rounded,
               size: 30,
-              color: Constants.primaryColor,
+              color: Constants
+                  .primaryColor, // Sesuaikan dengan warna utama aplikasi Anda
             ),
           ),
         ],
