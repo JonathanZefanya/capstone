@@ -5,9 +5,9 @@ import 'package:excel/excel.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:open_file/open_file.dart';
 
 class LaporanController extends GetxController {
@@ -92,13 +92,12 @@ class LaporanController extends GetxController {
     }
   }
 
-  Future<void> exportToExcel() async {
+  Future<void> exportToCsv() async {
     if (filteredLaporanList.isEmpty) {
       Get.snackbar("Informasi", "Tidak ada data untuk diekspor.");
       return;
     }
-
-    final status = await Permission.storage.request();
+    final status = await Permission.manageExternalStorage.request();
     if (status.isGranted) {
       var excel = Excel.createExcel();
       Sheet sheetObject = excel['Laporan Transaksi'];
@@ -135,35 +134,38 @@ class LaporanController extends GetxController {
             '-';
 
         DateTime date = (item['tanggal'] as Timestamp).toDate();
-        String formattedDate = DateFormat('yyyy-MM-dd').format(date);
+        DateTime onlyDate = DateTime(date.year, date.month, date.day);
 
         // Append row
         sheetObject.appendRow([
-          TextCellValue(formattedDate),
+          TextCellValue(onlyDate.toString()),
           TextCellValue(item['pelanggan']['nama pelanggan'] ?? 'Tidak Diketahui'),
           TextCellValue(item['metode_pembayaran'] ?? 'Tidak Diketahui'),
           TextCellValue(item['status_pembayaran'] ?? 'Tidak Diketahui'),
           TextCellValue(item['status_pengambilan'] ?? 'Tidak Diketahui'),
-          IntCellValue((item['totalHarga'] ?? 0).toInt()), // Konversi ke IntCellValue
+          IntCellValue((item['totalHarga'] ?? 0).toInt()), // Convert to int
           TextCellValue(cuciPerjamDetails),
           TextCellValue(serviceDetails),
           TextCellValue(satuanDetails),
         ]);
       }
 
+      // Save file to storage
       try {
-        var directory = Directory('/storage/emulated/0/Download');
-        if (!directory.existsSync()) {
-          directory.createSync(recursive: true);
-        }
+        var directory = await getApplicationDocumentsDirectory();
         var path = "${directory.path}/Laporan_Transaksi.xlsx";
         var fileBytes = excel.encode();
         File file = File(path)
           ..createSync(recursive: true)
           ..writeAsBytesSync(fileBytes!);
 
-        print("File berhasil disimpan di: $path");
-        await OpenFile.open(path);
+        // Open the file after exporting
+        final result = await OpenFile.open(file.path);
+        if (result.type != ResultType.done) {
+          Get.snackbar("Error", "Gagal membuka file: ${result.message}");
+        } else {
+          Get.snackbar("Sukses", "Laporan berhasil diekspor ke $path");
+        }
       } catch (e) {
         Get.snackbar("Error", "Gagal mengekspor laporan: $e");
       }
