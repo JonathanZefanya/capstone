@@ -92,12 +92,13 @@ class LaporanController extends GetxController {
     }
   }
 
-  Future<void> exportToCsv() async {
+  Future<void> exportToExcel() async {
     if (filteredLaporanList.isEmpty) {
       Get.snackbar("Informasi", "Tidak ada data untuk diekspor.");
       return;
     }
-    final status = await Permission.manageExternalStorage.request();
+
+    final status = await Permission.storage.request();
     if (status.isGranted) {
       var excel = Excel.createExcel();
       Sheet sheetObject = excel['Laporan Transaksi'];
@@ -134,38 +135,35 @@ class LaporanController extends GetxController {
             '-';
 
         DateTime date = (item['tanggal'] as Timestamp).toDate();
-        DateTime onlyDate = DateTime(date.year, date.month, date.day);
+        String formattedDate = DateFormat('yyyy-MM-dd').format(date);
 
         // Append row
         sheetObject.appendRow([
-          TextCellValue(onlyDate.toString()),
+          TextCellValue(formattedDate),
           TextCellValue(item['pelanggan']['nama pelanggan'] ?? 'Tidak Diketahui'),
           TextCellValue(item['metode_pembayaran'] ?? 'Tidak Diketahui'),
           TextCellValue(item['status_pembayaran'] ?? 'Tidak Diketahui'),
           TextCellValue(item['status_pengambilan'] ?? 'Tidak Diketahui'),
-          IntCellValue((item['totalHarga'] ?? 0).toInt()), // Convert to int
+          IntCellValue((item['totalHarga'] ?? 0).toInt()), // Konversi ke IntCellValue
           TextCellValue(cuciPerjamDetails),
           TextCellValue(serviceDetails),
           TextCellValue(satuanDetails),
         ]);
       }
 
-      // Save file to storage
       try {
-        var directory = await getApplicationDocumentsDirectory();
+        var directory = Directory('/storage/emulated/0/Download');
+        if (!directory.existsSync()) {
+          directory.createSync(recursive: true);
+        }
         var path = "${directory.path}/Laporan_Transaksi.xlsx";
         var fileBytes = excel.encode();
         File file = File(path)
           ..createSync(recursive: true)
           ..writeAsBytesSync(fileBytes!);
 
-        // Open the file after exporting
-        final result = await OpenFile.open(file.path);
-        if (result.type != ResultType.done) {
-          Get.snackbar("Error", "Gagal membuka file: ${result.message}");
-        } else {
-          Get.snackbar("Sukses", "Laporan berhasil diekspor ke $path");
-        }
+        print("File berhasil disimpan di: $path");
+        await OpenFile.open(path);
       } catch (e) {
         Get.snackbar("Error", "Gagal mengekspor laporan: $e");
       }
