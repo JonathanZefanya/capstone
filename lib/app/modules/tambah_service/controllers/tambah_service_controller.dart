@@ -28,9 +28,9 @@ class TambahServiceController extends GetxController {
       String collectionName;
       if (kategori == 'express') {
         collectionName = 'service_express';
-      } else if (kategori == 'cuciLipat') {
+      } else if (kategori == 'Cuci Lipat') {
         collectionName = 'service_cuciLipat';
-      } else if (kategori == 'cuciPerjam') {
+      } else if (kategori == 'Cuci Strika') {
         collectionName = 'service_cuciPerjam';
       } else if (kategori == 'satuan') {
         collectionName = 'service_satuan';

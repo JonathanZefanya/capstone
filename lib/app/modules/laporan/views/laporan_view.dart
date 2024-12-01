@@ -142,8 +142,7 @@ class LaporanView extends GetView<LaporanController> {
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               minimumSize: const Size(double.minPositive, 30),
-                              backgroundColor: const Color.fromARGB(255, 0, 123,
-                                  255), // Ubah warna sesuai keinginan
+                              backgroundColor: const Color.fromARGB(255, 0, 123,255), // Ubah warna sesuai keinginan
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5),
                               ),

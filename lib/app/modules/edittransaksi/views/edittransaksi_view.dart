@@ -86,6 +86,28 @@ class EditTransaksiView extends GetView<EditTransaksiController> {
               },
             ),
             const SizedBox(height: 20),
+            DropdownButtonFormField<String>(
+              value: controller.paymentPengambilanController.text.isEmpty
+                  ? null
+                  : controller.paymentPengambilanController.text,
+              decoration: const InputDecoration(
+                labelText: 'Status Pesanan',
+                border: OutlineInputBorder(),
+              ),
+              items: [
+                'Ambil Sendiri',
+                'Belum Di ambil',
+              ]
+                  .map((status) => DropdownMenuItem(
+                        value: status,
+                        child: Text(status),
+                      ))
+                  .toList(),
+              onChanged: (value) {
+                controller.paymentPengambilanController.text = value!;
+              },
+            ),
+            const SizedBox(height: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 45),

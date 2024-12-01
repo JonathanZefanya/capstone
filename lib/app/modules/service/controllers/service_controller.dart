@@ -50,7 +50,7 @@ class ServiceController extends GetxController {
         filteredcuciLipatList.value = cuciLipatList.toList();
       });
 
-      // Fetch cuciPerjam products
+      // Fetch Cuci Strika products
       firestore.collection('service_cuciPerjam').snapshots().listen((snapshot) {
         cuciPerjamList.value = snapshot.docs.map((doc) {
           var data = doc.data();
@@ -82,10 +82,10 @@ class ServiceController extends GetxController {
       case 'express':
         filteredexpressList.value = expressList.toList();
         break;
-      case 'cuciLipat':
+      case 'Cuci Lipat':
         filteredcuciLipatList.value = cuciLipatList.toList();
         break;
-      case 'cuciPerjam':
+      case 'Cuci Strika':
         filteredcuciPerjamList.value = cuciPerjamList.toList();
         break;
       case 'satuan':
@@ -107,7 +107,7 @@ class ServiceController extends GetxController {
                 .contains(lowercaseQuery))
             .toList();
         break;
-      case 'cuciLipat':
+      case 'Cuci Lipat':
         filteredcuciLipatList.value = cuciLipatList
             .where((service) => service['nama']
                 .toString()
@@ -115,7 +115,7 @@ class ServiceController extends GetxController {
                 .contains(lowercaseQuery))
             .toList();
         break;
-      case 'cuciPerjam':
+      case 'Cuci Strika':
         filteredcuciPerjamList.value = cuciPerjamList
             .where((service) => service['nama']
                 .toString()
@@ -158,9 +158,9 @@ class ServiceController extends GetxController {
     switch (category) {
       case 'express':
         return 'service_express';
-      case 'cuciLipat':
+      case 'Cuci Lipat':
         return 'service_cuciLipat';
-      case 'cuciPerjam':
+      case 'Cuci Strika':
         return 'service_cuciPerjam';
       case 'satuan':
         return 'service_satuan';
