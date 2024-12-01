@@ -149,13 +149,7 @@ class LaporanView extends GetView<LaporanController> {
                               ),
                             ),
                             onPressed: () async {
-                              try {
-                                await controller
-                                    .exportToExcel(); // Memastikan export berjalan secara async
-                                Get.back(); // Menutup dialog setelah ekspor selesai
-                              } catch (e) {
-                                print("Export failed: $e");
-                              }
+                              await controller.exportToCsv();
                             },
                             child: const Text(
                               "Export",
