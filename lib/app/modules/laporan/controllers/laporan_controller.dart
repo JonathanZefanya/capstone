@@ -7,7 +7,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:open_file/open_file.dart';
 
 class LaporanController extends GetxController {
   var laporanList = <Map<String, dynamic>>[].obs;
@@ -101,21 +100,6 @@ class LaporanController extends GetxController {
     List<String> csvData = [
       "Tanggal,Pelanggan,Metode Pembayaran,Status Pembayaran,Status Pengiriman,Total Harga,Detail Cuci Per Jam,Detail Service,Detail Satuan"
     ];
-    var excel = Excel.createExcel();
-    Sheet sheetObject = excel['Laporan Transaksi'];
-
-    // Header
-    sheetObject.appendRow([
-      TextCellValue('Tanggal'),
-      TextCellValue('Pelanggan'),
-      TextCellValue('Metode Pembayaran'),
-      TextCellValue('Status Pembayaran'),
-      TextCellValue('Status Pesanan'),
-      TextCellValue('Total Harga'),
-      TextCellValue('Detail Cuci Per Jam'),
-      TextCellValue('Detail Service'),
-      TextCellValue('Detail Satuan'),
-    ]);
 
     // Tambahkan data ke CSV
     for (var item in filteredLaporanList) {
@@ -137,7 +121,6 @@ class LaporanController extends GetxController {
 
       DateTime date = (item['tanggal'] as Timestamp).toDate();
       DateTime onlyDate = DateTime(date.year, date.month, date.day);
-      DateTime onlyDate = DateTime(date.year, date.month, date.day);
 
       // Tambahkan baris data
       csvData.add([
@@ -151,18 +134,6 @@ class LaporanController extends GetxController {
         serviceDetails,
         satuanDetails,
       ].join(','));
-      // Append row
-      sheetObject.appendRow([
-        TextCellValue(onlyDate.toString()),
-        TextCellValue(item['pelanggan']['nama pelanggan'] ?? 'Tidak Diketahui'),
-        TextCellValue(item['metode_pembayaran'] ?? 'Tidak Diketahui'),
-        TextCellValue(item['status_pembayaran'] ?? 'Tidak Diketahui'),
-        TextCellValue(item['status_pengambilan'] ?? 'Tidak Diketahui'),
-        IntCellValue((item['totalHarga'] ?? 0).toInt()), // Convert to int
-        TextCellValue(cuciPerjamDetails),
-        TextCellValue(serviceDetails),
-        TextCellValue(satuanDetails),
-      ]);
     }
 
     try {
@@ -185,32 +156,19 @@ class LaporanController extends GetxController {
 
       // Tulis data ke file CSV
       await file.writeAsString(csvData.join("\n"));
-    // Save file to storage
-    try {
-      var directory = await getApplicationDocumentsDirectory();
-      var path = "${directory.path}/Laporan_Transaksi.xlsx";
-      var fileBytes = excel.encode();
-      File file = File(path)
-        ..createSync(recursive: true)
-        ..writeAsBytesSync(fileBytes!);
 
       // Snackbar sukses
       Get.snackbar(
         "Sukses",
         "File berhasil diekspor ke folder Downloads:\n$filePath",
+        
       );
-      // Open the file after exporting
-      final result = await OpenFile.open(file.path);
-      if (result.type != ResultType.done) {
-        Get.snackbar("Error", "Gagal membuka file: ${result.message}");
-      } else {
-        Get.snackbar("Sukses", "Laporan berhasil diekspor ke $path");
-      }
     } catch (e) {
       // Snackbar error
       Get.snackbar(
         "Error",
         "Gagal mengekspor file: $e",
+        
       );
     }
   }
