@@ -140,11 +140,13 @@ class LaporanController extends GetxController {
         // Append row
         sheetObject.appendRow([
           TextCellValue(formattedDate),
-          TextCellValue(item['pelanggan']['nama pelanggan'] ?? 'Tidak Diketahui'),
+          TextCellValue(
+              item['pelanggan']['nama pelanggan'] ?? 'Tidak Diketahui'),
           TextCellValue(item['metode_pembayaran'] ?? 'Tidak Diketahui'),
           TextCellValue(item['status_pembayaran'] ?? 'Tidak Diketahui'),
           TextCellValue(item['status_pengambilan'] ?? 'Tidak Diketahui'),
-          IntCellValue((item['totalHarga'] ?? 0).toInt()), // Konversi ke IntCellValue
+          IntCellValue(
+              (item['totalHarga'] ?? 0).toInt()), // Konversi ke IntCellValue
           TextCellValue(cuciPerjamDetails),
           TextCellValue(serviceDetails),
           TextCellValue(satuanDetails),
@@ -162,13 +164,14 @@ class LaporanController extends GetxController {
           ..createSync(recursive: true)
           ..writeAsBytesSync(fileBytes!);
 
-        print("File berhasil disimpan di: $path");
+        Get.snackbar("Berhsail", "File berhasil disimpan di: $path");
         await OpenFile.open(path);
       } catch (e) {
         Get.snackbar("Error", "Gagal mengekspor laporan: $e");
       }
     } else {
-      Get.snackbar("Izin Ditolak", "Izin penyimpanan diperlukan untuk mengekspor laporan.");
+      Get.snackbar("Izin Ditolak",
+          "Izin penyimpanan diperlukan untuk mengekspor laporan.");
     }
   }
 }
