@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:excel/excel.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
@@ -177,4 +178,85 @@ class LaporanController extends GetxController {
       );
     }
   }
+
+  Future<void> exportToExcel() async {
+    if (filteredLaporanList.isEmpty) {
+      Get.snackbar("Informasi", "Tidak ada data untuk diekspor.");
+      return;
+    }
+
+    final status = await Permission.manageExternalStorage.request();
+    if (status.isGranted) {
+      var excel = Excel.createExcel();
+      Sheet sheetObject = excel['Laporan Transaksi'];
+
+      // Header
+      sheetObject.appendRow([
+        TextCellValue('Tanggal'),
+        TextCellValue('Pelanggan'),
+        TextCellValue('Metode Pembayaran'),
+        TextCellValue('Status Pembayaran'),
+        TextCellValue('Status Pesanan'),
+        TextCellValue('Total Harga'),
+        TextCellValue('Detail Cuci Per Jam'),
+        TextCellValue('Detail Service'),
+        TextCellValue('Detail Satuan'),
+      ]);
+
+      // Data
+      for (var item in filteredLaporanList) {
+        String cuciPerjamDetails = (item['cuciPerjam'] as List<dynamic>?)
+                ?.map((e) =>
+                    "Nama: ${e['nama']}, Harga: ${e['harga']}, Berat: ${e['berat']}")
+                .join('\n') ??
+            '-';
+        String serviceDetails = (item['Service'] as List<dynamic>?)
+                ?.map((e) =>
+                    "Nama: ${e['nama']}, Harga: ${e['harga']}, Berat: ${e['berat']}, Kategori: ${e['kategori']}")
+                .join('\n') ??
+            '-';
+        String satuanDetails = (item['Satuan'] as List<dynamic>?)
+                ?.map((e) =>
+                    "Nama: ${e['nama']}, Harga: ${e['harga']}, Jumlah: ${e['jumlah']}, Kategori: ${e['kategori']}")
+                .join('\n') ??
+            '-';
+
+        DateTime date = (item['tanggal'] as Timestamp).toDate();
+        String formattedDate = DateFormat('yyyy-MM-dd').format(date);
+
+        // Append row
+        sheetObject.appendRow([
+          TextCellValue(formattedDate),
+          TextCellValue(item['pelanggan']['nama pelanggan'] ?? 'Tidak Diketahui'),
+          TextCellValue(item['metode_pembayaran'] ?? 'Tidak Diketahui'),
+          TextCellValue(item['status_pembayaran'] ?? 'Tidak Diketahui'),
+          TextCellValue(item['status_pengambilan'] ?? 'Tidak Diketahui'),
+          IntCellValue((item['totalHarga'] ?? 0).toInt()), // Konversi ke IntCellValue
+          TextCellValue(cuciPerjamDetails),
+          TextCellValue(serviceDetails),
+          TextCellValue(satuanDetails),
+        ]);
+      }
+
+      try {
+        var directory = Directory('/storage/emulated/0/Download');
+        if (!directory.existsSync()) {
+          directory.createSync(recursive: true);
+        }
+        var path = "${directory.path}/Laporan_Transaksi.xlsx";
+        var fileBytes = excel.encode();
+        File file = File(path)
+          ..createSync(recursive: true)
+          ..writeAsBytesSync(fileBytes!);
+
+        print("File berhasil disimpan di: $path");
+        await OpenFile.open(path);
+      } catch (e) {
+        Get.snackbar("Error", "Gagal mengekspor laporan: $e");
+      }
+    } else {
+      Get.snackbar("Izin Ditolak", "Izin penyimpanan diperlukan untuk mengekspor laporan.");
+    }
+  }
+
 }

@@ -14,7 +14,8 @@ class DetailorderController extends GetxController {
   final ScreenshotController screenshotController = ScreenshotController();
 
   Future<void> saveInvoiceAsImage() async {
-    final status = await Permission.storage.request();
+    // final status = await Permission.storage.request();
+    final status = await Permission.manageExternalStorage.request();
     if (status.isGranted) {
       screenshotController.capture().then((Uint8List? image) async {
         if (image != null) {
