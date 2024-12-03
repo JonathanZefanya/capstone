@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:excel/excel.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
@@ -92,86 +91,90 @@ class LaporanController extends GetxController {
     }
   }
 
-  Future<void> exportToExcel() async {
+  Future<void> exportToCsv() async {
     if (filteredLaporanList.isEmpty) {
       Get.snackbar("Informasi", "Tidak ada data untuk diekspor.");
       return;
     }
 
-    final status = await Permission.storage.request();
-    if (status.isGranted) {
-      var excel = Excel.createExcel();
-      Sheet sheetObject = excel['Laporan Transaksi'];
+    double totalHarga = 0;
 
-      // Header
-      sheetObject.appendRow([
-        TextCellValue('Tanggal'),
-        TextCellValue('Pelanggan'),
-        TextCellValue('Metode Pembayaran'),
-        TextCellValue('Status Pembayaran'),
-        TextCellValue('Status Pesanan'),
-        TextCellValue('Total Harga'),
-        TextCellValue('Detail Cuci Per Jam'),
-        TextCellValue('Detail Service'),
-        TextCellValue('Detail Satuan'),
-      ]);
+    // Buat header CSV
+    List<String> csvData = [
+      "Tanggal,Pelanggan,Metode Pembayaran,Status Pembayaran,Status Pengiriman,Detail Cuci Per Jam,Detail Service,Detail Satuan,Total Harga"
+    ];
 
-      // Data
-      for (var item in filteredLaporanList) {
-        String cuciPerjamDetails = (item['cuciPerjam'] as List<dynamic>?)
-                ?.map((e) =>
-                    "Nama: ${e['nama']}, Harga: ${e['harga']}, Berat: ${e['berat']}")
-                .join('\n') ??
-            '-';
-        String serviceDetails = (item['Service'] as List<dynamic>?)
-                ?.map((e) =>
-                    "Nama: ${e['nama']}, Harga: ${e['harga']}, Berat: ${e['berat']}, Kategori: ${e['kategori']}")
-                .join('\n') ??
-            '-';
-        String satuanDetails = (item['Satuan'] as List<dynamic>?)
-                ?.map((e) =>
-                    "Nama: ${e['nama']}, Harga: ${e['harga']}, Jumlah: ${e['jumlah']}, Kategori: ${e['kategori']}")
-                .join('\n') ??
-            '-';
+    for (var item in filteredLaporanList) {
+      String cuciPerjamDetails = (item['cuciPerjam'] as List<dynamic>?)
+              ?.map((e) =>
+                  "Nama: ${e['nama']}, Harga: ${e['harga']}, Berat: ${e['berat']}")
+              .join('|') ??
+          '-';
+      String serviceDetails = (item['Service'] as List<dynamic>?)
+              ?.map((e) =>
+                  "Nama: ${e['nama']}, Harga: ${e['harga']}, Berat: ${e['berat']}, Kategori: ${e['kategori']}")
+              .join('|') ??
+          '-';
+      String satuanDetails = (item['Satuan'] as List<dynamic>?)
+              ?.map((e) =>
+                  "Nama: ${e['nama']}, Harga: ${e['harga']}, Jumlah: ${e['jumlah']}, Kategori: ${e['kategori']}")
+              .join('|') ??
+          '-';
 
-        DateTime date = (item['tanggal'] as Timestamp).toDate();
-        String formattedDate = DateFormat('yyyy-MM-dd').format(date);
+      DateTime date = (item['tanggal'] as Timestamp).toDate();
+      DateTime onlyDate = DateTime(date.year, date.month, date.day);
 
-        // Append row
-        sheetObject.appendRow([
-          TextCellValue(formattedDate),
-          TextCellValue(
-              item['pelanggan']['nama pelanggan'] ?? 'Tidak Diketahui'),
-          TextCellValue(item['metode_pembayaran'] ?? 'Tidak Diketahui'),
-          TextCellValue(item['status_pembayaran'] ?? 'Tidak Diketahui'),
-          TextCellValue(item['status_pengambilan'] ?? 'Tidak Diketahui'),
-          IntCellValue(
-              (item['totalHarga'] ?? 0).toInt()), // Konversi ke IntCellValue
-          TextCellValue(cuciPerjamDetails),
-          TextCellValue(serviceDetails),
-          TextCellValue(satuanDetails),
-        ]);
+      // Tambahkan baris data
+      double hargaItem = (item['totalHarga'] ?? 0).toDouble();
+      csvData.add([
+        onlyDate.toString(),
+        item['pelanggan']['nama pelanggan'] ?? 'Tidak Diketahui',
+        item['metode_pembayaran'] ?? 'Tidak Diketahui',
+        item['status_pembayaran'] ?? 'Tidak Diketahui',
+        item['status_pengiriman'] ?? 'Tidak Diketahui',
+        cuciPerjamDetails,
+        serviceDetails,
+        satuanDetails,
+        hargaItem.toString(),
+      ].join(','));
+
+      totalHarga += hargaItem;
+    }
+
+    //baris baru untuk total harga
+    csvData.add([
+      'TOTAL',
+      totalHarga.toString(), // Nilai total harga
+    ].join(','));
+
+    try {
+      // Minta izin akses penyimpanan
+      // var status = await Permission.storage.request();
+      // if (!status.isGranted) {
+      //   Get.snackbar("Error", "Izin akses penyimpanan ditolak.");
+      //   return;
+      // }
+
+      // Lokasi penyimpanan di folder Downloads
+      final directory = Directory('/storage/emulated/0/Download');
+      if (!directory.existsSync()) {
+        throw "Folder Downloads tidak ditemukan.";
       }
 
-      try {
-        var directory = Directory('/storage/emulated/0/Download');
-        if (!directory.existsSync()) {
-          directory.createSync(recursive: true);
-        }
-        var path = "${directory.path}/Laporan_Transaksi.xlsx";
-        var fileBytes = excel.encode();
-        File file = File(path)
-          ..createSync(recursive: true)
-          ..writeAsBytesSync(fileBytes!);
+      // Path file
+      String filePath = "${directory.path}/Laporan_Transaksi.csv";
+      File file = File(filePath);
 
-        Get.snackbar("Berhsail", "File berhasil disimpan di: $path");
-        await OpenFile.open(path);
-      } catch (e) {
-        Get.snackbar("Error", "Gagal mengekspor laporan: $e");
-      }
-    } else {
-      Get.snackbar("Izin Ditolak",
-          "Izin penyimpanan diperlukan untuk mengekspor laporan.");
+      await file.writeAsString(csvData.join("\n"));
+      Get.snackbar(
+        "Sukses",
+        "File berhasil diekspor ke folder Downloads:\n$filePath",
+      );
+    } catch (e) {
+      Get.snackbar(
+        "Error",
+        "Gagal mengekspor file: $e",
+      );
     }
   }
 }
