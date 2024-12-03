@@ -165,6 +165,10 @@ class LaporanController extends GetxController {
       String filePath = "${directory.path}/Laporan_Transaksi.csv";
       File file = File(filePath);
 
+      if (file.existsSync()) {
+        await file.delete();
+      }
+
       await file.writeAsString(csvData.join("\n"));
       Get.snackbar(
         "Sukses",
