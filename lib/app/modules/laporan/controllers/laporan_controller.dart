@@ -209,6 +209,7 @@ class LaporanController extends GetxController {
       ]);
 
       // Data
+      int grandTotal = 0; // Untuk menyimpan total keseluruhan harga
       for (var item in filteredLaporanList) {
         String cuciPerjamDetails = (item['cuciPerjam'] as List<dynamic>?)
                 ?.map((e) =>
@@ -229,6 +230,9 @@ class LaporanController extends GetxController {
         DateTime date = (item['tanggal'] as Timestamp).toDate();
         String formattedDate = DateFormat('yyyy-MM-dd').format(date);
 
+        int totalHarga = (item['totalHarga'] ?? 0).toInt();
+        grandTotal += totalHarga; // Tambahkan ke grand total
+
         // Append row
         sheetObject.appendRow([
           TextCellValue(formattedDate),
@@ -239,9 +243,22 @@ class LaporanController extends GetxController {
           TextCellValue(cuciPerjamDetails),
           TextCellValue(serviceDetails),
           TextCellValue(satuanDetails),
-          IntCellValue((item['totalHarga'] ?? 0).toInt()),
+          IntCellValue(totalHarga),
         ]);
       }
+
+      // Tambahkan baris total keseluruhan
+      sheetObject.appendRow([
+        TextCellValue('Total'), // Label "Total" untuk merangkum semua
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        IntCellValue(grandTotal), // Total keseluruhan harga
+      ]);
 
       try {
         var directory = Directory('/storage/emulated/0/Download/laporan-lalundry');
