@@ -29,7 +29,7 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
               alignment: Alignment.center,
               padding: EdgeInsets.all(10),
               child: const Text(
-                'Hijrah Laundri Reset Password Page',
+                'Ama Laundri Reset Password Page',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: Colors.indigo,
