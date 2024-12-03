@@ -34,6 +34,12 @@ class TambahPelangganController extends GetxController {
       Get.snackbar('Error', 'Harap lengkapi semua field');
       return;
     }
+    // Nama pelanggan tidak boleh sama 
+    if (pelangganController.pelangganList
+        .any((pelanggan) => pelanggan['nama pelanggan'] == namaPelanggan)) {
+      Get.snackbar('Error', 'Nama pelanggan sudah ada');
+      return;
+    }
 
     final String fullPhoneNumber = selectedCountryCode.value + nomorWhatsApp;
 
