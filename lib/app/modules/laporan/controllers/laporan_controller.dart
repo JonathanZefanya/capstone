@@ -175,6 +175,7 @@ class LaporanController extends GetxController {
         "Sukses",
         "File berhasil diekspor ke folder Downloads:\n$filePath",
       );
+      await OpenFile.open(filePath);
     } catch (e) {
       Get.snackbar(
         "Error",
