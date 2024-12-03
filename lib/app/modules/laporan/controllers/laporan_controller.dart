@@ -202,27 +202,27 @@ class LaporanController extends GetxController {
         TextCellValue('Metode Pembayaran'),
         TextCellValue('Status Pembayaran'),
         TextCellValue('Status Pesanan'),
-        TextCellValue('Total Harga'),
         TextCellValue('Detail Cuci Per Jam'),
         TextCellValue('Detail Service'),
         TextCellValue('Detail Satuan'),
+        TextCellValue('Total Harga'),
       ]);
 
       // Data
       for (var item in filteredLaporanList) {
         String cuciPerjamDetails = (item['cuciPerjam'] as List<dynamic>?)
                 ?.map((e) =>
-                    "Nama: ${e['nama']}, Harga: ${e['harga']}, Berat: ${e['berat']}")
+                    "Nama: ${e['nama'] ?? '-'}, Harga: ${e['harga'] ?? '-'}, Berat: ${e['berat'] ?? '-'}")
                 .join('\n') ??
             '-';
         String serviceDetails = (item['Service'] as List<dynamic>?)
                 ?.map((e) =>
-                    "Nama: ${e['nama']}, Harga: ${e['harga']}, Berat: ${e['berat']}, Kategori: ${e['kategori']}")
+                    "Nama: ${e['nama'] ?? '-'}, Harga: ${e['harga'] ?? '-'}, Berat: ${e['berat'] ?? '-'}, Kategori: ${e['kategori'] ?? '-'}")
                 .join('\n') ??
             '-';
         String satuanDetails = (item['Satuan'] as List<dynamic>?)
                 ?.map((e) =>
-                    "Nama: ${e['nama']}, Harga: ${e['harga']}, Jumlah: ${e['jumlah']}, Kategori: ${e['kategori']}")
+                    "Nama: ${e['nama'] ?? '-'}, Harga: ${e['harga'] ?? '-'}, Jumlah: ${e['jumlah'] ?? '-'}, Kategori: ${e['kategori'] ?? '-'}")
                 .join('\n') ??
             '-';
 
@@ -232,19 +232,19 @@ class LaporanController extends GetxController {
         // Append row
         sheetObject.appendRow([
           TextCellValue(formattedDate),
-          TextCellValue(item['pelanggan']['nama pelanggan'] ?? 'Tidak Diketahui'),
-          TextCellValue(item['metode_pembayaran'] ?? 'Tidak Diketahui'),
-          TextCellValue(item['status_pembayaran'] ?? 'Tidak Diketahui'),
-          TextCellValue(item['status_pengambilan'] ?? 'Tidak Diketahui'),
-          IntCellValue((item['totalHarga'] ?? 0).toInt()), // Konversi ke IntCellValue
+          TextCellValue(item['pelanggan']?['nama pelanggan'] ?? '-'),
+          TextCellValue(item['metode_pembayaran'] ?? '-'),
+          TextCellValue(item['status_pembayaran'] ?? '-'),
+          TextCellValue(item['status_pengambilan'] ?? '-'),
           TextCellValue(cuciPerjamDetails),
           TextCellValue(serviceDetails),
           TextCellValue(satuanDetails),
+          IntCellValue((item['totalHarga'] ?? 0).toInt()),
         ]);
       }
 
       try {
-        var directory = Directory('/storage/emulated/0/Download');
+        var directory = Directory('/storage/emulated/0/Download/laporan-lalundry');
         if (!directory.existsSync()) {
           directory.createSync(recursive: true);
         }
@@ -263,5 +263,4 @@ class LaporanController extends GetxController {
       Get.snackbar("Izin Ditolak", "Izin penyimpanan diperlukan untuk mengekspor laporan.");
     }
   }
-
 }
