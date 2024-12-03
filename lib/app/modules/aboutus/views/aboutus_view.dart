@@ -65,7 +65,7 @@ class AboutusView extends GetView<AboutusController> {
                   SizedBox(height: 16),
                   // Judul
                   Text(
-                    "Hijrah Laundri",
+                    "Ama Laundri",
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -100,7 +100,6 @@ class AboutusView extends GetView<AboutusController> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     subtitle: Text("Email: support@hijrah.com"),
-                   
                   ),
                   Divider(),
                   Padding(
