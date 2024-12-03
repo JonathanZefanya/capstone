@@ -240,9 +240,9 @@ class LaporanController extends GetxController {
           TextCellValue(item['metode_pembayaran'] ?? '-'),
           TextCellValue(item['status_pembayaran'] ?? '-'),
           TextCellValue(item['status_pengambilan'] ?? '-'),
-          TextCellValue(cuciPerjamDetails),
-          TextCellValue(serviceDetails),
-          TextCellValue(satuanDetails),
+          TextCellValue(cuciPerjamDetails ?? '-'),
+          TextCellValue(serviceDetails ?? '-'),
+          TextCellValue(satuanDetails ?? '-'),
           IntCellValue(totalHarga),
         ]);
       }
@@ -259,6 +259,59 @@ class LaporanController extends GetxController {
         null,
         IntCellValue(grandTotal), // Total keseluruhan harga
       ]);
+
+      Sheet sheetObject2 = excel['Pelanggan'];
+      sheetObject2.appendRow([
+        TextCellValue('Nama Pelanggan'),
+        TextCellValue('Alamat'),
+        TextCellValue('Nomor WhatsApp'),
+      ]);
+
+      for (var item in filteredLaporanList) {
+        sheetObject2.appendRow([
+          TextCellValue(item['pelanggan']?['nama pelanggan'] ?? '-'),
+          TextCellValue(item['pelanggan']?['alamat'] ?? '-'),
+          TextCellValue(item['pelanggan']?['nomor WhatsApp'] ?? '-'),
+        ]);
+      }
+
+      Sheet sheetObject3 = excel['Service'];
+      sheetObject3.appendRow([
+        TextCellValue('Nama Service'),
+        TextCellValue('Jumlah Pembelian'),
+      ]);
+
+      // Hitung jumlah tiap jenis kategori
+      Map<String, int> totalPerCategory = {};
+      for (var item in filteredLaporanList) {
+        List<dynamic>? cuciPerjam = item['cuciPerjam'];
+        List<dynamic>? service = item['Service'];
+        List<dynamic>? satuan = item['Satuan'];
+
+        // Hitung total pembelian per kategori
+        for (var item in cuciPerjam ?? []) {
+          String kategori = item['kategori'] ?? 'Express';
+          totalPerCategory[kategori] = (totalPerCategory[kategori] ?? 0) + 1;
+        }
+
+        for (var item in service ?? []) {
+          String kategori = item['kategori'] ?? 'Lainnya';
+          totalPerCategory[kategori] = (totalPerCategory[kategori] ?? 0) + 1;
+        }
+
+        for (var item in satuan ?? []) {
+          String kategori = item['kategori'] ?? 'Satuan';
+          totalPerCategory[kategori] = (totalPerCategory[kategori] ?? 0) + 1;
+        }
+      }
+
+      // Tambahkan data ke sheet
+      for (var entry in totalPerCategory.entries) {
+        sheetObject3.appendRow([
+          TextCellValue(entry.key),
+          IntCellValue(entry.value),
+        ]);
+      }
 
       try {
         var directory = Directory('/storage/emulated/0/Download/laporan-lalundry');
