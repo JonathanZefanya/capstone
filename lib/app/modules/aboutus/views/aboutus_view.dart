@@ -99,7 +99,7 @@ class AboutusView extends GetView<AboutusController> {
                       'Hubungi Kami',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text("Email: support@hijrah.com"),
+                    subtitle: Text("Email: support@ama.com"),
                   ),
                   Divider(),
                   Padding(
