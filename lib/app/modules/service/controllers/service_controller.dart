@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
 
 class ServiceController extends GetxController {
@@ -19,6 +20,7 @@ class ServiceController extends GetxController {
       RxList<Map<String, dynamic>>([]);
 
   RxBool isLoading = RxBool(false);
+  final Connectivity connectivity = Connectivity();
 
   @override
   void onInit() {
@@ -167,5 +169,10 @@ class ServiceController extends GetxController {
       default:
         throw Exception('Kategori tidak valid');
     }
+  }
+
+    Future<bool> checkInternetConnection() async {
+    var connectivityResult = await connectivity.checkConnectivity();
+    return connectivityResult != ConnectivityResult.none;
   }
 }

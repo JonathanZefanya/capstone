@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,6 +8,7 @@ class TambahServiceController extends GetxController {
   final TextEditingController hargaController = TextEditingController();
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final Connectivity connectivity = Connectivity();
 
   // Field untuk menyimpan kategori yang dipilih
   RxString selectedKategori = RxString('');
@@ -54,5 +56,10 @@ class TambahServiceController extends GetxController {
     } catch (e) {
       Get.snackbar('Error', 'Gagal menambahkan produk: $e');
     }
+  }
+
+  Future<bool> checkInternetConnection() async {
+    var connectivityResult = await connectivity.checkConnectivity();
+    return connectivityResult != ConnectivityResult.none;
   }
 }

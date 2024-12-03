@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +13,7 @@ class TambahPelangganController extends GetxController {
   final TextEditingController namaPelangganController = TextEditingController();
   final TextEditingController nomorWhatsAppController = TextEditingController();
   final TextEditingController alamatController = TextEditingController();
+  final Connectivity connectivity = Connectivity();
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -64,5 +66,10 @@ class TambahPelangganController extends GetxController {
     } catch (e) {
       Get.snackbar('Error', 'Gagal menambahkan pelanggan: $e');
     }
+  }
+
+  Future<bool> checkInternetConnection() async {
+    var connectivityResult = await connectivity.checkConnectivity();
+    return connectivityResult != ConnectivityResult.none;
   }
 }
