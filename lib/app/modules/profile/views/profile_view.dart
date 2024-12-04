@@ -22,7 +22,7 @@ class ProfileView extends GetView<ProfileController> {
           onPressed: () {
             Get.back();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
             color: Constants.secondColor,
           ),
@@ -34,11 +34,11 @@ class ProfileView extends GetView<ProfileController> {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.symmetric(
+              margin: const EdgeInsets.symmetric(
                 vertical: 22,
                 horizontal: 20,
               ),
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 vertical: 20,
                 horizontal: 33,
               ),
@@ -59,27 +59,27 @@ class ProfileView extends GetView<ProfileController> {
                         .get(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return CircularProgressIndicator();
+                        return const CircularProgressIndicator();
                       }
                       if (snapshot.hasError) {
-                        return Text('Error loading username');
+                        return const Text('Error loading username');
                       }
                       if (snapshot.hasData && snapshot.data != null) {
                         String username =
                             snapshot.data!['username'] ?? 'Pengguna';
                         return Text(
                           username,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         );
                       }
-                      return Text('Pengguna');
+                      return const Text('Pengguna');
                     },
                   ),
-                  Text(
+                  const Text(
                     "Member Silver",
                     style: TextStyle(
                       color: Colors.white,
@@ -89,13 +89,13 @@ class ProfileView extends GetView<ProfileController> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Container(
               width: double.infinity,
-              margin: EdgeInsets.symmetric(horizontal: 16),
-              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
@@ -103,7 +103,7 @@ class ProfileView extends GetView<ProfileController> {
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
                     blurRadius: 6,
-                    offset: Offset(0, 3),
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
@@ -112,28 +112,28 @@ class ProfileView extends GetView<ProfileController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ListTile(
-                    leading: Icon(Icons.person, color: AppColors.accent),
-                    title: Text(
+                    leading: const Icon(Icons.person, color: AppColors.accent),
+                    title: const Text(
                       'Akun Saya',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text('Buat perubahan pada akun Anda'),
-                    trailing: Icon(Icons.error_outline, color: AppColors.error),
+                    subtitle: const Text('Buat perubahan pada akun Anda'),
+                    trailing: const Icon(Icons.error_outline, color: AppColors.error),
                     onTap: () {
                       Get.toNamed(Routes.MYACCOUNT);
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   ListTile(
-                    leading: Icon(Icons.info, color: AppColors.accent),
-                    title: Text(
+                    leading: const Icon(Icons.info, color: AppColors.accent),
+                    title: const Text(
                       'Tentang Aplikasi',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text('Lihat informasi tentang aplikasi'),
-                    trailing: Icon(
+                    subtitle: const Text('Lihat informasi tentang aplikasi'),
+                    trailing: const Icon(
                       Icons.arrow_forward_ios,
                       color: Constants.secondColor,
                     ),
@@ -141,19 +141,19 @@ class ProfileView extends GetView<ProfileController> {
                       Get.toNamed(Routes.ABOUTUS);
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   ListTile(
-                    leading: Icon(
+                    leading: const Icon(
                       Icons.logout_outlined,
                       color: AppColors.accent,
                     ),
-                    title: Text(
+                    title: const Text(
                       'Keluar',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text('Keluar dari aplikasi'),
+                    subtitle: const Text('Keluar dari aplikasi'),
                     onTap: () {
                       homeController.logout();
                     },

@@ -8,7 +8,7 @@ import '../../service/views/service_view.dart';
 import '../controllers/transaksi_controller.dart';
 
 class TransaksiView extends GetView<TransaksiController> {
-  const TransaksiView({Key? key}) : super(key: key);
+  const TransaksiView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class TransaksiView extends GetView<TransaksiController> {
           onPressed: () {
             Get.offAllNamed(Routes.HOME);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
             color: Constants.secondColor,
           ),

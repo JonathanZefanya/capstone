@@ -15,12 +15,12 @@ class AboutusView extends GetView<AboutusController> {
           onPressed: () {
             Get.back();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
             color: Constants.secondColor,
           ),
         ),
-        title: Text(
+        title: const Text(
           'Tentang Kami',
           style: TextStyle(
             color: Colors.white,
@@ -36,7 +36,7 @@ class AboutusView extends GetView<AboutusController> {
               child: Column(
                 children: [
                   // Logo
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       // Logo 1
@@ -62,25 +62,25 @@ class AboutusView extends GetView<AboutusController> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   // Judul
-                  Text(
+                  const Text(
                     "Ama Laundri",
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   // Deskripsi
                   Text(
                     "Aplikasi ini dirancang untuk membantu UMKM laundry mengelola operasional mereka dengan mudah.",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 16, color: Colors.grey[700]),
                   ),
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
                   // Section Misi/Visi
-                  ListTile(
+                  const ListTile(
                     leading: Icon(Icons.lightbulb_outline,
                         color: Colors.orangeAccent),
                     title: Text(
@@ -90,9 +90,9 @@ class AboutusView extends GetView<AboutusController> {
                     subtitle: Text(
                         "Memberikan solusi teknologi yang inovatif untuk kebutuhan sehari-hari."),
                   ),
-                  Divider(),
+                  const Divider(),
                   // Section Kontak
-                  ListTile(
+                  const ListTile(
                     leading:
                         Icon(Icons.contact_mail, color: Colors.orangeAccent),
                     title: Text(
@@ -101,9 +101,9 @@ class AboutusView extends GetView<AboutusController> {
                     ),
                     subtitle: Text("Email: support@ama.com"),
                   ),
-                  Divider(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  const Divider(),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16.0),
                     child: Text(
                       "Tim Kami",
                       style: TextStyle(
@@ -112,7 +112,7 @@ class AboutusView extends GetView<AboutusController> {
                       ),
                     ),
                   ),
-                  Column(
+                  const Column(
                     children: [
                       // Anggota Tim 1
                       ListTile(

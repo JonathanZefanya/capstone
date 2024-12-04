@@ -19,7 +19,7 @@ class MyaccountView extends GetView<MyaccountController> {
           onPressed: () {
             Get.back();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
             color: Constants.secondColor,
           ),
@@ -33,14 +33,14 @@ class MyaccountView extends GetView<MyaccountController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Heading
-            Text(
+            const Text(
               "Informasi Akun",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             FutureBuilder<DocumentSnapshot>(
               future: FirebaseFirestore.instance
@@ -49,10 +49,10 @@ class MyaccountView extends GetView<MyaccountController> {
                   .get(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 }
                 if (snapshot.hasError) {
-                  return Text("Erorr loading data");
+                  return const Text("Erorr loading data");
                 }
                 if (snapshot.hasData && snapshot.data != null) {
                   String username = snapshot.data!['username'] ?? 'Pengguna';
@@ -61,32 +61,32 @@ class MyaccountView extends GetView<MyaccountController> {
                   return Column(
                     children: [
                       ListTile(
-                        leading: Icon(Icons.person, color: Colors.orangeAccent),
-                        title: Text("Username"),
+                        leading: const Icon(Icons.person, color: Colors.orangeAccent),
+                        title: const Text("Username"),
                         subtitle: Text(username),
                       ),
-                      Divider(),
+                      const Divider(),
                       // Email
                       ListTile(
-                        leading: Icon(Icons.email, color: Colors.orangeAccent),
-                        title: Text("Email"),
+                        leading: const Icon(Icons.email, color: Colors.orangeAccent),
+                        title: const Text("Email"),
                         subtitle: Text(email),
                       ),
                     ],
                   );
                 }
-                return Text('Pengguna');
+                return const Text('Pengguna');
               },
             ),
 
-            Divider(),
-            SizedBox(height: 24),
+            const Divider(),
+            const SizedBox(height: 24),
             // Reset Password Button
             Center(
               child: ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
-                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -97,30 +97,30 @@ class MyaccountView extends GetView<MyaccountController> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text("Reset Password",
+                        title: const Text("Reset Password",
                             style: TextStyle(color: Colors.white)),
-                        content: Text(
+                        content: const Text(
                             "Jika anda klik lanjutkan Anda akan dilanjutkan kehalaman reset password"),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context),
-                            child: Text("Tutup"),
+                            child: const Text("Tutup"),
                           ),
                           TextButton(
                               onPressed: () {
                                 Get.toNamed(Routes.RESET_PASSWORD);
                               },
-                              child: Text("Lanjutkan"))
+                              child: const Text("Lanjutkan"))
                         ],
                       );
                     },
                   );
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.lock_reset,
                   color: Colors.white,
                 ),
-                label: Text(
+                label: const Text(
                   "Reset Password",
                   style: TextStyle(
                     color: Colors.white,

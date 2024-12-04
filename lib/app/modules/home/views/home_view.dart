@@ -57,10 +57,10 @@ class HomeView extends GetView<HomeController> {
                 .get(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return CircularProgressIndicator();
+                return const CircularProgressIndicator();
               }
               if (snapshot.hasError) {
-                return Text('Error loading username');
+                return const Text('Error loading username');
               }
               if (snapshot.hasData && snapshot.data != null) {
                 // Mengambil username dari Firestore
@@ -75,7 +75,7 @@ class HomeView extends GetView<HomeController> {
                           vertical: 0, horizontal: 10),
                       child: Text(
                         username,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 25,
                           color: Constants.primaryColor,
@@ -87,7 +87,7 @@ class HomeView extends GetView<HomeController> {
                           vertical: 0, horizontal: 10),
                       child: Text(
                         dateTime,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                           color: Constants
                               .secondColor, // Warna untuk tanggal dan jam
@@ -97,7 +97,7 @@ class HomeView extends GetView<HomeController> {
                   ],
                 );
               }
-              return Text('Pengguna');
+              return const Text('Pengguna');
             },
           ),
           actions: [
@@ -170,7 +170,7 @@ class HomeView extends GetView<HomeController> {
                               Container(
                                 width: 60,
                                 height: 60,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: Colors.blue,
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
@@ -209,7 +209,7 @@ class HomeView extends GetView<HomeController> {
                               Container(
                                 width: 60,
                                 height: 60,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: Colors.yellow,
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
@@ -248,7 +248,7 @@ class HomeView extends GetView<HomeController> {
                               Container(
                                 width: 60,
                                 height: 60,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: Colors.green,
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
@@ -287,7 +287,7 @@ class HomeView extends GetView<HomeController> {
                               Container(
                                 width: 60,
                                 height: 60,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: Colors.orange,
                                   shape: BoxShape.circle,
                                   image: DecorationImage(

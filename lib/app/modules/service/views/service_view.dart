@@ -7,7 +7,7 @@ import '../../transaksi/controllers/transaksi_controller.dart';
 import '../controllers/service_controller.dart';
 
 class ServiceView extends GetView<ServiceController> {
-  const ServiceView({Key? key}) : super(key: key);
+  const ServiceView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class ServiceView extends GetView<ServiceController> {
             onPressed: () {
               Get.back();
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_ios,
               color: Constants.secondColor,
             ),

@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
             getPages: AppPages.routes,
           );
         }
-        return CircularProgressIndicator();
+        return const CircularProgressIndicator();
       },
     );
   }

@@ -10,7 +10,7 @@ import '../../detailorder/views/detailorder_view.dart';
 import '../controllers/laporan_controller.dart';
 
 class LaporanView extends GetView<LaporanController> {
-  const LaporanView({Key? key}) : super(key: key);
+  const LaporanView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class LaporanView extends GetView<LaporanController> {
           onPressed: () {
             Get.toNamed('/home');
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
             color: Constants.secondColor,
           ),

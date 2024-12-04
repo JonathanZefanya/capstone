@@ -8,7 +8,7 @@ import '../../transaksi/controllers/transaksi_controller.dart';
 import '../controllers/pelanggan_controller.dart';
 
 class PelangganView extends GetView<PelangganController> {
-  const PelangganView({Key? key}) : super(key: key);
+  const PelangganView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class PelangganView extends GetView<PelangganController> {
           onPressed: () {
             Get.back();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
             color: Constants.secondColor,
           ),

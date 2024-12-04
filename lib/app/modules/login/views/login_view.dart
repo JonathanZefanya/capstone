@@ -23,14 +23,14 @@ class LoginView extends GetView<LoginController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "Selamat Datang Kembali !",
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   CustomFormField(
@@ -48,7 +48,7 @@ class LoginView extends GetView<LoginController> {
                     },
                     prefixIcon: Icons.email,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Obx(
@@ -72,7 +72,7 @@ class LoginView extends GetView<LoginController> {
                       onSuffixIconTap: controller.togglePasswordVisibility,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Align(
@@ -81,13 +81,13 @@ class LoginView extends GetView<LoginController> {
                       onPressed: () {
                         Get.toNamed(Routes.RESET_PASSWORD);
                       },
-                      child: Text("Lupa Kata Sandi?"),
+                      child: const Text("Lupa Kata Sandi?"),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     height: 56,
                     child: ElevatedButton(
@@ -97,17 +97,17 @@ class LoginView extends GetView<LoginController> {
                           controller.passwordController.text,
                         );
                       },
-                      child: Text(
-                        "Masuk",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         backgroundColor: AppColors.primary,
+                      ),
+                      child: Text(
+                        "Masuk",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
@@ -116,13 +116,13 @@ class LoginView extends GetView<LoginController> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Belum punya akun?"),
+                        const Text("Belum punya akun?"),
                         TextButton(
                           onPressed: () {
                             Get.toNamed(
                                 '/register'); // Navigasi ke halaman register
                           },
-                          child: Text(
+                          child: const Text(
                             "Daftar Sekarang",
                             style: TextStyle(color: AppColors.primary),
                           ),

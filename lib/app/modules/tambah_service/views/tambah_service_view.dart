@@ -4,7 +4,7 @@ import '../../../../component/app_color.dart';
 import '../controllers/tambah_service_controller.dart';
 
 class TambahServiceView extends GetView<TambahServiceController> {
-  const TambahServiceView({Key? key}) : super(key: key);
+  const TambahServiceView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class TambahServiceView extends GetView<TambahServiceController> {
           onPressed: () {
             Get.back();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
             color: Constants.secondColor,
           ),

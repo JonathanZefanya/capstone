@@ -20,7 +20,7 @@ class RegisterView extends GetView<RegisterController> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Buat Akun Baru",
                   style: TextStyle(
                     fontSize: 30,
@@ -98,20 +98,20 @@ class RegisterView extends GetView<RegisterController> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Container(
+                SizedBox(
                   width: double.infinity,
                   height: 56,
                   child: ElevatedButton(
                     onPressed: controller.register,
-                    child: const Text(
-                      "Daftar",
-                      style: TextStyle(color: Colors.white),
-                    ),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
                       backgroundColor: AppColors.primary,
+                    ),
+                    child: const Text(
+                      "Daftar",
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
@@ -124,7 +124,7 @@ class RegisterView extends GetView<RegisterController> {
                       onPressed: () {
                         Get.toNamed('/login');
                       },
-                      child: Text(
+                      child: const Text(
                         "Masuk Sekarang",
                         style: TextStyle(color: AppColors.primary),
                       ),
