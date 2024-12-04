@@ -5,6 +5,7 @@ import '../../../../component/app_color.dart';
 import '../../tambah_service/views/tambah_service_view.dart';
 import '../../transaksi/controllers/transaksi_controller.dart';
 import '../controllers/service_controller.dart';
+import '../../../../component/nointernet_widget.dart';
 
 class ServiceView extends GetView<ServiceController> {
   const ServiceView({super.key});
@@ -78,13 +79,28 @@ class ServiceView extends GetView<ServiceController> {
           ),
           centerTitle: true,
         ),
-        body: TabBarView(
-          children: [
-            buildserviceList(transaksiController, 'express'),
-            buildserviceList(transaksiController, 'Cuci Lipat'),
-            buildserviceList(transaksiController, 'Cuci Strika'),
-            buildserviceList(transaksiController, 'satuan'),
-          ],
+        body: FutureBuilder<bool>(
+          future: controller.checkInternetConnection(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            if (snapshot.hasData && snapshot.data == true) {
+              // Koneksi internet tersedia
+              return TabBarView(
+                children: [
+                  buildserviceList(transaksiController, 'express'),
+                  buildserviceList(transaksiController, 'Cuci Lipat'),
+                  buildserviceList(transaksiController, 'Cuci Strika'),
+                  buildserviceList(transaksiController, 'satuan'),
+                ],
+              );
+            } else {
+              // Tidak ada koneksi internet
+              return const NoInternet();
+            }
+          },
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Constants.primaryColor,
@@ -215,7 +231,7 @@ class ServiceView extends GetView<ServiceController> {
                               onTap: () {
                                 if (category == 'express') {
                                   transaksiController.addcuciPerjam(service);
-                                } else if (category == 'satuan'){
+                                } else if (category == 'satuan') {
                                   transaksiController.addSatuan(service);
                                 } else {
                                   transaksiController.addService(service);

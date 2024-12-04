@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../component/app_color.dart';
+import '../../../../component/nointernet_widget.dart';
 import '../controllers/tambah_service_controller.dart';
 
 class TambahServiceView extends GetView<TambahServiceController> {
@@ -32,98 +33,110 @@ class TambahServiceView extends GetView<TambahServiceController> {
         ),
         centerTitle: true,
       ),
-      body: Container(
-        padding: const EdgeInsets.all(20.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Text(
-                "Nama Service",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Constants.primaryColor,
-                ),
-              ),
-              const SizedBox(height: 5),
-              TextField(
-                controller: controller.namaController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Nama Service',
-                ),
-              ),
-              const SizedBox(height: 15),
-              const Text(
-                "Harga ",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Constants.primaryColor,
-                ),
-              ),
-              const SizedBox(height: 5),
-              TextField(
-                controller: controller.hargaController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Harga',
-                ),
-                keyboardType: TextInputType.number,
-              ),
-              const SizedBox(height: 15),
-              const Text(
-                "Kategori",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Constants.primaryColor,
-                ),
-              ),
-              const SizedBox(height: 5),
-              DropdownButtonFormField<String>(
-                value: controller.selectedKategori.value,
-                onChanged: (value) {
-                  controller.selectedKategori.value = value!;
-                },
-                items: <String>['express', 'Cuci Lipat', 'Cuci Strika', 'satuan']
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Pilih Kategori',
-                ),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Constants.primaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+      body: FutureBuilder<bool>(
+          future: controller.checkInternetConnection(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            if (snapshot.hasData && snapshot.data == true) { 
+        return Container(
+          padding: const EdgeInsets.all(20.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const Text(
+                  "Nama Service",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Constants.primaryColor,
                   ),
                 ),
-                onPressed: () {
-                  controller.tambahProduk(
-                    controller.namaController.text,
-                    double.tryParse(controller.hargaController.text) ?? 0.0,
-                    controller.selectedKategori.value,
-                  );
-                  Get.back();
-                },
-                child: const Text(
-                  'Simpan',
+                const SizedBox(height: 5),
+                TextField(
+                  controller: controller.namaController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Nama Service',
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 15),
+                const Text(
+                  "Harga ",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Constants.primaryColor,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                TextField(
+                  controller: controller.hargaController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Harga',
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+                const SizedBox(height: 15),
+                const Text(
+                  "Kategori",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Constants.primaryColor,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                DropdownButtonFormField<String>(
+                  value: controller.selectedKategori.value,
+                  onChanged: (value) {
+                    controller.selectedKategori.value = value!;
+                  },
+                  items: <String>['express', 'Cuci Lipat', 'Cuci Strika', 'satuan']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Pilih Kategori',
+                  ),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Constants.primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  onPressed: () {
+                    controller.tambahProduk(
+                      controller.namaController.text,
+                      double.tryParse(controller.hargaController.text) ?? 0.0,
+                      controller.selectedKategori.value,
+                    );
+                    Get.back();
+                  },
+                  child: const Text(
+                    'Simpan',
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      } else {
+        return const NoInternet();
+      }
+    }),
     );
   }
 }

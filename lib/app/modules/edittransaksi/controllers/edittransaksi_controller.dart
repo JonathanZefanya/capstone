@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,6 +9,7 @@ class EditTransaksiController extends GetxController {
   TextEditingController paymentMethodController = TextEditingController();
   TextEditingController paymentStatusController = TextEditingController();
   TextEditingController paymentPengambilanController = TextEditingController();
+  final Connectivity connectivity = Connectivity();
 
   void updateTransaksi() async {
     var laporan = Get.find<LaporanController>().selectedLaporan.value;
@@ -51,4 +53,10 @@ class EditTransaksiController extends GetxController {
       Get.snackbar('Error', 'Failed to delete transaction');
     }
   }
+
+  Future<bool> checkInternetConnection() async {
+    var connectivityResult = await connectivity.checkConnectivity();
+    return connectivityResult != ConnectivityResult.none;
+  }
+
 }

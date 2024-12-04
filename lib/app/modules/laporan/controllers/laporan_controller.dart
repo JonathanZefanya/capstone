@@ -323,7 +323,7 @@ class LaporanController extends GetxController {
           ..createSync(recursive: true)
           ..writeAsBytesSync(fileBytes!);
 
-        print("File berhasil disimpan di: $path");
+        Get.snackbar("Berhasil","File berhasil disimpan di: $path");
         await OpenFile.open(path);
       } catch (e) {
         Get.snackbar("Error", "Gagal mengekspor laporan: $e");

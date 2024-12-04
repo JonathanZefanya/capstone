@@ -6,6 +6,7 @@ import '../../../../component/app_color.dart';
 import '../../tambah_pelanggan/views/tambah_pelanggan_view.dart';
 import '../../transaksi/controllers/transaksi_controller.dart';
 import '../controllers/pelanggan_controller.dart';
+import '../../../../component/nointernet_widget.dart';
 
 class PelangganView extends GetView<PelangganController> {
   const PelangganView({super.key});
@@ -34,94 +35,106 @@ class PelangganView extends GetView<PelangganController> {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: SearchFormField(
-                    hintText: "Cari Pelanggan",
-                    prefixIcon: Icons.search,
-                    onChanged: (value) {
-                      controller.filterPelanggan(value);
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Obx(() {
-              var pelangganList = controller.filteredPelangganList;
-              if (pelangganList.isEmpty) {
-                return const Center(
-                  child: Text('Tidak ada pelanggan'),
-                );
-              }
-              return ListView.builder(
-                itemCount: pelangganList.length,
-                itemBuilder: (context, index) {
-                  var pelanggan = pelangganList[index];
-                  return Card(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 20.0, vertical: 15),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      side: const BorderSide(
-                          color: Constants.borderColor, width: 1.5),
-                    ),
-                    color: Colors.white,
-                    child: ListTile(
-                      title: Text(
-                        'Nama : ${pelanggan['nama pelanggan']}',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 5),
-                          Text(
-                            'No WhatsApp: ${pelanggan['nomor WhatsApp']}',
+      body: FutureBuilder<bool>(
+          future: controller.checkInternetConnection(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            if (snapshot.hasData && snapshot.data == true) { 
+              return Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: SearchFormField(
+                                  hintText: "Cari Pelanggan",
+                                  prefixIcon: Icons.search,
+                                  onChanged: (value) {
+                                    controller.filterPelanggan(value);
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 5),
-                          Text(
-                            'Alamat : ${pelanggan['alamat'] ?? 'Alamat tidak tersedia'}',
-                          ),
-                        ],
-                      ),
-                      trailing: IconButton(
-                        icon: const Icon(
-                          Icons.delete_outlined,
-                          color: AppColors.error,
                         ),
-                        onPressed: () {
-                          if (pelanggan['id'] != null) {
-                            controller.deletePelanggan(pelanggan['id']);
-                          } else {
-                            Get.snackbar('Error', 'ID pelanggan tidak valid');
-                          }
-                        },
-                      ),
-                      onTap: () {
-                        Get.find<TransaksiController>()
-                            .selectedPelanggan
-                            .value = pelanggan;
-                        Get.back();
-                      },
-                    ),
-                  );
-                },
-              );
-            }),
-          ),
-        ],
-      ),
+                        Expanded(
+                          child: Obx(() {
+                            var pelangganList = controller.filteredPelangganList;
+                            if (pelangganList.isEmpty) {
+                              return const Center(
+                                child: Text('Tidak ada pelanggan'),
+                              );
+                            }
+                            return ListView.builder(
+                              itemCount: pelangganList.length,
+                              itemBuilder: (context, index) {
+                                var pelanggan = pelangganList[index];
+                                return Card(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 20.0, vertical: 15),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    side: const BorderSide(
+                                        color: Constants.borderColor, width: 1.5),
+                                  ),
+                                  color: Colors.white,
+                                  child: ListTile(
+                                    title: Text(
+                                      'Nama : ${pelanggan['nama pelanggan']}',
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    subtitle: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        const SizedBox(height: 5),
+                                        Text(
+                                          'No WhatsApp: ${pelanggan['nomor WhatsApp']}',
+                                        ),
+                                        const SizedBox(height: 5),
+                                        Text(
+                                          'Alamat : ${pelanggan['alamat'] ?? 'Alamat tidak tersedia'}',
+                                        ),
+                                      ],
+                                    ),
+                                    trailing: IconButton(
+                                      icon: const Icon(
+                                        Icons.delete_outlined,
+                                        color: AppColors.error,
+                                      ),
+                                      onPressed: () {
+                                        if (pelanggan['id'] != null) {
+                                          controller.deletePelanggan(pelanggan['id']);
+                                        } else {
+                                          Get.snackbar('Error', 'ID pelanggan tidak valid');
+                                        }
+                                      },
+                                    ),
+                                    onTap: () {
+                                      Get.find<TransaksiController>()
+                                          .selectedPelanggan
+                                          .value = pelanggan;
+                                      Get.back();
+                                    },
+                                  ),
+                                );
+                              },
+                            );
+                          }),
+                        ),
+                      ],
+                    );
+            } else {
+              return const NoInternet();
+            }
+          }),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Constants.primaryColor,
         onPressed: () {

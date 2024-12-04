@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
 
 class PelangganController extends GetxController {
@@ -6,6 +7,7 @@ class PelangganController extends GetxController {
 
   var pelangganList = <Map<String, dynamic>>[].obs;
   var filteredPelangganList = <Map<String, dynamic>>[].obs;
+  final Connectivity connectivity = Connectivity();
 
   @override
   void onInit() {
@@ -51,5 +53,10 @@ class PelangganController extends GetxController {
     } catch (e) {
       Get.snackbar('Error', 'Gagal menghapus pelanggan: $e');
     }
+  }
+
+  Future<bool> checkInternetConnection() async {
+    var connectivityResult = await connectivity.checkConnectivity();
+    return connectivityResult != ConnectivityResult.none;
   }
 }

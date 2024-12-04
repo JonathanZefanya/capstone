@@ -1,5 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
 
 class TransaksiController extends GetxController {
@@ -11,6 +12,7 @@ class TransaksiController extends GetxController {
   var statusPembayaran = 'Lunas'.obs;
   var statusPengambilan = 'Belum Di Ambil'.obs;
   var totalHarga = 0.0.obs;
+  final Connectivity connectivity = Connectivity();
 
   // Select pelanggan
   void selectPelanggan(Map<String, dynamic> pelanggan) {
@@ -211,5 +213,10 @@ class TransaksiController extends GetxController {
     statusPengambilan.value = 'Belum Di Ambil';
     totalHarga.value = 0;
     totalHarga.refresh();
+  }
+
+  Future<bool> checkInternetConnection() async {
+    var connectivityResult = await connectivity.checkConnectivity();
+    return connectivityResult != ConnectivityResult.none;
   }
 }

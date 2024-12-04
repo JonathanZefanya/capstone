@@ -36,7 +36,7 @@ class AboutusView extends GetView<AboutusController> {
               child: Column(
                 children: [
                   // Logo
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       // Logo 1
@@ -112,23 +112,23 @@ class AboutusView extends GetView<AboutusController> {
                       ),
                     ),
                   ),
-                  const Column(
+
+                  Column(
                     children: [
                       // Anggota Tim 1
                       ListTile(
-                        leading: Icon(
-                          Icons.person,
-                          color: AppColors.accent,
+                        leading: CircleAvatar(
+                          backgroundImage: AssetImage('assets/avatar/jojo.jpg'),
                         ),
-                        title: Text("Jonatahan Natannael Zefany"),
+                        title: Text("Jonatahan Natannael Zefanya"),
                         subtitle: Text("Institut Teknologi Indonesia"),
                       ),
                       Divider(),
                       // Anggota Tim 2
                       ListTile(
-                        leading: Icon(
-                          Icons.person,
-                          color: AppColors.accent,
+                        leading: CircleAvatar(
+                          backgroundImage:
+                              AssetImage('assets/avatar/bryan.jpg'),
                         ),
                         title: Text("Bryan Hanggara"),
                         subtitle: Text("Universitas Sriwijaya"),
@@ -136,20 +136,19 @@ class AboutusView extends GetView<AboutusController> {
                       Divider(),
                       // Anggota Tim 3
                       ListTile(
-                        leading: Icon(
-                          Icons.person,
-                          color: AppColors.accent,
+                        leading: CircleAvatar(
+                          backgroundImage: AssetImage('assets/avatar/rian.jpg'),
                         ),
                         title: Text("Rian Satria Permana"),
                         subtitle: Text(
                             "Sekolah Tinggi Teknologi Terpadu Nurul Fikri"),
                       ),
                       Divider(),
-                      // Anggota Tim 3
+                      // Anggota Tim 4
                       ListTile(
-                        leading: Icon(
-                          Icons.person,
-                          color: AppColors.accent,
+                        leading: CircleAvatar(
+                          backgroundImage:
+                              AssetImage('assets/avatar/yohanna.jpg'),
                         ),
                         title: Text("Yohanna Gloria"),
                         subtitle: Text("Universitas Paramadina"),
