@@ -13,10 +13,6 @@ class HomeController extends GetxController {
 
   late String userId;
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
 
   void logout() async {
     await auth.signOut();

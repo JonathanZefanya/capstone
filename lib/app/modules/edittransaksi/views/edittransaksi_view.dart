@@ -7,7 +7,7 @@ import '../controllers/edittransaksi_controller.dart';
 import '../../../../component/nointernet_widget.dart';
 
 class EditTransaksiView extends GetView<EditTransaksiController> {
-  const EditTransaksiView({Key? key}) : super(key: key);
+  const EditTransaksiView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class EditTransaksiView extends GetView<EditTransaksiController> {
           onPressed: () {
             Get.back();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
             color: Constants.secondColor,
           ),

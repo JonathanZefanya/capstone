@@ -22,12 +22,12 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: ListView(
           children: [
             Container(
               alignment: Alignment.center,
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: const Text(
                 'Ama Laundri Reset Password Page',
                 textAlign: TextAlign.center,
@@ -38,7 +38,7 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: CustomFormField(
                 controller: controller.emailController,
                 hintText: "Email",
@@ -48,11 +48,11 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
               onPressed: () {
                 Get.toNamed(Routes.LOGIN);
               },
-              child: Text('Back to Login'),
+              child: const Text('Back to Login'),
             ),
             Container(
                 height: 50,
-                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Constants.primaryColor,

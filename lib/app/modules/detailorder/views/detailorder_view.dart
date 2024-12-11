@@ -11,7 +11,7 @@ import '../../laporan/controllers/laporan_controller.dart';
 import '../controllers/detailorder_controller.dart';
 
 class DetailorderView extends GetView<LaporanController> {
-    DetailorderView({Key? key}) : super(key: key);
+    DetailorderView({super.key});
 
   final DetailorderController detailorderController =
       Get.put(DetailorderController());
@@ -36,7 +36,7 @@ class DetailorderView extends GetView<LaporanController> {
           onPressed: () {
             Get.back();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
             color: Constants.secondColor,
           ),
@@ -228,9 +228,9 @@ class DetailorderView extends GetView<LaporanController> {
                   // Jika metode pembayaran adalah transfer bank maka tampilkan nomor rekening
                   if (laporan['metode_pembayaran'] == 'Transfer') ...[
                     const SizedBox(height: 10),
-                    Text(
+                    const Text(
                       'Nomor Rekening BCA: NOMOR REKENING\nNomor Dana: 08xx-xxxx-xxxx\nAtas Nama : Owner Laundry',
-                      style: const TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16),
                     ),
                   ],
                   // Jika metode pembayaran adalah QRIS maka tampilkan QR Code dalam bentuk gambar di local

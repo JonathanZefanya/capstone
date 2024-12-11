@@ -27,7 +27,7 @@ class TambahPelangganView extends GetView<TambahPelangganController> {
           onPressed: () {
             Get.back();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
             color: Constants.secondColor,
           ),

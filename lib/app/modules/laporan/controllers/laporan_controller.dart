@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:excel/excel.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -324,7 +323,7 @@ class LaporanController extends GetxController {
           ..createSync(recursive: true)
           ..writeAsBytesSync(fileBytes!);
 
-        print("File berhasil disimpan di: $path");
+        Get.snackbar("Berhasil","File berhasil disimpan di: $path");
         await OpenFile.open(path);
       } catch (e) {
         Get.snackbar("Error", "Gagal mengekspor laporan: $e");

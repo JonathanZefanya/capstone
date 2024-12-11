@@ -4,9 +4,11 @@ import 'package:myapp/app/routes/app_pages.dart';
 import 'package:myapp/component/app_color.dart';
 
 class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () {
       Get.offNamed(Routes.HOME);
     });
 
@@ -30,10 +32,10 @@ class SplashScreen extends StatelessWidget {
           ),
 
           // Teks "By HoneyComb" di bagian paling bawah
-          Align(
+          const Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.all(16.0), // Jarak dari bawah
+              padding: EdgeInsets.all(16.0), // Jarak dari bawah
               child: Text(
                 "By HoneyComb",
                 style: TextStyle(
