@@ -1,195 +1,26 @@
 {
   "project_info": {
-    "project_number": "665224682928",
-    "project_id": "my-firebase-project-76e33",
-    "storage_bucket": "my-firebase-project-76e33.firebasestorage.app"
+    "project_number": "816668227820",
+    "project_id": "laundryapp-fc484",
+    "storage_bucket": "laundryapp-fc484.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:665224682928:android:251c8803814325d73d4a75",
+        "mobilesdk_app_id": "1:816668227820:android:7194df1d2d279b76834dc9",
         "android_client_info": {
-          "package_name": "com.dea.firebase_application"
+          "package_name": "com.ama.myapp"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "665224682928-l0gro3h7oh412mfq6rmapjl7gi5lch1h.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyADa-k0P_fB6wMf0BvYl-rud-R9jAAGifo"
+          "current_key": "AIzaSyD0tmw3fkt-hxSygi1HsyDrg85fQsEqsYY"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "665224682928-l0gro3h7oh412mfq6rmapjl7gi5lch1h.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "665224682928-30p2a9h60tcpmorvnkvkuqq46k8gira9.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.laundryku"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:665224682928:android:9cb012c9e15afb203d4a75",
-        "android_client_info": {
-          "package_name": "com.example.flutter_firebase"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "665224682928-l0gro3h7oh412mfq6rmapjl7gi5lch1h.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyADa-k0P_fB6wMf0BvYl-rud-R9jAAGifo"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "665224682928-l0gro3h7oh412mfq6rmapjl7gi5lch1h.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "665224682928-30p2a9h60tcpmorvnkvkuqq46k8gira9.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.laundryku"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:665224682928:android:33cb2d01fbe14f523d4a75",
-        "android_client_info": {
-          "package_name": "com.hijrah.myapp"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "665224682928-l0gro3h7oh412mfq6rmapjl7gi5lch1h.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyADa-k0P_fB6wMf0BvYl-rud-R9jAAGifo"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "665224682928-l0gro3h7oh412mfq6rmapjl7gi5lch1h.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "665224682928-30p2a9h60tcpmorvnkvkuqq46k8gira9.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.laundryku"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:665224682928:android:5ae8364d06f74e003d4a75",
-        "android_client_info": {
-          "package_name": "com.honey"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "665224682928-l0gro3h7oh412mfq6rmapjl7gi5lch1h.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyADa-k0P_fB6wMf0BvYl-rud-R9jAAGifo"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "665224682928-l0gro3h7oh412mfq6rmapjl7gi5lch1h.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "665224682928-30p2a9h60tcpmorvnkvkuqq46k8gira9.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.laundryku"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:665224682928:android:b14dfa08b850236e3d4a75",
-        "android_client_info": {
-          "package_name": "com.honeycumb.laundryku"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "665224682928-f84lkahmmshue74fmh96kmtabrjasrio.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.honeycumb.laundryku",
-            "certificate_hash": "dc162b00f94d436f0ae0f6e6029ae8536043546e"
-          }
-        },
-        {
-          "client_id": "665224682928-l0gro3h7oh412mfq6rmapjl7gi5lch1h.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyADa-k0P_fB6wMf0BvYl-rud-R9jAAGifo"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "665224682928-l0gro3h7oh412mfq6rmapjl7gi5lch1h.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "665224682928-30p2a9h60tcpmorvnkvkuqq46k8gira9.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.laundryku"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

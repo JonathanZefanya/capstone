@@ -49,6 +49,7 @@ class HomeView extends GetView<HomeController> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white, // Warna latar belakang
+          automaticallyImplyLeading: false,
           elevation: 0,
           title: FutureBuilder<DocumentSnapshot>(
             future: FirebaseFirestore.instance
