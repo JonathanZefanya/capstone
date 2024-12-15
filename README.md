@@ -1,5 +1,11 @@
 # Wash and Clean - Laundry Management App
 
+<div align="center">
+  <img src="assets/images/logo.png" alt="Logo 1" width="150">
+  <img src="assets/images/learningX.jpg" alt="Logo 1" width="150">
+  <img src="assets/images/msib.jpg" alt="Logo 1" width="150">
+</div>
+
 Wash and Clean adalah aplikasi manajemen laundry berbasis Flutter yang dirancang untuk mempermudah UMKM dalam mengelola layanan laundry mereka. Aplikasi ini dibuat sebagai bagian dari proyek akhir program MSIB Batch 7 dan ditargetkan untuk digunakan oleh UMKM laundry seperti *Ama Laundry* di Indralaya.
 
 ## Fitur Utama
