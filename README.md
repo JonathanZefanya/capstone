@@ -55,4 +55,14 @@ Wash and Clean adalah aplikasi manajemen laundry berbasis Flutter yang dirancang
    flutter run
    ```
 
+##Tampilan Aplikasi
+
+- Authentikasi
+
+<div align="center">
+  <img src="assets/images/logo.png" alt="Logo 1" width="200">
+  <img src="assets/images/learningX.jpg" alt="Logo 1" width="200">
+  <img src="assets/images/msib.jpg" alt="Logo 1" width="200">
+</div>
+
 Dibuat dengan ❤ oleh tim HoneyComb untuk mendukung UMKM laundry berkembang lebih baik!
