@@ -116,38 +116,44 @@ class TransaksiView extends GetView<TransaksiController> {
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment
+                                          .start,
                                       children: [
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Nama : ${pelanggan['nama pelanggan']}",
-                                              style: const TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600,
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Nama : ${pelanggan['nama pelanggan']}",
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
                                               ),
-                                            ),
-                                            const SizedBox(height: 5),
-                                            Text(
-                                              "Nomor : ${pelanggan['nomor WhatsApp']}",
-                                              style: const TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600,
+                                              const SizedBox(height: 5),
+                                              Text(
+                                                "Nomor : ${pelanggan['nomor WhatsApp']}",
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
                                               ),
-                                            ),
-                                            const SizedBox(height: 5),
-                                            Text(
-                                              "Alamat : ${pelanggan['alamat']}",
-                                              style: const TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                              softWrap: true,
+                                              const SizedBox(height: 5),
+                                              Text(
+                                                "Alamat : ${pelanggan['alamat']}",
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                                softWrap: true,
                                                 overflow: TextOverflow
                                                     .visible,
-                                            ),
-                                          ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                         IconButton(
                                           onPressed: () {
@@ -192,8 +198,8 @@ class TransaksiView extends GetView<TransaksiController> {
                                   ),
                                   const SizedBox(height: 5),
                                   Column(
-                                    children:
-                                        List.generate(cuciPerjamList.length, (index) {
+                                    children: List.generate(
+                                        cuciPerjamList.length, (index) {
                                       var cuciPerjam = cuciPerjamList[index];
                                       return Column(
                                         children: [
@@ -257,24 +263,28 @@ class TransaksiView extends GetView<TransaksiController> {
                                                     "Kg",
                                                     style: TextStyle(
                                                       fontSize: 16,
-                                                      fontWeight: FontWeight.w700,
+                                                      fontWeight:
+                                                          FontWeight.w700,
                                                     ),
                                                   ),
                                                   IconButton(
                                                     onPressed: () {
                                                       controller
-                                                          .removecuciPerjam(index);
+                                                          .removecuciPerjam(
+                                                              index);
                                                     },
                                                     icon: const Icon(
                                                       Icons.delete_outlined,
-                                                      color: Constants.primaryColor,
+                                                      color: Constants
+                                                          .primaryColor,
                                                     ),
                                                   ),
                                                 ],
                                               ),
                                             ],
                                           ),
-                                          const Divider(color: Constants.primaryColor),
+                                          const Divider(
+                                              color: Constants.primaryColor),
                                         ],
                                       );
                                     }),
@@ -300,7 +310,8 @@ class TransaksiView extends GetView<TransaksiController> {
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: const Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "Laundry Harian:",
@@ -320,7 +331,8 @@ class TransaksiView extends GetView<TransaksiController> {
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: List.generate(
                                           ServiceList.length,
                                           (index) {
@@ -341,14 +353,16 @@ class TransaksiView extends GetView<TransaksiController> {
                                                 const SizedBox(height: 5),
                                                 Row(
                                                   mainAxisAlignment:
-                                                      MainAxisAlignment.spaceBetween,
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
                                                     Expanded(
                                                       child: Text(
                                                         "${Service['nama']}\nRp.${Service['harga'].toStringAsFixed(0)}",
                                                         style: const TextStyle(
                                                           fontSize: 16,
-                                                          fontWeight: FontWeight.w600,
+                                                          fontWeight:
+                                                              FontWeight.w600,
                                                         ),
                                                       ),
                                                     ),
@@ -358,23 +372,27 @@ class TransaksiView extends GetView<TransaksiController> {
                                                           width: 50,
                                                           height: 30,
                                                           child: TextFormField(
-                                                            initialValue:
-                                                                Service['jumlah'] !=
-                                                                        null
-                                                                    ? Service['jumlah']
-                                                                        .toString()
-                                                                    : '1',
+                                                            initialValue: Service[
+                                                                        'jumlah'] !=
+                                                                    null
+                                                                ? Service[
+                                                                        'jumlah']
+                                                                    .toString()
+                                                                : '1',
                                                             keyboardType:
                                                                 const TextInputType
                                                                     .numberWithOptions(
-                                                                    decimal: true),
-                                                            textAlign: TextAlign.center,
+                                                                    decimal:
+                                                                        true),
+                                                            textAlign: TextAlign
+                                                                .center,
                                                             decoration:
                                                                 const InputDecoration(
                                                               border:
                                                                   OutlineInputBorder(),
                                                               contentPadding:
-                                                                  EdgeInsets.zero,
+                                                                  EdgeInsets
+                                                                      .zero,
                                                             ),
                                                             onChanged: (value) {
                                                               if (value.isNotEmpty) {
@@ -408,23 +426,27 @@ class TransaksiView extends GetView<TransaksiController> {
                                                             },
                                                           ),
                                                         ),
-                                                        const SizedBox(width: 5),
+                                                        const SizedBox(
+                                                            width: 5),
                                                         const Text(
                                                           "Kg",
                                                           style: TextStyle(
                                                             fontSize: 16,
-                                                            fontWeight: FontWeight.w700,
+                                                            fontWeight:
+                                                                FontWeight.w700,
                                                           ),
                                                         ),
                                                         IconButton(
                                                           onPressed: () {
                                                             controller
-                                                                .removeService(index);
+                                                                .removeService(
+                                                                    index);
                                                           },
                                                           icon: const Icon(
-                                                            Icons.delete_outlined,
-                                                            color:
-                                                                Constants.primaryColor,
+                                                            Icons
+                                                                .delete_outlined,
+                                                            color: Constants
+                                                                .primaryColor,
                                                           ),
                                                         ),
                                                       ],
@@ -462,7 +484,8 @@ class TransaksiView extends GetView<TransaksiController> {
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: const Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "Laundry Satuan:",
@@ -482,13 +505,15 @@ class TransaksiView extends GetView<TransaksiController> {
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: List.generate(
                                           satuanList.length,
                                           (index) {
                                             var satuan = satuanList[index];
                                             return Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 // Menampilkan kategori di atas harga
                                                 Text(
@@ -501,14 +526,17 @@ class TransaksiView extends GetView<TransaksiController> {
                                                 ),
                                                 const SizedBox(height: 5),
                                                 Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
                                                     Expanded(
                                                       child: Text(
                                                         "${satuan['nama']}\nRp.${satuan['harga'].toStringAsFixed(0)}",
                                                         style: const TextStyle(
                                                           fontSize: 16,
-                                                          fontWeight: FontWeight.w600,
+                                                          fontWeight:
+                                                              FontWeight.w600,
                                                         ),
                                                       ),
                                                     ),
@@ -518,17 +546,27 @@ class TransaksiView extends GetView<TransaksiController> {
                                                           width: 50,
                                                           height: 30,
                                                           child: TextFormField(
-                                                            initialValue: satuan['jumlah'] != null
-                                                                ? satuan['jumlah'].toString()
+                                                            initialValue: satuan[
+                                                                        'jumlah'] !=
+                                                                    null
+                                                                ? satuan[
+                                                                        'jumlah']
+                                                                    .toString()
                                                                 : '1',
                                                             keyboardType:
-                                                                const TextInputType.numberWithOptions(
+                                                                const TextInputType
+                                                                    .numberWithOptions(
                                                               decimal: true,
                                                             ),
-                                                            textAlign: TextAlign.center,
-                                                            decoration: const InputDecoration(
-                                                              border: OutlineInputBorder(),
-                                                              contentPadding: EdgeInsets.zero,
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            decoration:
+                                                                const InputDecoration(
+                                                              border:
+                                                                  OutlineInputBorder(),
+                                                              contentPadding:
+                                                                  EdgeInsets
+                                                                      .zero,
                                                             ),
                                                             onChanged: (value) {
                                                               if (value.isNotEmpty) {
@@ -544,7 +582,8 @@ class TransaksiView extends GetView<TransaksiController> {
                                                                   );
                                                                 }
                                                               } else {
-                                                                controller.updateJumlahSatuan(
+                                                                controller
+                                                                    .updateJumlahSatuan(
                                                                   index,
                                                                   1,
                                                                 );
@@ -552,21 +591,27 @@ class TransaksiView extends GetView<TransaksiController> {
                                                             },
                                                           ),
                                                         ),
-                                                        const SizedBox(width: 5),
+                                                        const SizedBox(
+                                                            width: 5),
                                                         const Text(
                                                           "Pcs",
                                                           style: TextStyle(
                                                             fontSize: 16,
-                                                            fontWeight: FontWeight.w700,
+                                                            fontWeight:
+                                                                FontWeight.w700,
                                                           ),
                                                         ),
                                                         IconButton(
                                                           onPressed: () {
-                                                            controller.removeSatuan(index);
+                                                            controller
+                                                                .removeSatuan(
+                                                                    index);
                                                           },
                                                           icon: const Icon(
-                                                            Icons.delete_outlined,
-                                                            color: Constants.primaryColor,
+                                                            Icons
+                                                                .delete_outlined,
+                                                            color: Constants
+                                                                .primaryColor,
                                                           ),
                                                         ),
                                                       ],
@@ -616,11 +661,13 @@ class TransaksiView extends GetView<TransaksiController> {
                                 }).toList(),
                                 decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
-                                  contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                                  contentPadding:
+                                      EdgeInsets.symmetric(horizontal: 10),
                                 ),
                               ),
                               Obx(() {
-                                if (controller.metodePembayaran.value == 'QRIS') {
+                                if (controller.metodePembayaran.value ==
+                                    'QRIS') {
                                   return Padding(
                                     padding: const EdgeInsets.only(top: 16.0),
                                     child: Image.asset(
@@ -663,7 +710,8 @@ class TransaksiView extends GetView<TransaksiController> {
                                 }).toList(),
                                 decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
-                                  contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                                  contentPadding:
+                                      EdgeInsets.symmetric(horizontal: 10),
                                 ),
                               ),
                             ],
@@ -681,7 +729,8 @@ class TransaksiView extends GetView<TransaksiController> {
                               DropdownButtonFormField<String>(
                                 value: controller.statusPengambilan.value,
                                 onChanged: (newValue) {
-                                  controller.statusPengambilan.value = newValue!;
+                                  controller.statusPengambilan.value =
+                                      newValue!;
                                 },
                                 items: <String>[
                                   'Belum Di Ambil',
@@ -694,7 +743,8 @@ class TransaksiView extends GetView<TransaksiController> {
                                 }).toList(),
                                 decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
-                                  contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                                  contentPadding:
+                                      EdgeInsets.symmetric(horizontal: 10),
                                 ),
                               ),
                             ],
@@ -733,7 +783,8 @@ class TransaksiView extends GetView<TransaksiController> {
                             },
                           );
                         } else if (controller.selectedService.isEmpty &&
-                            controller.selectedcuciPerjam.isEmpty && controller.selectedSatuan.isEmpty) {
+                            controller.selectedcuciPerjam.isEmpty &&
+                            controller.selectedSatuan.isEmpty) {
                           Get.defaultDialog(
                             title: "Data tidak lengkap",
                             middleText: "service harus diisi",
@@ -764,8 +815,7 @@ class TransaksiView extends GetView<TransaksiController> {
               // Tidak ada koneksi internet
               return const NoInternet();
             }
-          }
-        ),
+          }),
     );
   }
 }
