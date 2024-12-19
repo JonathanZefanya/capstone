@@ -104,7 +104,7 @@ class EditTransaksiView extends GetView<EditTransaksiController> {
                         border: OutlineInputBorder(),
                       ),
                       items: [
-                        'Ambil Sendiri',
+                        'Sudah Di Ambil',
                         'Belum Di ambil',
                       ]
                           .map((status) => DropdownMenuItem(

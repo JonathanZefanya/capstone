@@ -9,7 +9,7 @@ import '../../service/views/service_view.dart';
 import '../controllers/transaksi_controller.dart';
 
 class TransaksiView extends GetView<TransaksiController> {
-  const TransaksiView({super.key});
+  const TransaksiView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class TransaksiView extends GetView<TransaksiController> {
           onPressed: () {
             Get.offAllNamed(Routes.HOME);
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back_ios,
             color: Constants.secondColor,
           ),
@@ -143,6 +143,9 @@ class TransaksiView extends GetView<TransaksiController> {
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w600,
                                               ),
+                                              softWrap: true,
+                                                overflow: TextOverflow
+                                                    .visible,
                                             ),
                                           ],
                                         ),
@@ -217,10 +220,11 @@ class TransaksiView extends GetView<TransaksiController> {
                                                           cuciPerjam['berat'] != null
                                                               ? cuciPerjam['berat']
                                                                   .toString()
-                                                              : '1',
+                                                              : '2',
+                                                              
                                                       keyboardType: const TextInputType
                                                           .numberWithOptions(
-                                                          decimal: true),
+                                                          decimal: true,),
                                                       textAlign: TextAlign.center,
                                                       decoration: const InputDecoration(
                                                         border: OutlineInputBorder(),
@@ -228,16 +232,22 @@ class TransaksiView extends GetView<TransaksiController> {
                                                       ),
                                                       onChanged: (value) {
                                                         if (value.isNotEmpty) {
+                                                          if (double.parse(value) > 0) {
                                                           controller
                                                               .updateBeratcuciPerjam(
                                                             index,
                                                             double.parse(value)
                                                                 .toDouble(),
                                                           );
+                                                          } else {
+                                                            controller
+                                                              .updateBeratcuciPerjam(
+                                                                  index, 2);
+                                                          }
                                                         } else {
                                                           controller
                                                               .updateBeratcuciPerjam(
-                                                                  index, 1);
+                                                                  index, 2);
                                                         }
                                                       },
                                                     ),
@@ -368,17 +378,31 @@ class TransaksiView extends GetView<TransaksiController> {
                                                             ),
                                                             onChanged: (value) {
                                                               if (value.isNotEmpty) {
-                                                                controller
-                                                                    .updateJumlahService(
-                                                                  index,
-                                                                  double.parse(value)
-                                                                      .toDouble(),
-                                                                );
+                                                                if (double.parse(value) > 0) {
+                                                                  controller
+                                                                      .updateJumlahService(
+                                                                    index,
+                                                                    double.parse(value)
+                                                                        .toDouble(),
+                                                                  );
+                                                                } else {
+                                                                  controller
+                                                                      .updateJumlahService(
+                                                                    index,
+                                                                    2,
+                                                                  );
+                                                                }
+                                                                // controller
+                                                                //     .updateJumlahService(
+                                                                //   index,
+                                                                //   double.parse(value)
+                                                                //       .toDouble(),
+                                                                // );
                                                               } else {
                                                                 controller
                                                                     .updateJumlahService(
                                                                   index,
-                                                                  1,
+                                                                  2,
                                                                 );
                                                               }
                                                             },
@@ -508,10 +532,17 @@ class TransaksiView extends GetView<TransaksiController> {
                                                             ),
                                                             onChanged: (value) {
                                                               if (value.isNotEmpty) {
-                                                                controller.updateJumlahSatuan(
-                                                                  index,
-                                                                  double.parse(value).toDouble(),
-                                                                );
+                                                                if (double.parse(value) > 0) {
+                                                                  controller.updateJumlahSatuan(
+                                                                    index,
+                                                                    double.parse(value).toDouble(),
+                                                                  );
+                                                                } else {
+                                                                  controller.updateJumlahSatuan(
+                                                                    index,
+                                                                    1,
+                                                                  );
+                                                                }
                                                               } else {
                                                                 controller.updateJumlahSatuan(
                                                                   index,
@@ -654,7 +685,7 @@ class TransaksiView extends GetView<TransaksiController> {
                                 },
                                 items: <String>[
                                   'Belum Di Ambil',
-                                  'Ambil Sendiri',
+                                  'Sudah Di Ambil',
                                 ].map<DropdownMenuItem<String>>((String value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
